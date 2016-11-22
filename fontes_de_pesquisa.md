@@ -15,4 +15,7 @@ Segue o link que o Fábio me enviou por email:
 
 + Acompanho o blog do *colah* sobre Machine Learning. Os posts dele apesar de não serem muito acadêmicos, são excelentes para entender alguns tópicos. Pelo menos eu achei. As imagens e a linguagem que ele usa durante as explicações são muito boas.
 	
-	
+
+[Visualizing and Understanding Convolutional Networks](http://www.matthewzeiler.com/pubs/arxive2013/arxive2013.pdf)
+
++ Do abstract to artigo: introduce a novel visualization technique that gives insight into the function of intermediate  feature  layers  and  the  operation  of the classifer. 
