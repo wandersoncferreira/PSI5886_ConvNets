@@ -33,14 +33,31 @@
 
 	\begin{frame}
       \frametitle{Python - Keras Framework para Machine Learning}
+      Keras was initially developed as part of the research effort of
+      project ONEIROS (Open-ended Neuro-Electronic Intelligent Robot
+      Operating System)
+
+      Example of MLP:
+      modelo = Sequential()
+      modelo.add(Dense(numero_neuronios, input_dim=treino.shape[1],
+      init='uniform', activation='tanh'))
+      modelo.add(Dense(numero_neuronios=1, activation='linear'))
+      modelo.compile(learning_rate=0.01, momentum=0.9,
+      optimizer=stochastic_gradient_descend)
+      modelo.fit(features_treino, target_treino, numero_epocas=40)
+      modelo.evaluate(features_teste, target_teste)
+      
     \end{frame}
 
     \begin{frame}
       \frametitle{Base de dados utilizada}
+
+      Descrição sobre o MINST
     \end{frame}
 
     \begin{frame}
       \frametitle{Implementação da Rede Convolucional}
+      como foi implementada a rede convolucional
     \end{frame}
 
     \begin{frame}
