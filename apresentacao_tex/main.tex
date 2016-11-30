@@ -75,13 +75,13 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{Primeira Rede - Arquitetura}
+	\frametitle{Aplicação da CNN}
 	\centering
 	\includegraphics[height=.8\paperheight]{images/resultados/default/model}
 \end{frame}
 
 \begin{frame}
-	\frametitle{Primeira Rede - Treinamento}
+	\frametitle{Treinamento}
 	\centering
 %	\begin{minipage}{.5\textwidth}
 		\centering
@@ -89,7 +89,7 @@
 		\begin{itemize}
 			\item Épocas = 10
 			\item Itens = 60000
-			\item Tempo = 30 minutos
+			\item Tempo = 30 ~ 40 minutos
 		\end{itemize}		
 %	\end{minipage}%
 %	\begin{minipage}{.5\textwidth}
@@ -168,11 +168,37 @@
 	\includegraphics[height=.8\paperheight]{images/fabio/ativ_4}
 \end{frame}
 
+
 \begin{frame}
-	\frametitle{Apresentacao do Fábio - Sugestão: Discussao sobre
-		como essas observacoes ligam na MLP clássica e/ou problemas de
-		Machine Learning}
+	\frametitle{Resultados das demais redes testadas - 1 }
+	\centering
+	\par Precisão na base de treino: 98.94\%
+	\par Precisão na base de teste: 98.89\%
+	\par 3 conv + 1 pooling + 3 conv + 1 pooling + 2 FC 
+	\\
+	\includegraphics[height=.7\paperheight]{images/resultados/network_1/model}
 \end{frame}
+
+\begin{frame}
+	\frametitle{Resultados das demais redes testadas - 2 }
+	\centering
+	\par Precisão na base de treino: 98.94\%
+	\par Precisão na base de teste: 99.06\%
+	\par 3 conv + 1 pooling + 3 conv + 1 pooling + 2 FC \(com dropout\)
+	\\
+	\includegraphics[height=.7\paperheight]{images/resultados/network_2/model}
+\end{frame}
+
+\begin{frame}
+	\frametitle{MLP \& CNN}
+	\centering
+	\begin{itemize}
+		\item CNN é uma extensão do conceito da MLP
+		\item Convoluções e Pooling ajudam a diminuir rapidamente o número de variáveis do sistema
+		\item Próprio para o processamento de imagens e vídeos		
+	\end{itemize}
+\end{frame}
+
 % -------------------------------------------------
 % end{fabio}
 % -------------------------------------------------
