@@ -13,6 +13,7 @@
 \usetikzlibrary{matrix,arrows.meta}
 
 \setbeamertemplate{footline}[frame number]
+\renewcommand{\figurename}{Fig.}
 
 \begin{document}
 \author{Bruno Canale \\ Bruno Giordano \\ Fábio Sancinetti \\
@@ -225,6 +226,71 @@ Alguns exemplos:
 	\par Explicação visual sobre Convoluções com demonstrações em Javascript
 \end{frame}
 
+
+
+\begin{frame}
+	\frametitle{Visualizando a Convolução}
+	\centering
+\begin{figure}
+	\centering
+	\includegraphics[width=1.0\linewidth]{images/convolucao/001_sem_filtro}
+	\caption{Imagem original}
+	\label{fig:001semfiltro}
+\end{figure}
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{Visualizando a Convolução}
+	\centering
+\begin{figure}[t!]
+	\centering
+	\includegraphics[width=0.7\linewidth]{images/convolucao/004_left_sobel} \\
+	\includegraphics[width=0.7\linewidth]{images/convolucao/003_upper_sobel} \\
+	\caption{Acima: efeito de \textit{Left Sobel}, Abaixo: Efeito \textit{Upper Sobel}}
+	\label{fig:left_upper}
+\end{figure}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Visualizando a Convolução}
+	\centering
+	
+	\begin{figure}[t!]
+		\centering
+		\includegraphics[width=0.7\linewidth]{images/convolucao/004_left_sobel} \\
+		\includegraphics[width=0.7\linewidth]{images/convolucao/005_right_sobel} \\
+		\caption{Acima: efeito de \textit{Left Sobel}, Abaixo: Efeito \textit{Right Sobel}}
+		\label{fig:left_right_sobel}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Visualizando a Convolução}
+	\centering
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.7\linewidth]{images/convolucao/001_sem_filtro} \\
+		\includegraphics[width=0.7\linewidth]{images/convolucao/002_blur}		
+		\caption{Acima: Imagem Original, Abaixo: Efeito \textit{Blur}}
+		\label{fig:orig_blur}
+	\end{figure}
+	
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Visualizando a Convolução}
+	\centering
+	\begin{figure}
+		\centering
+		\includegraphics[width=1.0\linewidth]{images/convolucao/006_edge_det}		
+		\caption{Exemplo trivial de detecção de bordas com filtro convolucional}
+		\label{fig:orig_blur}
+	\end{figure}
+	
+\end{frame}
 
 \begin{frame}
 	\frametitle{Python - Keras Framework para Machine Learning}
