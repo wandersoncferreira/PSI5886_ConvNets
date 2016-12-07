@@ -10,252 +10,272 @@
 % ----------------------------
 
 \usepackage{tikz}
-\usetikzlibrary{matrix,arrows.meta, shapes.geometric, arrows,chains}
-
-\setbeamertemplate{footline}[frame number]
-\renewcommand{\figurename}{Fig.}
-
-
-\tikzset{
-	startstop/.style={
-		rectangle, 
-		rounded corners,
-		minimum width=4cm, 
-		minimum height=1cm,
-		align=center, 
-		draw=black, 
-		fill=gray!70
-	},
-	startstop2/.style={
-	rectangle, 
-	rounded corners,
-	minimum width=4cm, 
-	minimum height=1cm,
-	align=center, 
-	draw=black, 
-	fill=green!30
-},
-	process/.style={
-		rectangle, 
-		minimum width=4cm, 
-		minimum height=1cm, 
-		align=center, 
-		draw=black, 
-		fill=gray!30
-	},
-	process2/.style={
-		rectangle, 
-		minimum width=4cm, 
-		minimum height=1cm, 
-		align=center, 
-		draw=black, 
-		fill=red!30
-	},
-	process3/.style={
-	rectangle, 
-	minimum width=4cm, 
-	minimum height=1cm, 
-	align=center, 
-	draw=black, 
-	fill=green!30
-},
-	decision/.style={
-		rectangle, 
-		minimum width=4cm, 
-		minimum height=1cm, align=center, 
-		draw=black, 
-		fill=green!30
-	},
-	arrow/.style={thick,->,>=stealth},
-	dec/.style={
-		ellipse, 
-		align=center, 
-		draw=black, 
-		fill=black!30
-	},
-}
-
+\usetikzlibrary{matrix,arrows.meta}
 
 \begin{document}
-\author{Bruno Canale \\ Bruno Giordano \\ Fábio Sancinetti \\
-  Wanderson Ferreira}
+	\author{Bruno Canale \\ Bruno Giordano \\ Fábio Sancinetti \\
+		Wanderson Ferreira}
 	\title{Estudos sobre Redes Neurais Convolucionais}
 	\subtitle{Disciplina PSI5886 \\ Prof. Emilio Del
-          Moral Hernandez}
+		Moral Hernandez}
 	%\logo{}
 	%\institute{}
 	\date{\today}
 	%\subject{}
 	%\setbeamercovered{transparent}
 	%\setbeamertemplate{navigation symbols}{}
-        \maketitle
-    \begin{frame}
-	\frametitle{Objetivos do Trabalho}
-	
-	Os objetivos principais do trabalho foram:
-	
-	\begin{itemize}
-	    \item Entender como as \textbf{MLPs} clássicas evoluíram para o que hoje é conhecido como Deep Learning
-		\item Estudar a estrutura e o funcionamento de Redes Neurais
-		Convolucionais 2D
-		\item Entender como a informação é transformada dentro da
-		rede neural ao avançar nas camadas mais profundas
-		\item Extrapolar esse conhecimento para redes mais
-		clássicas como a \textbf{MLP} estudada durante a
-		disciplina.
-	\end{itemize}
+	\maketitle
+	\begin{frame}
+		\frametitle{Objetivos do Trabalho}
+		
+		Os objetivos principais do trabalho foram:
+		
+		\begin{itemize}
+			\item Entender como as \textbf{MLPs} clássicas evoluíram para o que hoje é conhecido como Deep Learning
+			\item Estudar a estrutura e o funcionamento de Redes Neurais
+			Convolucionais 2D
+			\item Entender como a informação é transformada dentro da
+			rede neural ao avançar nas camadas mais profundas
+			\item Extrapolar esse conhecimento para redes mais
+			clássicas como a \textbf{MLP} estudada durante a
+			disciplina.
+		\end{itemize}
 	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Introdução e Motivação}
+		\begin{itemize}
+			\item Cybenko prova que uma rede neural MLP com uma camada escondida e com número arbitrário de neurônios consegue aproximar qualquer função
+			
+			\item Considerando tal resultado, por que tentar fazer redes neurais profundas?
+			
+			\item Delalleau e Bengio fizeram um estudo teórico \footnote{O. Delalleau, Y. Bengio - \emph{Shallow vs Deep Sum-Product Networks},
+				\hskip 1em plus
+				0.5em minus 0.4em\relax Neural Information Processing Systems} com neurônios simples (chamados de sum-product units) comparando a quantidade de neurônios necessária para uma aproximação com redes "superficiais" e "profundas"
+			
+			\item O trabalho conclui que para algumas classes de funções a utilização de redes neurais como postuladas por Cybenko requer um número de neurônios consideravelmente maior à uma rede neural com mais camadas escondidas
+			
+			\item Tarefas clássicas de inteligência artificial (como reconhecimento de imagens) se encaixam em algumas dessas premissas, justificando a utilização de arquiteturas profundas nesses problemas
+			
+			
+		\end{itemize}
+		
+	\end{frame}
+	
+	\begin{frame}{Esboço da idéia do trabalho}
+		
+		\begin{itemize}
+			\item \textbf{ Uma rede com $n$ inputs e profundidade $O(\log{n})$ pode representar com $O(n)$ units o que uma rede com profundidade 2 representaria com $O(2^{\sqrt{n}})$ units}
+			\item Sejam \begin{cases}
+				$N_1$ com 128 neurônios e profundidade 7 \\
+				$N_2$ com $n$ neurônios e profundidade 2
+			\end{cases}
+			
+			Temos $\sqrt{128} = 11.3 \Rightarrow 2^{11.3} = 2540$. Ou seja, $N_2$ necessitaria de quase 20 vezes mais neurônios para representar uma mesma função $f$.
+		\end{itemize}
+		
+		
+		\begin{figure}
+			\centering
+			\includegraphics[scale=0.33]{images/shallowdeep.png}
+		\end{figure}
+		
+		
+	\end{frame}
+	
+	
+	\begin{frame}
+		\frametitle{Análise preliminar da MLP clássica vista em sala}
+		
+		Para entender os problemas no aprendizado de redes com grande número de camadas escondidas em uma MLP clássica, vamos relembrar alguns conceitos de rede neurais com a arquitetura profunda mais simples possível \footnote{Michael A. Nielsen. - \emph{Neural Networks and Deep Learning},
+			\hskip 1em plus
+			0.5em minus 0.4em\relax Determination Press, 2015} :
+		
+		
+		\begin{figure}
+			\centering
+			\includegraphics[scale=0.5]{nnetsimples.png}
+		\end{figure}
+		Seja $a_i$ o output do i-\'esimo neur\^onio do modelo. Ou seja:
+		
+		$$a = \begin{cases}
+		a_1 = \sigma\big( w_1 x + b_1\big) = \sigma( z_1 ) \\
+		a_i = \sigma\big( w_i a_{i-1} + b_i\big) = \sigma( z_i ) \enspace \enspace i>1
+		\end{cases}$$
+		
+		Onde $\sigma(.)$ \'e a fun\c{c}\~ao de ativa\c{c}\~ao do i-\'esimo neur\^onio.
+		A derivada parcial de $C$ em relação à $w_1$ pode ser calculada como:
+		
+		$$ \frac{\partial C}{\partial w_1} = x \cdot \sigma^{'}(z_1) \cdot w_2 \cdot \sigma^{'}(z_2) \cdot w_3 \cdot \sigma^{'}(z_3) \cdot w_4 \cdot  \sigma^{'}(z_4)\cdot\frac{\partial C}{\partial a_4}$$
+		
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Funções de Perda}
+		
+		\begin{itemize}
+			\item Erro quadrático médio (RMS)
+			$$C = \frac{(y - a_4)^2}{2} = \frac{(y - \sigma(z_4))^2}{2} = \frac{(y - \sigma(a_3 w_4 + b_4))^2}{2}$$
+			$$\frac{ \partial C } {\partial w_4 } =  \frac{ \partial a_4 } {\partial w_4 } \frac{ \partial C } {\partial a_4 } = a_3 \cdot \sigma^{'}(z_4) \cdot (\sigma(z_4) - y_{ref})$$
+		\end{itemize}
+		
+		\begin{figure}
+			\centering
+			\includegraphics[scale=0.33]{images/plots.png}
+		\end{figure}
+		
+		
+		
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Funções de Perda}
+		
+		\begin{itemize}
+			\item Treino com RMS
+		\end{itemize}
+		\begin{figure}
+			\centering
+			\includegraphics[scale=0.33]{images/training.png}
+		\end{figure} Script disponivel em \footnote{Michael A. Nielsen. - \emph{Neural Networks and Deep Learning},
+		\hskip 1em plus
+		0.5em minus 0.4em\relax Determination Press, 2015
+		http://neuralnetworksanddeeplearning.com/chap3.html}.
+	
+	
+\end{frame}
 
 \begin{frame}
-	\frametitle{Introdução e Motivação}
+	\frametitle{Funções de Perda}
+	
 	\begin{itemize}
-	\item Cybenko prova que uma rede neural MLP com uma camada escondida e com número arbitrário de neurônios consegue aproximar qualquer função
-	
-	\item Considerando tal resultado, por que tentar fazer redes neurais profundas?
-	
-	\item Delalleau e Bengio fizeram um estudo teórico \footnote{O. Delalleau, Y. Bengio - \emph{Shallow vs Deep Sum-Product Networks},
-	\hskip 1em plus
-	0.5em minus 0.4em\relax Neural Information Processing Systems} com neurônios simples (chamados de sum-product units) comparando a quantidade de neurônios necessária para uma aproximação com redes "superficiais" e "profundas"
-	    
+		\item Cross-entropy loss:
+		$$C = - \bigg(y_{ref} \ln{a_4} + (1-y_{ref}) \ln{(1 - a_4)} \bigg) \Rightarrow \Big(a_4 = \sigma(z_4) \Big) \Rightarrow $$
+		$$\frac{ \partial C } {\partial w_4 } = a_3 \cdot \sigma^{'}(z_4) \cdot \bigg(- \frac{ y_{ref} }{ \sigma(z_4)} + \frac{(1 - y_{ref})}{1 -  \sigma(z_4)} \bigg) = $$ 
+		$$ \frac{ \partial C } {\partial w_4 }  = a_3 \frac{ \sigma^{'}(z_4) } { \sigma(z_4)(1 -  \sigma(z_4)) }  \Big(\sigma(z_4) - y_{ref}\Big)$$
+		
+		Para a sigmoide $\sigma = \frac{1}{1 + e^{-z}}$, temos $\sigma^{'} = \sigma(1-\sigma)$. Assim:
+		
+		$$ \frac{ \partial C } {\partial w_4 }  = a_3 \frac{ \sigma(z_4)(1 -  \sigma(z_4))   } { \sigma(z_4)(1 -  \sigma(z_4)) }  \Big(\sigma(z_4) - y_{ref}\Big) = a_3 \Big(\sigma(z_4) - y_{ref}\Big) $$
+		
+		\item A derivada parcial $\frac{ \partial C } {\partial a_4 }$ "cancela" o termo $\sigma^{'}(z_4)$.
+		\item Conceito pode ser estendido para outras funções de ativação.
+		
 	\end{itemize}
 	
 \end{frame}
 
-\begin{frame}
-	\frametitle{Introdução e Motivação}
-	\begin{itemize}
-	\item De maneira simplificada, o trabalho \footnote{O. Delalleau, Y. Bengio - \emph{Shallow vs Deep Sum-Product Networks},
-	\hskip 1em plus
-	0.5em minus 0.4em\relax Neural Information Processing Systems} conclui que, para uma classe de funções:
-	
-	\textbf{It shows that some deep sumproduct network with n inputs and depth $O(\log{n})$ can represent with $O(n)$ units what would require $O(2^{\sqrt{n}})$ units for a depth-2 network.}
-	\item Em outras palavras, conclui-se que para alguns tipos de funções a utilização de redes neurais como postuladas por Cybenko requer um número de neurônios consideravelmente maior à uma rede neural com mais camadas escondidas
-	\item Tarefas clássicas de inteligência artificial (como reconhecimento de imagens) se encaixam em algumas dessas premissas, justificando a utilização de arquiteturas profundas nesses problemas
-	 
-	\item O que acontece se aumentarmos arbritariamente o número de camadas escondidas em uma MLP clássica como visto em aula?
-
-	\end{itemize}
-	
-\end{frame}
-
 
 \begin{frame}
-    \frametitle{Análise preliminar da MLP clássica vista em sala}
- 
-     Para entender os problemas no aprendizado de redes com grande número de camadas escondidas em uma MLP clássica, vamos relembrar alguns conceitos de rede neurais com a arquitetura profunda mais simples possível \footnote{Michael A. Nielsen. - \emph{Neural Networks and Deep Learning},
-	\hskip 1em plus
-	0.5em minus 0.4em\relax Determination Press, 2015} :
-    
-    
-    \begin{figure}
-	\centering
-	\includegraphics[scale=0.5]{nnetsimples.png}
-	\end{figure}
-	Seja $a_i$ o output do i-\'esimo neur\^onio do modelo. Ou seja:
-
-$$a = \begin{cases}
-a_1 = \sigma\big( w_1 x + b_1\big) = \sigma( z_1 ) \\
-a_i = \sigma\big( w_i a_{i-1} + b_i\big) = \sigma( z_i ) \enspace \enspace i>1
-\end{cases}$$
-
-Onde $\sigma(.)$ \'e a fun\c{c}\~ao de ativa\c{c}\~ao do i-\'esimo neur\^onio.
-	A derivada parcial de $C$ em relação à $w_1$ pode ser calculada como:
-	
-	$$ \frac{\partial C}{\partial w_1} = x \cdot \sigma^{'}(z_1) \cdot w_2 \cdot \sigma^{'}(z_2) \cdot w_3 \cdot \sigma^{'}(z_3) \cdot w_4 \cdot  \sigma^{'}(z_4)\cdot\frac{\partial C}{\partial a_4}$$
-    
-\end{frame}
-
-\begin{frame}
-	\frametitle{Análise preliminar da MLP clássica vista em sala}
-	Há dois problemas cruciais consequentes da expressão da derivada parcial de $C$ em relação à $w_1$.
+	\frametitle{Funções de Perda}
 	
 	\begin{itemize}
-	    \item Função de perda $C$:
-	    
-	    $C = \frac{(y - a_4)^2}{2}$ como erro quadrático médio não é muito adequado para problemas de classificação:
-	    $$ \frac{ \partial C } {\partial w_4 } = a_3(a_4 - y_{ref})\sigma^{'}(z_4)$$
-	    
-	    Para $a_4 \rightarrow \{1,0\}$, $\sigma^{'}(z_4) \rightarrow 0$. Assim, se $a_4 \rightarrow \{1,0\}$, $ \frac{ \partial C } {\partial w_4 } \rightarrow 0$. Se $a_4 \rightarrow y_{ref}$, é interessante que os pesos se modifiquem menos pois $a_4$ já está correto. Entretanto, se $a_4$ estiver próximo do valor binário contrário à $y_{ref}$, $\sigma^{'}(z_4)$ impede uma correção grande nos pesos para corrigir $a_4$.
-	    
-	    Alternativa: Cross-Entropy Loss
-	   
+		\item Treino com Cross-Entropy
 	\end{itemize}
-\end{frame}
+	\begin{figure}
+		\centering
+		\includegraphics[scale=0.33]{images/trainingCE.png}
+	\end{figure} Script disponivel em \footnote{Michael A. Nielsen. - \emph{Neural Networks and Deep Learning},
+	\hskip 1em plus
+	0.5em minus 0.4em\relax Determination Press, 2015 http://neuralnetworksanddeeplearning.com/chap3.html}.
 
-\begin{frame}
-	\frametitle{Análise preliminar da MLP clássica vista em sala}
-    	
-    	Cross-entropy loss:
-    	
-    	$C = - \bigg(y_{ref} \ln{a_4} + (1-y_{ref}) \ln{(1 - a_4)} \bigg)$
-    	
-    	Como $y_{ref} = \{1,0\}$, podemos perceber que $C \rightarrow 0$ se $a_4 = y_{ref}$ e $C \rightarrow \infty$ se $a_4$ se aproxima do valor binário contrário de $y_{ref}$. A propriedade mais interessante dessa função de perda está em sua derivada parcial:
-    	
-    	$$\frac{ \partial C } {\partial w_4 } = a_3(a_4 - y_{ref})$$
-    	
-    	Como podemos ver, a derivada independe de $\sigma^{'}(z_4)$. Assim, não há mais o problema mencionado anteriormente. Nas implementações práticas percebe-se que tal função de perda resulta em um treinamento consideravelmente mais rápido para problemas de classificação. Note que esse problema não é especificamente relacionado à redes profundas já que só se manifesta na última camada. Experimentalmente, verificou-se que para arquiteturas profundas diferentes camadas aprendiam em taxas diferentes de acordo com sua profundidade. Vamos voltar a analisar $\frac{\partial C}{\partial w_1}$:
-    	
 
 \end{frame}
 
 \begin{frame}
-	\frametitle{Análise preliminar da MLP clássica vista em sala}
-	 Considere $\frac{\partial C}{\partial w_1}$:
-	 
+	\frametitle{Problema Vanishing Gradient}
+	Vamos voltar a analisar $\frac{\partial C}{\partial w_1}$:
+	
 	$$ \frac{\partial C}{\partial w_1} = x \cdot \sigma^{'}(z_1) \cdot w_2 \cdot \sigma^{'}(z_2) \cdot w_3 \cdot \sigma^{'}(z_3) \cdot w_4 \cdot  \sigma^{'}(z_4)\cdot\frac{\partial C}{\partial a_4} \rightarrow $$
+	\begin{figure}
+		\centering
+		\includegraphics[scale=0.5]{nnetsimples.png}
+	\end{figure}
 	$$ \frac{\partial C}{\partial w_1} = x \bigg(w_2 w_3 w_4 \bigg) \cdot \bigg(\sigma^{'}(z_1) \cdot \sigma^{'}(z_2)\cdot \sigma^{'}(z_3) \cdot \sigma^{'}(z_4) \bigg) \frac{\partial C}{\partial a_4} $$
 	
-	Sabemos que para $\sigma(z) = \frac{1}{1 + e^z}$, $\sigma^{'}(z) \leq 0.25$ e que $\sigma^{'}(z) \rightarrow 0$ para certos valores de $z$. Assim, a multiplicação de vários $\sigma^{'}(z)$ resulta em valores cada vez menores. Quanto maior a "distância" entre a camada e a função de perda $C$, menor a velocidade de aprendizado. Em particular, se inicializarmos todos os pesos com a mesma distribuição aleatória sem considerar a profundidade da camada em que se encontram, teremos uma inicialização com $\frac{\partial C}{\partial w_1} < \frac{\partial C}{\partial w_2} < \frac{\partial C}{\partial w_3} < ... $ . Tal problema é uma das principais causas da convergência para mínimos locais em redes profundas, comumente chamado na literatura de \it{Vanishing Gradient Problem}.
+	\begin{itemize}
+		\item Como $\sigma^{'}(z) \leq 0.25$, a multiplicação de vários $\sigma^{'}(z)$ resulta em valores cada vez menores.
+		
+		\item Quanto maior a "distância" entre a camada e a função de perda $C$, menor a velocidade de aprendizado.
+		
+		\item Se inicializarmos todos os pesos com a mesma distribuição aleatória sem considerar a profundidade da camada em que se encontram, teremos uma inicialização com $\frac{\partial C}{\partial w_1} < \frac{\partial C}{\partial w_2} < \frac{\partial C}{\partial w_3} < ... $
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Problema Vanishing Gradient}
+	
+	\begin{itemize}
+		\item Rede com 4 camadas escondidas com o mesmo número de neurônios, treinada no dataset MNIST (banco de dados de números escritos à mão)
+		\item Para cada iteração do treino, a norma das alterações $\Delta w_i$ dos pesos é usada para inferir a velocidade de aprendizado
+	\end{itemize}
+	
+	\begin{figure}
+		\centering
+		\includegraphics[scale=0.6]{images/vanishinggradient.png}
+	\end{figure}
+	Imagem disponível em \footnote{Michael A. Nielsen. - \emph{Neural Networks and Deep Learning},
+		\hskip 1em plus
+		0.5em minus 0.4em\relax Determination Press, 2015 http://neuralnetworksanddeeplearning.com/chap5.html}.
 	
 \end{frame}
 
 \begin{frame}
 	\frametitle{Deep Learning}
-	Durante um bom tempo tal problema impossibilitava a utilização de arquiteturas profundas para machine learning. Em 2006 \footnote{Hinton et al. - \emph{A fast learning algorithm for deep belief nets},
-	\hskip 1em plus
-	0.5em minus 0.4em\relax Neural Computation, 2006} e 2007 \footnote{
-	Bengio et al. - \emph{Greedy Layer-Wise Training of Deep Networks},
-	\hskip 1em plus
-	0.5em minus 0.4em\relax Neural Information Processing Systems, 2007} surgiram os primeiros algoritmos bem sucedidos para lidar com esse problema objetivando melhorar a inicialização da rede.
-	
-	Ambos algoritmos exploravam a ideia da utilização de técnicas de aprendizado não supervisionado para a inicialização dos pesos da rede seguidas de técnicas de aprendizado supervisionado. Tal estratégia talvez não seja mais tão utilizada atualmente em classificadores estado-da-arte, mas certamente foi extremamente importante na época pois estimulou a comunidade científica na pesquisa de novos métodos para treinamento de redes profundas.
-	
-	Surge, assim, o Deep Learning como conjunto de técnicas para melhorar o treinamento de redes profundas. Indicaremos a seguir algumas técnicas já consolidadas:
-	
+	\begin{itemize}
+		\item Diversos outros problemas associados a escalabilidade de redes neurais
+		\item Estudo de técnicas para possibilitar treinamento de arquiteturas profundas
+		\item Hyper-parâmetros para serem selecionados durante o treino, adequando-o conforme as especifidades dos dados
+	\end{itemize}
 \end{frame}
-
 
 \begin{frame}
 	\frametitle{Regularização}
-	Como vimos, o problema de aprendizado lento ocorre quando $\frac{\partial C}{\partial w_i}$ é pequeno. Considerando $\sigma(z)$ e $\sigma^`(z)$, sabemos que isso ocorre criticamente quando o módulo de $z$ é grande. Já que $z = \vec{w}^T \vec{a} + b$ (onde $\vec{a}$ são as ativações da camadas anterior e portanto são menores ou iguais a 1), o módulo de $z$ é grande quando o módulo de $\vec{w}$ é grande.
 	
-	Assim, para evitar que a rede "caminhe" durante o treinamento para regiões de baixo aprendizado, introduzimos um termo na função de custo C que penaliza pesos grandes. Por exemplo, a regularização L2 utiliza a norma L2 dos pesos $\vec{w}$ como penalidade:
+	\begin{itemize}
+		\item Consiste na inclusão de um termo extra na função de custo:
+		$$C = C_{loss} + C_{reg}$$
+		
+		\item Esse termo $C_{reg}$ é usado para penalizar convergências indesejáveis durante o treino, introduzindo novos hyper-parametros
+		
+		\item Regularização L2:	    
+		$$C^{L2}_{reg} = \lambda ||w||^2$$
+		
+		Penaliza otimizações com pesos $w$ altos. Conforme o aumento de $\lambda$, as sigmóides tendem a se ativar mais em torno da região linear:
+		\begin{figure}
+			\centering
+			\includegraphics[scale=0.4]{images/regL2.png}
+		\end{figure}
+		
+		
+		
+		
+	\end{itemize}
 	
-	$$C_{reg} = C_{orig} + \lambda \vec{w}^T \vec{w}$$
-	
-	Onde o parâmetro $\lambda$ é utilizado como hyper-parâmetro para ponderar a importância desse termo na função de perda. Quanto maior o parâmetro $\lambda$, menores serão os pesos encontrados durante o treinamento.
 	
 \end{frame}
 
 
 \begin{frame}
 	\frametitle{Dropout}
-    Introduzido por Hinton et al. \footnote{
-	Hinton et al. - \emph{Improving neural networks by preventing
-co-adaptation of feature detectors},
-	\hskip 1em plus
-	0.5em minus 0.4em\relax 2012}, pode ser interpretado simplificadamente como uma técnica para evitar o problema de overfitting. Em cada iteração de treino, há uma probabilidade $p$ para cada neurônio estar ativo (pesos $w$ mantidos) e (1-p) de estar inativo (pesos $w$ zerados). 
 	
-	 \begin{figure}
-	\centering
-	\includegraphics[scale=0.3]{dropout.png}
+	\begin{itemize}
+		\item Técnica para evitar co-adaptação de neurônios
+		\item Em cada iteração de treino, há uma probabilidade $p$ para cada neurônio estar ativo (pesos $w$ mantidos) e (1-p) de estar inativo (pesos $w$ zerados)
+	\end{itemize}
+	
+	\begin{figure}
+		\centering
+		\includegraphics[scale=0.28]{dropout.png}
 	\end{figure}
 	
-	Foi popularizada após a utilização de Krizhevsky et al. \footnote{
-	Krizhevsky et al. - \emph{ImageNet Classification with Deep Convolutional Neural Networks}
-	\hskip 1em plus
-	0.5em minus 0.4em\relax 2012} em sua solução campeã da competição ImageNet de 2012. 
-	\tiny{\it{"This technique reduces complex co-adaptations of neurons, since a neuron cannot rely on the presence of particular other neurons. It is, therefore, forced to learn more robust features that are useful in conjunction with many different random subsets of the other neurons."}}
+	
+	\begin{itemize}
+		\item Reduz a co-adaptação de neurônios
+		\item Força os neurônios a aprenderem pesos baseados em diferentes subsets aleatórios de outros neurônios
+		\item Melhora a capacidade de generalização para situações de oclusão de características
+	\end{itemize}
 	
 \end{frame}
 
@@ -263,14 +283,18 @@ co-adaptation of feature detectors},
 \begin{frame}
 	\frametitle{Generalização de arquiteturas de ativação: building blocks}
 	
-Com o passar dos anos, a comunidade científica foi testando experimentalmente novas metodologias orientadas à     resultados sem tanto embasamento teórico como a MLP de Cybenko. Nesse contexto, novas funções de ativação e       novas arquiteturas de conexões entre neurônios foram surgindo na tentativa de inserir conhecimento específico     de domínio na generalidade das redes neurais. Introduz-se então o conceito de "building blocks", que são pequenos blocos neurais pré-definidos.
-
-Alguns exemplos:
-	 \begin{figure}
-	\centering
-	\includegraphics[scale=0.3]{blocks.png}
+	
+	\begin{figure}
+		\centering
+		\includegraphics[scale=0.28]{images/denseconv.png}
 	\end{figure}
+	\begin{figure}
+		\centering
+		\includegraphics[scale=0.28]{images/conv.png}
+	\end{figure}
+	
 \end{frame}
+
 
 
 \begin{frame}
