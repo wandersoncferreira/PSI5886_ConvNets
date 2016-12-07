@@ -10,10 +10,71 @@
 % ----------------------------
 
 \usepackage{tikz}
-\usetikzlibrary{matrix,arrows.meta}
+\usetikzlibrary{matrix,arrows.meta, shapes.geometric, arrows,chains}
 
 \setbeamertemplate{footline}[frame number]
 \renewcommand{\figurename}{Fig.}
+
+
+\tikzset{
+	startstop/.style={
+		rectangle, 
+		rounded corners,
+		minimum width=4cm, 
+		minimum height=1cm,
+		align=center, 
+		draw=black, 
+		fill=gray!70
+	},
+	startstop2/.style={
+	rectangle, 
+	rounded corners,
+	minimum width=4cm, 
+	minimum height=1cm,
+	align=center, 
+	draw=black, 
+	fill=green!30
+},
+	process/.style={
+		rectangle, 
+		minimum width=4cm, 
+		minimum height=1cm, 
+		align=center, 
+		draw=black, 
+		fill=gray!30
+	},
+	process2/.style={
+		rectangle, 
+		minimum width=4cm, 
+		minimum height=1cm, 
+		align=center, 
+		draw=black, 
+		fill=red!30
+	},
+	process3/.style={
+	rectangle, 
+	minimum width=4cm, 
+	minimum height=1cm, 
+	align=center, 
+	draw=black, 
+	fill=green!30
+},
+	decision/.style={
+		rectangle, 
+		minimum width=4cm, 
+		minimum height=1cm, align=center, 
+		draw=black, 
+		fill=green!30
+	},
+	arrow/.style={thick,->,>=stealth},
+	dec/.style={
+		ellipse, 
+		align=center, 
+		draw=black, 
+		fill=black!30
+	},
+}
+
 
 \begin{document}
 \author{Bruno Canale \\ Bruno Giordano \\ Fábio Sancinetti \\
@@ -401,42 +462,50 @@ Alguns exemplos:
 % -------------------------------------------------
 % \begin{fabio}
 % -------------------------------------------------
-
 \begin{frame}
-	\frametitle{Redes e Resultados}
-
-    \begin{figure}
-	\centering
-	\begin{minipage}{.33\textwidth}
-		\centering
-		\includegraphics[width=.4\linewidth]{images/resultados/default/model}
-	\end{minipage}%
-	\begin{minipage}{.33\textwidth}
-		\centering
-		\includegraphics[width=.4\linewidth, height=.9\textheight]{images/resultados/network_1/model}
-	\end{minipage}%
-	\begin{minipage}{.34\textwidth}
-	\centering
-	\includegraphics[width=.4\linewidth, height=.9\textheight]{images/resultados/network_2/model}
-	\end{minipage}
-
-\end{figure}
-
-\end{frame}
-
-
-\begin{frame}
-	\frametitle{Camada de entrada}
+	\frametitle{Entradas}
 	\centering
 	MNIST DATASET
 	\includegraphics[width=.8\paperwidth]{images/fabio/inputs}
 \end{frame}
 
 \begin{frame}
-	\frametitle{Aplicação da CNN}
+	\frametitle{Exemplo de Rede}
 	\centering
-	\includegraphics[height=.8\paperheight]{images/resultados/default/model}
+	
+	\resizebox{!}{.9\textheight}{% if required
+	\begin{tikzpicture}[
+	start chain=going below,
+	every join/.style={arrow},
+	node distance=0.3cm
+	]
+	\node (start) [startstop,on chain,join] {Imagem de entrada};
+	
+	\node (out1) [process,on chain,join] {Convolução \\ Ativação};
+	
+	\node (out3) [process,on chain,join] {Convolução \\ Ativação };
+	
+	\node (out5) [process,on chain,join] {Convolução \\ Ativação};
+	
+	\node (out7) [process,on chain,join] {Pooling};
+
+	\node (out8) [process,on chain,join] {Convolução \\ Ativação};
+	
+	\node (out10) [process,on chain,join] {Flatten};
+	\node (out11) [process,on chain,join] {Dense};
+	
+	\node (out12) [process,on chain,join] {Dropout};
+	\node (out13) [process,on chain,join] {Ativação};	
+	
+	\node (out14) [process,on chain,join] {Dense};
+	\node (out15) [process,on chain,join] {Dropout};
+			
+	\node (out16) [startstop,on chain,join] {Ativação};		
+
+	\end{tikzpicture}%
+	}
 \end{frame}
+
 
 \begin{frame}
 	\frametitle{Treinamento}
@@ -446,106 +515,983 @@ Alguns exemplos:
 		\par Treinamento
 		\begin{itemize}
 			\item Épocas = 10
-			\item Itens = 60000
-			\item Tempo = 30 ~ 40 minutos
+			\item Itens = 60.000
+			\item Tempo = 30 $\longrightarrow$ 40 minutos
 		\end{itemize}		
 %	\end{minipage}%
 %	\begin{minipage}{.5\textwidth}
 	\centering
 	\par Teste
 	\begin{itemize}
-		\item Itens = 10000
-	\end{itemize}		
+		\item Itens = 10.000
+	\end{itemize}	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Treinamento}		
 	\centering
+	\par Resultado na base de treinamento
+	\begin{itemize}
+		\item 98.94\%
+	\end{itemize}	
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.5\linewidth]{images/resultados/network_1/loss_history}
+		\label{fig:losshistory}
+	\end{figure}
 	\par Resultado na base de teste
 	\begin{itemize}
-		\item 98.02\%
-	\end{itemize}
+		\item 99.06\%
+	\end{itemize}	
 %\end{minipage}%
 
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
 	\frametitle{Convolução - 1}
 	\centering
-	\includegraphics[width=.8\paperwidth]{images/fabio/conv_1}
-\end{frame}
+	\begin{columns}
+		\begin{column}{0.25\textwidth}
+\begin{figure}
+\resizebox{!}{.9\textheight}
+{% if required
+	
+\begin{tikzpicture}[
+start chain=going below,
+every join/.style={arrow},
+node distance=0.3cm
+]
+\node (start) [startstop,on chain,join] {Imagem de entrada};
 
+\node (out1) [process2,on chain,join] {Convolução \\ Ativação};
+
+\node (out3) [process,on chain,join] {Convolução \\ Ativação };
+
+\node (out5) [process,on chain,join] {Convolução \\ Ativação};
+
+\node (out7) [process,on chain,join] {Pooling};
+
+\node (out8) [process,on chain,join] {Convolução \\ Ativação};
+
+\node (out10) [process,on chain,join] {Flatten};
+\node (out11) [process,on chain,join] {Dense};
+
+\node (out12) [process,on chain,join] {Dropout};
+\node (out13) [process,on chain,join] {Ativação};	
+
+\node (out14) [process,on chain,join] {Dense};
+\node (out15) [process,on chain,join] {Dropout};
+
+\node (out16) [startstop,on chain,join] {Ativação};		
+
+		\end{tikzpicture}
+		} %resize		
+			\end{figure}
+
+		\end{column}		
+	
+		\begin{column}{0.25\textwidth}
+			\begin{figure}
+				\includegraphics[height=.1\paperheight]{images/fabio/num_0}
+				\caption{Entrada}
+			\end{figure}%
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\begin{figure}
+			\includegraphics[height=.6\paperheight]{images/resultados/network_1/filter_convolution2d_1}%
+			\caption{Filtros}			
+			\end{figure}%
+		\end{column}	
+	\end{columns}
+
+%	\includegraphics[height=.5\paperheight]{images/resultados/network_1/input_1_layer_convolution2d_1}		
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-	\frametitle{Ativação - 1}
+	\frametitle{Convolução - 1}
 	\centering
-	\includegraphics[height=.8\paperheight]{images/fabio/ativ_1}
+	\begin{columns}
+		\begin{column}{0.25\textwidth}
+			\begin{figure}
+				\resizebox{!}{.9\textheight}
+				{% if required
+					
+					\begin{tikzpicture}[
+					start chain=going below,
+					every join/.style={arrow},
+					node distance=0.3cm
+					]
+					\node (start) [startstop,on chain,join] {Imagem de entrada};
+					
+					\node (out1) [process2,on chain,join] {Convolução \\ Ativação};
+					
+					\node (out3) [process,on chain,join] {Convolução \\ Ativação };
+					
+					\node (out5) [process,on chain,join] {Convolução \\ Ativação};
+					
+					\node (out7) [process,on chain,join] {Pooling};
+					
+					\node (out8) [process,on chain,join] {Convolução \\ Ativação};
+					
+					\node (out10) [process,on chain,join] {Flatten};
+					\node (out11) [process,on chain,join] {Dense};
+					
+					\node (out12) [process,on chain,join] {Dropout};
+					\node (out13) [process,on chain,join] {Ativação};	
+					
+					\node (out14) [process,on chain,join] {Dense};
+					\node (out15) [process,on chain,join] {Dropout};
+					
+					\node (out16) [startstop,on chain,join] {Ativação};		
+					
+					\end{tikzpicture}
+				} %resize		
+			\end{figure}
+			
+		\end{column}		
+		
+		\begin{column}{0.33\textwidth}
+			\begin{figure}
+				\includegraphics[height=4cm]{images/resultados/network_1/input_1_layer_convolution2d_1}
+				\caption{Convolução 1}
+			\end{figure}%
+		\end{column}
+		\begin{column}{0.33\textwidth}
+			\begin{figure}
+				\includegraphics[height=4cm]{images/resultados/network_1/input_1_layer_activation_1}%
+				\caption{Ativação}			
+			\end{figure}%
+		\end{column}	
+	\end{columns}
+	
 \end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
 	\frametitle{Convolução - 2}
 	\centering
-	\includegraphics[width=.8\paperwidth]{images/fabio/conv_2}
+	\begin{columns}
+		\begin{column}{0.25\textwidth}
+			\begin{figure}
+				\resizebox{!}{.9\textheight}
+				{% if required
+					
+					\begin{tikzpicture}[
+					start chain=going below,
+					every join/.style={arrow},
+					node distance=0.3cm
+					]
+					\node (start) [startstop,on chain,join] {Imagem de entrada};
+					
+					\node (out1) [process3,on chain,join] {Convolução \\ Ativação};
+					
+					\node (out3) [process2,on chain,join] {Convolução \\ Ativação };
+					
+					\node (out5) [process,on chain,join] {Convolução \\ Ativação};
+					
+					\node (out7) [process,on chain,join] {Pooling};
+					
+					\node (out8) [process,on chain,join] {Convolução \\ Ativação};
+					
+					\node (out10) [process,on chain,join] {Flatten};
+					\node (out11) [process,on chain,join] {Dense};
+					
+					\node (out12) [process,on chain,join] {Dropout};
+					\node (out13) [process,on chain,join] {Ativação};	
+					
+					\node (out14) [process,on chain,join] {Dense};
+					\node (out15) [process,on chain,join] {Dropout};
+					
+					\node (out16) [startstop,on chain,join] {Ativação};		
+					
+					\end{tikzpicture}
+				} %resize		
+			\end{figure}
+			
+		\end{column}		
+		
+		\begin{column}{0.33\textwidth}
+			\begin{figure}
+				\includegraphics[height=4cm]{images/resultados/network_1/input_1_layer_activation_1}%
+				\caption{Ativação 1}
+			\end{figure}%
+		\end{column}
+		\begin{column}{0.33\textwidth}
+			\begin{figure}
+				\includegraphics[height=4cm]{images/resultados/network_1/filter_convolution2d_2}%
+				\caption{Filtros}			
+			\end{figure}%
+		\end{column}	
+	\end{columns}
+	
 \end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-	\frametitle{Ativação - 2}
+	\frametitle{Convolução - 2}
 	\centering
-	\includegraphics[height=.8\paperheight]{images/fabio/ativ_2}
+	\begin{columns}
+		\begin{column}{0.25\textwidth}
+			\begin{figure}
+				\resizebox{!}{.9\textheight}
+				{% if required
+					
+					\begin{tikzpicture}[
+					start chain=going below,
+					every join/.style={arrow},
+					node distance=0.3cm
+					]
+					\node (start) [startstop,on chain,join] {Imagem de entrada};
+					
+					\node (out1) [process3,on chain,join] {Convolução \\ Ativação};
+					
+					\node (out3) [process2,on chain,join] {Convolução \\ Ativação };
+					
+					\node (out5) [process,on chain,join] {Convolução \\ Ativação};
+					
+					\node (out7) [process,on chain,join] {Pooling};
+					
+					\node (out8) [process,on chain,join] {Convolução \\ Ativação};
+					
+					\node (out10) [process,on chain,join] {Flatten};
+					\node (out11) [process,on chain,join] {Dense};
+					
+					\node (out12) [process,on chain,join] {Dropout};
+					\node (out13) [process,on chain,join] {Ativação};	
+					
+					\node (out14) [process,on chain,join] {Dense};
+					\node (out15) [process,on chain,join] {Dropout};
+					
+					\node (out16) [startstop,on chain,join] {Ativação};		
+					
+					\end{tikzpicture}
+				} %resize		
+			\end{figure}
+			
+		\end{column}		
+		
+		\begin{column}{0.33\textwidth}
+			\begin{figure}
+				\includegraphics[height=4cm]{images/resultados/network_1/input_1_layer_convolution2d_2}%
+				\caption{Convolução 2}
+			\end{figure}%
+		\end{column}
+		\begin{column}{0.33\textwidth}
+			\begin{figure}
+				\includegraphics[height=4cm]{images/resultados/network_1/input_1_layer_activation_2}%
+				\caption{Ativação}			
+			\end{figure}%
+		\end{column}	
+	\end{columns}
+	
 \end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-	\frametitle{Pooling}
+	\frametitle{Convolução - 3}
 	\centering
-	\includegraphics[height=.8\paperheight]{images/fabio/pooling_1}
+	\begin{columns}
+		\begin{column}{0.25\textwidth}
+			\begin{figure}
+				\resizebox{!}{.9\textheight}
+				{% if required
+					
+					\begin{tikzpicture}[
+					start chain=going below,
+					every join/.style={arrow},
+					node distance=0.3cm
+					]
+					\node (start) [startstop,on chain,join] {Imagem de entrada};
+					
+					\node (out1) [process3,on chain,join] {Convolução \\ Ativação};
+					
+					\node (out3) [process3,on chain,join] {Convolução \\ Ativação };
+					
+					\node (out5) [process2,on chain,join] {Convolução \\ Ativação};
+					
+					\node (out7) [process,on chain,join] {Pooling};
+					
+					\node (out8) [process,on chain,join] {Convolução \\ Ativação};
+					
+					\node (out10) [process,on chain,join] {Flatten};
+					\node (out11) [process,on chain,join] {Dense};
+					
+					\node (out12) [process,on chain,join] {Dropout};
+					\node (out13) [process,on chain,join] {Ativação};	
+					
+					\node (out14) [process,on chain,join] {Dense};
+					\node (out15) [process,on chain,join] {Dropout};
+					
+					\node (out16) [startstop,on chain,join] {Ativação};		
+					
+					\end{tikzpicture}
+				} %resize		
+			\end{figure}
+			
+		\end{column}		
+		
+		\begin{column}{0.33\textwidth}
+			\begin{figure}
+				\includegraphics[height=4cm]{images/resultados/network_1/input_1_layer_activation_2}%
+				\caption{Ativação 2}
+			\end{figure}%
+		\end{column}
+		\begin{column}{0.33\textwidth}
+			\begin{figure}
+				\includegraphics[height=4cm]{images/resultados/network_1/filter_convolution2d_3}%
+				\caption{Filtros}			
+			\end{figure}%
+		\end{column}	
+	\end{columns}
+	
 \end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-	\frametitle{Flatten ( N * 2D -> 1D)}
+	\frametitle{Convolução - 3}
 	\centering
-	\includegraphics[height=.8\paperheight]{images/fabio/flatten_1}
+	\begin{columns}
+		\begin{column}{0.25\textwidth}
+			\begin{figure}
+				\resizebox{!}{.9\textheight}
+				{% if required
+					
+					\begin{tikzpicture}[
+					start chain=going below,
+					every join/.style={arrow},
+					node distance=0.3cm
+					]
+					\node (start) [startstop,on chain,join] {Imagem de entrada};
+					
+					\node (out1) [process3,on chain,join] {Convolução \\ Ativação};
+					
+					\node (out3) [process3,on chain,join] {Convolução \\ Ativação };
+					
+					\node (out5) [process2,on chain,join] {Convolução \\ Ativação};
+					
+					\node (out7) [process,on chain,join] {Pooling};
+					
+					\node (out8) [process,on chain,join] {Convolução \\ Ativação};
+					
+					\node (out10) [process,on chain,join] {Flatten};
+					\node (out11) [process,on chain,join] {Dense};
+					
+					\node (out12) [process,on chain,join] {Dropout};
+					\node (out13) [process,on chain,join] {Ativação};	
+					
+					\node (out14) [process,on chain,join] {Dense};
+					\node (out15) [process,on chain,join] {Dropout};
+					
+					\node (out16) [startstop,on chain,join] {Ativação};		
+					
+					\end{tikzpicture}
+				} %resize		
+			\end{figure}
+			
+		\end{column}		
+		
+		\begin{column}{0.33\textwidth}
+			\begin{figure}
+				\includegraphics[height=4cm]{images/resultados/network_1/input_1_layer_convolution2d_3}%
+				\caption{Convolução 3}
+			\end{figure}%
+		\end{column}
+		\begin{column}{0.33\textwidth}
+			\begin{figure}
+				\includegraphics[height=4cm]{images/resultados/network_1/input_1_layer_activation_3}%
+				\caption{Ativação}			
+			\end{figure}%
+		\end{column}	
+	\end{columns}
+	
 \end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{Pooling - 1}
+	\centering
+	\begin{columns}
+		\begin{column}{0.25\textwidth}
+			\begin{figure}
+				\resizebox{!}{.9\textheight}
+				{% if required
+					
+					\begin{tikzpicture}[
+					start chain=going below,
+					every join/.style={arrow},
+					node distance=0.3cm
+					]
+					\node (start) [startstop,on chain,join] {Imagem de entrada};
+					
+					\node (out1) [process3,on chain,join] {Convolução \\ Ativação};
+					
+					\node (out3) [process3,on chain,join] {Convolução \\ Ativação };
+					
+					\node (out5) [process3,on chain,join] {Convolução \\ Ativação};
+					
+					\node (out7) [process2,on chain,join] {Pooling};
+					
+					\node (out8) [process,on chain,join] {Convolução \\ Ativação};
+					
+					\node (out10) [process,on chain,join] {Flatten};
+					\node (out11) [process,on chain,join] {Dense};
+					
+					\node (out12) [process,on chain,join] {Dropout};
+					\node (out13) [process,on chain,join] {Ativação};	
+					
+					\node (out14) [process,on chain,join] {Dense};
+					\node (out15) [process,on chain,join] {Dropout};
+					
+					\node (out16) [startstop,on chain,join] {Ativação};		
+					
+					\end{tikzpicture}
+				} %resize		
+			\end{figure}
+			
+		\end{column}		
+		
+		\begin{column}{0.33\textwidth}
+			\begin{figure}
+				\includegraphics[height=4cm]{images/resultados/network_1/input_1_layer_activation_3}
+				\caption{Ativação 3}
+			\end{figure}%
+		\end{column}
+		\begin{column}{0.33\textwidth}
+			\begin{figure}
+				\includegraphics[height=4cm]{images/resultados/network_1/input_1_layer_maxpooling2d_1}%
+				\caption{Pooling}			
+			\end{figure}%
+		\end{column}	
+	\end{columns}
+	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{Convolução - 4}
+	\centering
+	\begin{columns}
+		\begin{column}{0.25\textwidth}
+			\begin{figure}
+				\resizebox{!}{.9\textheight}
+				{% if required
+					
+					\begin{tikzpicture}[
+					start chain=going below,
+					every join/.style={arrow},
+					node distance=0.3cm
+					]
+					\node (start) [startstop,on chain,join] {Imagem de entrada};
+					
+					\node (out1) [process3,on chain,join] {Convolução \\ Ativação};
+					
+					\node (out3) [process3,on chain,join] {Convolução \\ Ativação };
+					
+					\node (out5) [process3,on chain,join] {Convolução \\ Ativação};
+					
+					\node (out7) [process3,on chain,join] {Pooling};
+					
+					\node (out8) [process2,on chain,join] {Convolução \\ Ativação};
+					
+					\node (out10) [process,on chain,join] {Flatten};
+					\node (out11) [process,on chain,join] {Dense};
+					
+					\node (out12) [process,on chain,join] {Dropout};
+					\node (out13) [process,on chain,join] {Ativação};	
+					
+					\node (out14) [process,on chain,join] {Dense};
+					\node (out15) [process,on chain,join] {Dropout};
+					
+					\node (out16) [startstop,on chain,join] {Ativação};		
+					
+					\end{tikzpicture}
+				} %resize		
+			\end{figure}
+			
+		\end{column}		
+		
+		\begin{column}{0.33\textwidth}
+			\begin{figure}
+				\includegraphics[height=4cm]{images/resultados/network_1/input_1_layer_maxpooling2d_1}
+				\caption{Pooling 1}
+			\end{figure}%
+		\end{column}
+		\begin{column}{0.33\textwidth}
+			\begin{figure}
+				\includegraphics[height=4cm]{images/resultados/network_1/filter_convolution2d_4}%
+				\caption{Filtros}			
+			\end{figure}%
+		\end{column}	
+	\end{columns}
+	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{Convolução - 4}
+	\centering
+	\begin{columns}
+		\begin{column}{0.25\textwidth}
+			\begin{figure}
+				\resizebox{!}{.9\textheight}
+				{% if required
+					
+					\begin{tikzpicture}[
+					start chain=going below,
+					every join/.style={arrow},
+					node distance=0.3cm
+					]
+					\node (start) [startstop,on chain,join] {Imagem de entrada};
+					
+					\node (out1) [process3,on chain,join] {Convolução \\ Ativação};
+					
+					\node (out3) [process3,on chain,join] {Convolução \\ Ativação };
+					
+					\node (out5) [process3,on chain,join] {Convolução \\ Ativação};
+					
+					\node (out7) [process3,on chain,join] {Pooling};
+					
+					\node (out8) [process2,on chain,join] {Convolução \\ Ativação};
+					
+					\node (out10) [process,on chain,join] {Flatten};
+					\node (out11) [process,on chain,join] {Dense};
+					
+					\node (out12) [process,on chain,join] {Dropout};
+					\node (out13) [process,on chain,join] {Ativação};	
+					
+					\node (out14) [process,on chain,join] {Dense};
+					\node (out15) [process,on chain,join] {Dropout};
+					
+					\node (out16) [startstop,on chain,join] {Ativação};		
+					
+					\end{tikzpicture}
+				} %resize		
+			\end{figure}
+			
+		\end{column}		
+		
+		\begin{column}{0.33\textwidth}
+			\begin{figure}
+				\includegraphics[height=4cm]{images/resultados/network_1/input_1_layer_convolution2d_4}
+				\caption{Convolução 4}
+			\end{figure}%
+		\end{column}
+		\begin{column}{0.33\textwidth}
+			\begin{figure}
+				\includegraphics[height=4cm]{images/resultados/network_1/input_1_layer_activation_4}%
+				\caption{Ativação}			
+			\end{figure}%
+		\end{column}	
+	\end{columns}
+	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{Flatten}
+	\centering
+	\begin{columns}
+		\begin{column}{0.25\textwidth}
+			\begin{figure}
+				\resizebox{!}{.9\textheight}
+				{% if required
+					
+					\begin{tikzpicture}[
+					start chain=going below,
+					every join/.style={arrow},
+					node distance=0.3cm
+					]
+					\node (start) [startstop,on chain,join] {Imagem de entrada};
+					
+					\node (out1) [process3,on chain,join] {Convolução \\ Ativação};
+					
+					\node (out3) [process3,on chain,join] {Convolução \\ Ativação };
+					
+					\node (out5) [process3,on chain,join] {Convolução \\ Ativação};
+					
+					\node (out7) [process3,on chain,join] {Pooling};
+					
+					\node (out8) [process3,on chain,join] {Convolução \\ Ativação};
+					
+					\node (out10) [process2,on chain,join] {Flatten};
+					\node (out11) [process,on chain,join] {Dense};
+					
+					\node (out12) [process,on chain,join] {Dropout};
+					\node (out13) [process,on chain,join] {Ativação};	
+					
+					\node (out14) [process,on chain,join] {Dense};
+					\node (out15) [process,on chain,join] {Dropout};
+					
+					\node (out16) [startstop,on chain,join] {Ativação};		
+					
+					\end{tikzpicture}
+				} %resize		
+			\end{figure}
+			
+		\end{column}		
+		
+		\begin{column}{0.66\textwidth}
+			\begin{figure}
+				\includegraphics[height=4cm]{images/resultados/network_1/input_1_layer_activation_4}
+				\caption{Ativação 4}
+			\end{figure}%
+			\begin{figure}
+				\includegraphics[width=6cm]{images/resultados/network_1/input_1_layer_flatten_1}%
+				\caption{Flatten \small{ ( $3 \times 3 \times 32 \rightarrow 1 \times 1 \times 288$ )} }			
+			\end{figure}%
+		\end{column}	
+	\end{columns}
+	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
 	\frametitle{Dense - 1}
 	\centering
-	\includegraphics[height=.8\paperheight]{images/fabio/dense1}
+	\begin{columns}
+		\begin{column}{0.25\textwidth}
+			\begin{figure}
+				\resizebox{!}{.9\textheight}
+				{% if required
+					
+					\begin{tikzpicture}[
+					start chain=going below,
+					every join/.style={arrow},
+					node distance=0.3cm
+					]
+					\node (start) [startstop,on chain,join] {Imagem de entrada};
+					
+					\node (out1) [process3,on chain,join] {Convolução \\ Ativação};
+					
+					\node (out3) [process3,on chain,join] {Convolução \\ Ativação };
+					
+					\node (out5) [process3,on chain,join] {Convolução \\ Ativação};
+					
+					\node (out7) [process3,on chain,join] {Pooling};
+					
+					\node (out8) [process3,on chain,join] {Convolução \\ Ativação};
+					
+					\node (out10) [process3,on chain,join] {Flatten};
+					\node (out11) [process2,on chain,join] {Dense};
+					
+					\node (out12) [process,on chain,join] {Dropout};
+					\node (out13) [process,on chain,join] {Ativação};	
+					
+					\node (out14) [process,on chain,join] {Dense};
+					\node (out15) [process,on chain,join] {Dropout};
+					
+					\node (out16) [startstop,on chain,join] {Ativação};		
+					
+					\end{tikzpicture}
+				} %resize		
+			\end{figure}
+			
+		\end{column}		
+		
+		\begin{column}{0.66\textwidth}
+			\begin{figure}
+				\includegraphics[width=6cm]{images/resultados/network_1/input_1_layer_flatten_1}%
+				\caption{Flatten \small{1x1x288} }	
+			\end{figure}%
+			\begin{figure}
+				\includegraphics[width=6cm]{images/resultados/network_1/input_1_layer_dense_1}%
+				\caption{Dense \small{1x1x100} }			
+			\end{figure}%
+		\end{column}	
+	\end{columns}
+	
 \end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-	\frametitle{Ativação - 3}
+	\frametitle{Dropout - 1}
 	\centering
-	\includegraphics[height=.8\paperheight]{images/fabio/ativ_3}
+	\begin{columns}
+		\begin{column}{0.25\textwidth}
+			\begin{figure}
+				\resizebox{!}{.9\textheight}
+				{% if required
+					
+					\begin{tikzpicture}[
+					start chain=going below,
+					every join/.style={arrow},
+					node distance=0.3cm
+					]
+					\node (start) [startstop,on chain,join] {Imagem de entrada};
+					
+					\node (out1) [process3,on chain,join] {Convolução \\ Ativação};
+					
+					\node (out3) [process3,on chain,join] {Convolução \\ Ativação };
+					
+					\node (out5) [process3,on chain,join] {Convolução \\ Ativação};
+					
+					\node (out7) [process3,on chain,join] {Pooling};
+					
+					\node (out8) [process3,on chain,join] {Convolução \\ Ativação};
+					
+					\node (out10) [process3,on chain,join] {Flatten};
+					\node (out11) [process3,on chain,join] {Dense};
+					
+					\node (out12) [process2,on chain,join] {Dropout};
+					\node (out13) [process,on chain,join] {Ativação};	
+					
+					\node (out14) [process,on chain,join] {Dense};
+					\node (out15) [process,on chain,join] {Dropout};
+					
+					\node (out16) [startstop,on chain,join] {Ativação};		
+					
+					\end{tikzpicture}
+				} %resize		
+			\end{figure}
+			
+		\end{column}		
+		
+		\begin{column}{0.66\textwidth}
+			\begin{itemize}
+				\item Dropout = 0.25
+			\end{itemize}			
+		\end{column}	
+	\end{columns}
+	
 \end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{Ativação - 7}
+	\centering
+	\begin{columns}
+		\begin{column}{0.25\textwidth}
+			\begin{figure}
+				\resizebox{!}{.9\textheight}
+				{% if required
+					
+					\begin{tikzpicture}[
+					start chain=going below,
+					every join/.style={arrow},
+					node distance=0.3cm
+					]
+					\node (start) [startstop,on chain,join] {Imagem de entrada};
+					
+					\node (out1) [process3,on chain,join] {Convolução \\ Ativação};
+					
+					\node (out3) [process3,on chain,join] {Convolução \\ Ativação };
+					
+					\node (out5) [process3,on chain,join] {Convolução \\ Ativação};
+					
+					\node (out7) [process3,on chain,join] {Pooling};
+					
+					\node (out8) [process3,on chain,join] {Convolução \\ Ativação};
+					
+					\node (out10) [process3,on chain,join] {Flatten};
+					\node (out11) [process3,on chain,join] {Dense};
+					
+					\node (out12) [process3,on chain,join] {Dropout};
+					\node (out13) [process2,on chain,join] {Ativação};	
+					
+					\node (out14) [process,on chain,join] {Dense};
+					\node (out15) [process,on chain,join] {Dropout};
+					
+					\node (out16) [startstop,on chain,join] {Ativação};		
+					
+					\end{tikzpicture}
+				} %resize		
+			\end{figure}
+			
+		\end{column}		
+		
+		\begin{column}{0.66\textwidth}
+			\begin{figure}
+				\includegraphics[width=6cm]{images/resultados/network_1/input_1_layer_activation_7}%
+				\caption{Ativação }			
+			\end{figure}%
+		\end{column}	
+	\end{columns}
+	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
 	\frametitle{Dense - 2}
 	\centering
-	\includegraphics[height=.8\paperheight]{images/fabio/dense2}
+	\begin{columns}
+		\begin{column}{0.25\textwidth}
+			\begin{figure}
+				\resizebox{!}{.9\textheight}
+				{% if required
+					
+					\begin{tikzpicture}[
+					start chain=going below,
+					every join/.style={arrow},
+					node distance=0.3cm
+					]
+					\node (start) [startstop,on chain,join] {Imagem de entrada};
+					
+					\node (out1) [process3,on chain,join] {Convolução \\ Ativação};
+					
+					\node (out3) [process3,on chain,join] {Convolução \\ Ativação };
+					
+					\node (out5) [process3,on chain,join] {Convolução \\ Ativação};
+					
+					\node (out7) [process3,on chain,join] {Pooling};
+					
+					\node (out8) [process3,on chain,join] {Convolução \\ Ativação};
+					
+					\node (out10) [process3,on chain,join] {Flatten};
+					\node (out11) [process3,on chain,join] {Dense};
+					
+					\node (out12) [process3,on chain,join] {Dropout};
+					\node (out13) [process3,on chain,join] {Ativação};	
+					
+					\node (out14) [process2,on chain,join] {Dense};
+					\node (out15) [process,on chain,join] {Dropout};
+					
+					\node (out16) [startstop,on chain,join] {Ativação};		
+					
+					\end{tikzpicture}
+				} %resize		
+			\end{figure}
+			
+		\end{column}		
+		
+		\begin{column}{0.66\textwidth}
+			\begin{figure}
+				\includegraphics[width=6cm]{images/resultados/network_1/input_1_layer_activation_7}%
+				\caption{Ativação 7 \small{1x1x100} }	
+			\end{figure}%
+			\begin{figure}
+				\includegraphics[width=6cm]{images/resultados/network_1/input_1_layer_dense_2}%
+				\caption{Dense \small{1x1x10} }			
+			\end{figure}%
+		\end{column}	
+	\end{columns}
+	
 \end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-	\frametitle{Ativação - 4}
+	\frametitle{Dropout - 2}
 	\centering
-	\includegraphics[height=.8\paperheight]{images/fabio/ativ_4}
+	\begin{columns}
+		\begin{column}{0.25\textwidth}
+			\begin{figure}
+				\resizebox{!}{.9\textheight}
+				{% if required
+					
+					\begin{tikzpicture}[
+					start chain=going below,
+					every join/.style={arrow},
+					node distance=0.3cm
+					]
+					\node (start) [startstop,on chain,join] {Imagem de entrada};
+					
+					\node (out1) [process3,on chain,join] {Convolução \\ Ativação};
+					
+					\node (out3) [process3,on chain,join] {Convolução \\ Ativação };
+					
+					\node (out5) [process3,on chain,join] {Convolução \\ Ativação};
+					
+					\node (out7) [process3,on chain,join] {Pooling};
+					
+					\node (out8) [process3,on chain,join] {Convolução \\ Ativação};
+					
+					\node (out10) [process3,on chain,join] {Flatten};
+					\node (out11) [process3,on chain,join] {Dense};
+					
+					\node (out12) [process3,on chain,join] {Dropout};
+					\node (out13) [process3,on chain,join] {Ativação};	
+					
+					\node (out14) [process3,on chain,join] {Dense};
+					\node (out15) [process2,on chain,join] {Dropout};
+					
+					\node (out16) [startstop,on chain,join] {Ativação};		
+					
+					\end{tikzpicture}
+				} %resize		
+			\end{figure}
+			
+		\end{column}		
+		
+		\begin{column}{0.66\textwidth}
+			\begin{itemize}
+				\item Dropout = 0.25
+			\end{itemize}			
+		\end{column}	
+	\end{columns}
+	
 \end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-	\frametitle{Resultados das demais redes testadas - 1 }
+	\frametitle{Ativação - 8}
 	\centering
-	\par Precisão na base de treino: 98.94\%
-	\par Precisão na base de teste: 98.89\%
-	\par 3 conv + 1 pooling + 3 conv + 1 pooling + 2 FC 
-	\\
-	\includegraphics[height=.7\paperheight]{images/resultados/network_1/model}
+	\begin{columns}
+		\begin{column}{0.25\textwidth}
+			\begin{figure}
+				\resizebox{!}{.9\textheight}
+				{% if required
+					
+					\begin{tikzpicture}[
+					start chain=going below,
+					every join/.style={arrow},
+					node distance=0.3cm
+					]
+					\node (start) [startstop,on chain,join] {Imagem de entrada};
+					
+					\node (out1) [process3,on chain,join] {Convolução \\ Ativação};
+					
+					\node (out3) [process3,on chain,join] {Convolução \\ Ativação };
+					
+					\node (out5) [process3,on chain,join] {Convolução \\ Ativação};
+					
+					\node (out7) [process3,on chain,join] {Pooling};
+					
+					\node (out8) [process3,on chain,join] {Convolução \\ Ativação};
+					
+					\node (out10) [process3,on chain,join] {Flatten};
+					\node (out11) [process3,on chain,join] {Dense};
+					
+					\node (out12) [process3,on chain,join] {Dropout};
+					\node (out13) [process3,on chain,join] {Ativação};	
+					
+					\node (out14) [process3,on chain,join] {Dense};
+					\node (out15) [process3,on chain,join] {Dropout};
+					
+					\node (out16) [startstop,on chain,join] {Ativação};		
+					
+					\end{tikzpicture}
+				} %resize		
+			\end{figure}
+			
+		\end{column}		
+		
+		\begin{column}{0.66\textwidth}
+			\begin{figure}
+				\includegraphics[width=6cm]{images/resultados/network_1/input_1_layer_activation_8}%
+				\caption{Ativação }			
+			\end{figure}%
+		\end{column}	
+	\end{columns}
+	
 \end{frame}
-
-\begin{frame}
-	\frametitle{Resultados das demais redes testadas - 2 }
-	\centering
-	\par Precisão na base de treino: 98.94\%
-	\par Precisão na base de teste: 99.06\%
-	\par 3 conv + 1 pooling + 3 conv + 1 pooling + 2 FC \(com dropout\)
-	\\
-	\includegraphics[height=.7\paperheight]{images/resultados/network_2/model}
-\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}
 	\frametitle{MLP \& CNN}

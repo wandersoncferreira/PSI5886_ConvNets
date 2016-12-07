@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded format=pdflatex 2016.11.21)  6 DEC 2016 21:10
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded format=pdflatex 2016.11.21)  6 DEC 2016 23:29
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1126,27 +1126,54 @@ File: pgflibraryarrows.meta.code.tex 2015/05/13 v3.0.1a (rcs-revision 1.13)
 \pgfarrowlength=\dimen260
 \pgfarrowwidth=\dimen261
 \pgfarrowlinewidth=\dimen262
-) (./main.aux
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
+zlibraryshapes.geometric.code.tex
+File: tikzlibraryshapes.geometric.code.tex 2008/01/09 v3.0.1a (rcs-revision 1.1
+)
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibraryshape
+s.geometric.code.tex
+File: pgflibraryshapes.geometric.code.tex 2008/06/26 v3.0.1a (rcs-revision 1.1)
+
+))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
+zlibraryarrows.code.tex
+File: tikzlibraryarrows.code.tex 2008/01/09 v3.0.1a (rcs-revision 1.1)
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.code.
+tex
+File: pgflibraryarrows.code.tex 2013/09/23 v3.0.1a (rcs-revision 1.16)
+\arrowsize=\dimen263
+))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
+zlibrarychains.code.tex
+File: tikzlibrarychains.code.tex 2013/07/15 v3.0.1a (rcs-revision 1.6)
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
+zlibrarypositioning.code.tex
+File: tikzlibrarypositioning.code.tex 2008/10/06 v3.0.1a (rcs-revision 1.7)
+)) (./main.aux
 
 LaTeX Warning: Label `fig:orig_blur' multiply defined.
 
 )
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 79.
+LaTeX Font Info:    ... okay on input line 79.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 79.
+LaTeX Font Info:    ... okay on input line 79.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 79.
+LaTeX Font Info:    ... okay on input line 79.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 79.
+LaTeX Font Info:    ... okay on input line 79.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 79.
+LaTeX Font Info:    ... okay on input line 79.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 79.
+LaTeX Font Info:    ... okay on input line 79.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 79.
+LaTeX Font Info:    ... okay on input line 79.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1185,13 +1212,13 @@ LaTeX Font Info:    ... okay on input line 18.
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count171
-\scratchdimen=\dimen263
+\scratchdimen=\dimen264
 \scratchbox=\box60
 \nofMPsegments=\count172
 \nofMParguments=\count173
 \everyMPshowfont=\toks48
 \MPscratchCnt=\count174
-\MPscratchDim=\dimen264
+\MPscratchDim=\dimen265
 \MPnumerator=\count175
 \makeMPintoPDFobject=\count176
 \everyMPtoPDFconversion=\toks49
@@ -1214,7 +1241,7 @@ e
 ))
 ABD: EveryShipout initializing macros
 \AtBeginShipoutBox=\box61
-Package hyperref Info: Link coloring OFF on input line 18.
+Package hyperref Info: Link coloring OFF on input line 79.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
@@ -1224,56 +1251,56 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
 \c@section@level=\count177
 )
-LaTeX Info: Redefining \ref on input line 18.
-LaTeX Info: Redefining \pageref on input line 18.
-LaTeX Info: Redefining \nameref on input line 18.
+LaTeX Info: Redefining \ref on input line 79.
+LaTeX Info: Redefining \pageref on input line 79.
+LaTeX Info: Redefining \nameref on input line 79.
 
 (./main.out) (./main.out)
 \@outlinefile=\write5
 \openout5 = `main.out'.
 
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/cmr/m/n --> OT1/cmss/m/n on input line 18.
+(Font)                  OT1/cmr/m/n --> OT1/cmss/m/n on input line 79.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/cmr/bx/n --> OT1/cmss/bx/n on input line 18.
+(Font)                  OT1/cmr/bx/n --> OT1/cmss/bx/n on input line 79.
 \symnumbers=\mathgroup6
 \sympureletters=\mathgroup7
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
-(Font)                  OT1/cmss/m/n --> T1/cmr/m/n on input line 18.
-LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 18.
+(Font)                  OT1/cmss/m/n --> T1/cmr/m/n on input line 79.
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 79.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
-(Font)                  OT1/cmr/bx/n --> T1/cmss/bx/n on input line 18.
+(Font)                  OT1/cmr/bx/n --> T1/cmss/bx/n on input line 79.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
-(Font)                  OT1/cmr/bx/n --> T1/cmss/bx/n on input line 18.
-LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 18.
+(Font)                  OT1/cmr/bx/n --> T1/cmss/bx/n on input line 79.
+LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 79.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/cmss/m/n --> T1/cmss/m/n on input line 18.
+(Font)                  OT1/cmss/m/n --> T1/cmss/m/n on input line 79.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/cmss/bx/n --> T1/cmss/m/n on input line 18.
-LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 18.
+(Font)                  OT1/cmss/bx/n --> T1/cmss/m/n on input line 79.
+LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 79.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT1/cmr/m/it --> T1/cmss/m/it on input line 18.
+(Font)                  OT1/cmr/m/it --> T1/cmss/m/it on input line 79.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/cmr/bx/it --> T1/cmss/m/it on input line 18.
-LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 18.
+(Font)                  OT1/cmr/bx/it --> T1/cmss/m/it on input line 79.
+LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 79.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/cmtt/m/n --> T1/cmtt/m/n on input line 18.
+(Font)                  OT1/cmtt/m/n --> T1/cmtt/m/n on input line 79.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> T1/cmtt/m/n on input line 18.
+(Font)                  OT1/cmtt/m/n --> T1/cmtt/m/n on input line 79.
 LaTeX Font Info:    Overwriting symbol font `numbers' in version `bold'
-(Font)                  T1/cmss/m/n --> T1/cmss/bx/n on input line 18.
+(Font)                  T1/cmss/m/n --> T1/cmss/bx/n on input line 79.
 LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
-(Font)                  T1/cmss/m/it --> T1/cmss/bx/it on input line 18.
+(Font)                  T1/cmss/m/it --> T1/cmss/bx/it on input line 79.
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `bold'
-(Font)                  OT1/cmss/bx/n --> T1/cmr/bx/n on input line 18.
+(Font)                  OT1/cmss/bx/n --> T1/cmr/bx/n on input line 79.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
-(Font)                  T1/cmss/bx/n --> T1/cmss/bx/n on input line 18.
+(Font)                  T1/cmss/bx/n --> T1/cmss/bx/n on input line 79.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  T1/cmss/m/n --> T1/cmss/bx/n on input line 18.
+(Font)                  T1/cmss/m/n --> T1/cmss/bx/n on input line 79.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  T1/cmss/m/it --> T1/cmss/bx/it on input line 18.
+(Font)                  T1/cmss/m/it --> T1/cmss/bx/it on input line 79.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  T1/cmtt/m/n --> T1/cmtt/bx/n on input line 18.
+(Font)                  T1/cmtt/m/n --> T1/cmtt/bx/n on input line 79.
 
 (/usr/share/texlive/texmf-dist/tex/latex/beamer/translator/dicts/translator-bas
 ic-dictionary/translator-basic-dictionary-English.dict
@@ -1299,26 +1326,26 @@ Dictionary: translator-numbers-dictionary, Language: English
 orem-dictionary/translator-theorem-dictionary-English.dict
 Dictionary: translator-theorem-dictionary, Language: English 
 )
-LaTeX Info: Redefining \includegraphics on input line 18.
+LaTeX Info: Redefining \includegraphics on input line 79.
 \c@lstlisting=\count178
  (./main.nav)
 
 Package hyperref Warning: Option `pdfauthor' has already been used,
-(hyperref)                setting the option has no effect on input line 20.
+(hyperref)                setting the option has no effect on input line 81.
 
 
 LaTeX Font Warning: Font shape `T1/cmss/m/n' in size <4> not available
-(Font)              size <5> substituted on input line 30.
+(Font)              size <5> substituted on input line 91.
 
 [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-LaTeX Font Info:    Try loading font information for U+msa on input line 46.
+LaTeX Font Info:    Try loading font information for U+msa on input line 107.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 46.
+LaTeX Font Info:    Try loading font information for U+msb on input line 107.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -1332,7 +1359,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 <nnetsimples.png, id=129, 432.86719pt x 54.2025pt>
 File: nnetsimples.png Graphic file (type png)
  <use nnetsimples.png>
-Package pdftex.def Info: nnetsimples.png used on input line 105.
+Package pdftex.def Info: nnetsimples.png used on input line 166.
 (pdftex.def)             Requested size: 216.43306pt x 27.10118pt.
 
 [5
@@ -1351,14 +1378,14 @@ Package pdftex.def Info: nnetsimples.png used on input line 105.
 <dropout.png, id=290, 482.55281pt x 280.79906pt>
 File: dropout.png Graphic file (type png)
  <use dropout.png>
-Package pdftex.def Info: dropout.png used on input line 199.
+Package pdftex.def Info: dropout.png used on input line 260.
 (pdftex.def)             Requested size: 144.76695pt x 84.24036pt.
  [11
 
  <./dropout.png>] <blocks.png, id=316, 925.20656pt x 374.90062pt>
 File: blocks.png Graphic file (type png)
  <use blocks.png>
-Package pdftex.def Info: blocks.png used on input line 215.
+Package pdftex.def Info: blocks.png used on input line 276.
 (pdftex.def)             Requested size: 277.5641pt x 112.47105pt.
 
 [12
@@ -1366,7 +1393,7 @@ Package pdftex.def Info: blocks.png used on input line 215.
  <./blocks.png>] [13
 
 ]
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 227.
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 288.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
@@ -1379,7 +1406,7 @@ File: images/convolucao/001_sem_filtro.png Graphic file (type png)
 
 <use images/convolucao/001_sem_filtro.png>
 Package pdftex.def Info: images/convolucao/001_sem_filtro.png used on input lin
-e 241.
+e 302.
 (pdftex.def)             Requested size: 307.28987pt x 115.85622pt.
  [15
 
@@ -1389,7 +1416,7 @@ File: images/convolucao/004_left_sobel.png Graphic file (type png)
 
 <use images/convolucao/004_left_sobel.png>
 Package pdftex.def Info: images/convolucao/004_left_sobel.png used on input lin
-e 253.
+e 314.
 (pdftex.def)             Requested size: 215.10196pt x 87.60825pt.
 
 <images/convolucao/003_upper_sobel.png, id=425, 988.69376pt x 399.4925pt>
@@ -1397,7 +1424,7 @@ File: images/convolucao/003_upper_sobel.png Graphic file (type png)
 
 <use images/convolucao/003_upper_sobel.png>
 Package pdftex.def Info: images/convolucao/003_upper_sobel.png used on input li
-ne 253.
+ne 314.
 (pdftex.def)             Requested size: 215.10196pt x 86.9133pt.
  [16
 
@@ -1407,7 +1434,7 @@ File: images/convolucao/004_left_sobel.png Graphic file (type png)
 
 <use images/convolucao/004_left_sobel.png>
 Package pdftex.def Info: images/convolucao/004_left_sobel.png used on input lin
-e 267.
+e 328.
 (pdftex.def)             Requested size: 215.10196pt x 87.60825pt.
 
 <images/convolucao/005_right_sobel.png, id=453, 1027.84pt x 396.48125pt>
@@ -1415,7 +1442,7 @@ File: images/convolucao/005_right_sobel.png Graphic file (type png)
 
 <use images/convolucao/005_right_sobel.png>
 Package pdftex.def Info: images/convolucao/005_right_sobel.png used on input li
-ne 267.
+ne 328.
 (pdftex.def)             Requested size: 215.10196pt x 82.97311pt.
  [17
 
@@ -1423,14 +1450,14 @@ ne 267.
 File: images/convolucao/001_sem_filtro.png Graphic file (type png)
  <use images/convolucao/001_sem_filtro.png>
 Package pdftex.def Info: images/convolucao/001_sem_filtro.png used on input lin
-e 280.
+e 341.
 (pdftex.def)             Requested size: 215.10196pt x 81.09755pt.
 
 <images/convolucao/002_blur.png, id=481, 984.67876pt x 400.49625pt>
 File: images/convolucao/002_blur.png Graphic file (type png)
 
 <use images/convolucao/002_blur.png>
-Package pdftex.def Info: images/convolucao/002_blur.png used on input line 280.
+Package pdftex.def Info: images/convolucao/002_blur.png used on input line 341.
 
 (pdftex.def)             Requested size: 215.10196pt x 87.48611pt.
  [18
@@ -1441,34 +1468,34 @@ File: images/convolucao/006_edge_det.png Graphic file (type png)
 
 <use images/convolucao/006_edge_det.png>
 Package pdftex.def Info: images/convolucao/006_edge_det.png used on input line 
-293.
+354.
 (pdftex.def)             Requested size: 307.28987pt x 113.10362pt.
 pdfTeX warning (ext4): destination with the same identifier (name{fig:orig_blur
 }) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.293 \end{frame}
+l.354 \end{frame}
                   [19
 
  <./images/convolucao/006_edge_det.png>]
 <road_map.jpg, id=535, 750.805pt x 334.24875pt>
 File: road_map.jpg Graphic file (type jpg)
  <use road_map.jpg>
-Package pdftex.def Info: road_map.jpg used on input line 312.
+Package pdftex.def Info: road_map.jpg used on input line 373.
 (pdftex.def)             Requested size: 225.24323pt x 100.27539pt.
  [20
 
  <./road_map.jpg>] [21
 
 ]
-Overfull \hbox (4.15959pt too wide) in paragraph at lines 354--354
+Overfull \hbox (4.15959pt too wide) in paragraph at lines 415--415
 \T1/cmss/m/n/10 http://yann.lecun.com/exdb/mnist/  
  []
 
 <minst.png, id=587, 399.4925pt x 372.39125pt>
 File: minst.png Graphic file (type png)
  <use minst.png>
-Package pdftex.def Info: minst.png used on input line 354.
+Package pdftex.def Info: minst.png used on input line 415.
 (pdftex.def)             Requested size: 139.82446pt x 130.33888pt.
 
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
@@ -1486,165 +1513,450 @@ LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <7> not available
 ] [25
 
 ]
-<images/resultados/default/model.png, id=692, 513.92pt x 1184.425pt>
-File: images/resultados/default/model.png Graphic file (type png)
-
-<use images/resultados/default/model.png>
-Package pdftex.def Info: images/resultados/default/model.png used on input line
- 425.
-(pdftex.def)             Requested size: 40.56186pt x 93.47276pt.
-
-<images/resultados/network_1/model.png, id=693, 513.92pt x 1850.915pt>
-File: images/resultados/network_1/model.png Graphic file (type png)
-
-<use images/resultados/network_1/model.png>
-Package pdftex.def Info: images/resultados/network_1/model.png used on input li
-ne 425.
-(pdftex.def)             Requested size: 40.55766pt x 235.93912pt.
-
-<images/resultados/network_2/model.png, id=694, 513.92pt x 2405.98875pt>
-File: images/resultados/network_2/model.png Graphic file (type png)
-
-<use images/resultados/network_2/model.png>
-Package pdftex.def Info: images/resultados/network_2/model.png used on input li
-ne 425.
-(pdftex.def)             Requested size: 41.78882pt x 235.91379pt.
-
-Overfull \vbox (7.73174pt too high) detected at line 425
- []
-
-[26
-
- <./images/resultados/default/model.png> <./images/resultados/network_1/model.p
-ng> <./images/resultados/network_2/model.png>]
-<images/fabio/inputs.png, id=720, 562.2606pt x 273.9033pt>
+<images/fabio/inputs.png, id=692, 562.2606pt x 273.9033pt>
 File: images/fabio/inputs.png Graphic file (type png)
 
 <use images/fabio/inputs.png>
-Package pdftex.def Info: images/fabio/inputs.png used on input line 433.
+Package pdftex.def Info: images/fabio/inputs.png used on input line 470.
 (pdftex.def)             Requested size: 291.35739pt x 141.93317pt.
- [27
+ [26
 
- <./images/fabio/inputs.png>]
-File: images/resultados/default/model.png Graphic file (type png)
+ <./images/fabio/inputs.png>] [27
 
-<use images/resultados/default/model.png>
-Package pdftex.def Info: images/resultados/default/model.png used on input line
- 439.
-(pdftex.def)             Requested size: 94.80708pt x 218.51813pt.
- [28
-
-] [29
+] [28
 
 ]
-<images/fabio/conv_1.png, id=799, 806.01125pt x 327.2225pt>
-File: images/fabio/conv_1.png Graphic file (type png)
+<images/resultados/network_1/loss_history.png, id=770, 553.06625pt x 388.45125p
+t>
+File: images/resultados/network_1/loss_history.png Graphic file (type png)
+ <use images/resultados/network_1/loss_history.png>
+Package pdftex.def Info: images/resultados/network_1/loss_history.png used on i
+nput line 548.
+(pdftex.def)             Requested size: 153.64493pt x 107.91206pt.
+ [29
 
-<use images/fabio/conv_1.png>
-Package pdftex.def Info: images/fabio/conv_1.png used on input line 472.
-(pdftex.def)             Requested size: 291.35739pt x 118.28432pt.
- [30
+ <./images/resultados/network_1/loss_history.png>]
+<images/fabio/num_0.png, id=798, 132.495pt x 132.495pt>
+File: images/fabio/num_0.png Graphic file (type png)
 
- <./images/fabio/conv_1.png>]
-<images/fabio/ativ_1.png, id=825, 579.16376pt x 610.28pt>
-File: images/fabio/ativ_1.png Graphic file (type png)
+<use images/fabio/num_0.png>
+Package pdftex.def Info: images/fabio/num_0.png used on input line 609.
+(pdftex.def)             Requested size: 27.31529pt x 27.31631pt.
 
-<use images/fabio/ativ_1.png>
-Package pdftex.def Info: images/fabio/ativ_1.png used on input line 478.
-(pdftex.def)             Requested size: 207.37645pt x 218.51813pt.
- [31
+<images/resultados/network_1/filter_convolution2d_1.png, id=799, 578.16pt x 578
+.16pt>
+File: images/resultados/network_1/filter_convolution2d_1.png Graphic file (type
+ png)
+ <use images/resultados/network_1/filter_convolution2d_1.png>
+Package pdftex.def Info: images/resultados/network_1/filter_convolution2d_1.png
+ used on input line 609.
+(pdftex.def)             Requested size: 163.88629pt x 163.88963pt.
 
- <./images/fabio/ativ_1.png>]
-<images/fabio/conv_2.png, id=852, 797.98125pt x 608.2725pt>
-File: images/fabio/conv_2.png Graphic file (type png)
+Overfull \hbox (10.24136pt too wide) in paragraph at lines 609--609
+ [] 
+ []
 
-<use images/fabio/conv_2.png>
-Package pdftex.def Info: images/fabio/conv_2.png used on input line 484.
-(pdftex.def)             Requested size: 291.35739pt x 222.08723pt.
- [32
 
- <./images/fabio/conv_2.png>]
-<images/fabio/ativ_2.png, id=878, 613.29124pt x 605.26125pt>
-File: images/fabio/ativ_2.png Graphic file (type png)
+Overfull \vbox (8.73093pt too high) detected at line 609
+ []
 
-<use images/fabio/ativ_2.png>
-Package pdftex.def Info: images/fabio/ativ_2.png used on input line 490.
-(pdftex.def)             Requested size: 221.41167pt x 218.51813pt.
- [33
+[30
 
- <./images/fabio/ativ_2.png>]
-<images/fabio/pooling_1.png, id=904, 602.25pt x 612.2875pt>
-File: images/fabio/pooling_1.png Graphic file (type png)
+ <./images/fabio/num_0.png> <./images/resultados/network_1/filter_convolution2d
+_1.png>]
+<images/resultados/network_1/input_1_layer_convolution2d_1.png, id=826, 578.16p
+t x 578.16pt>
+File: images/resultados/network_1/input_1_layer_convolution2d_1.png Graphic fil
+e (type png)
 
-<use images/fabio/pooling_1.png>
-Package pdftex.def Info: images/fabio/pooling_1.png used on input line 496.
-(pdftex.def)             Requested size: 214.93515pt x 218.51813pt.
- [34
+<use images/resultados/network_1/input_1_layer_convolution2d_1.png>
+Package pdftex.def Info: images/resultados/network_1/input_1_layer_convolution2
+d_1.png used on input line 670.
+(pdftex.def)             Requested size: 113.80379pt x 113.81102pt.
 
- <./images/fabio/pooling_1.png>]
-<images/fabio/flatten_1.png, id=931, 626.34pt x 605.26125pt>
-File: images/fabio/flatten_1.png Graphic file (type png)
+Overfull \hbox (12.39757pt too wide) in paragraph at lines 670--670
+ [] 
+ []
 
-<use images/fabio/flatten_1.png>
-Package pdftex.def Info: images/fabio/flatten_1.png used on input line 502.
-(pdftex.def)             Requested size: 226.12254pt x 218.51813pt.
- [35
 
- <./images/fabio/flatten_1.png>]
-<images/fabio/dense1.png, id=957, 747.79375pt x 606.265pt>
-File: images/fabio/dense1.png Graphic file (type png)
+<images/resultados/network_1/input_1_layer_activation_1.png, id=827, 558.6471pt
+ x 558.6471pt>
+File: images/resultados/network_1/input_1_layer_activation_1.png Graphic file (
+type png)
 
-<use images/fabio/dense1.png>
-Package pdftex.def Info: images/fabio/dense1.png used on input line 509.
-(pdftex.def)             Requested size: 269.52502pt x 218.51813pt.
- [36
+<use images/resultados/network_1/input_1_layer_activation_1.png>
+Package pdftex.def Info: images/resultados/network_1/input_1_layer_activation_1
+.png used on input line 670.
+(pdftex.def)             Requested size: 113.80736pt x 113.81102pt.
 
- <./images/fabio/dense1.png>]
-<images/fabio/ativ_3.png, id=983, 798.985pt x 621.32124pt>
-File: images/fabio/ativ_3.png Graphic file (type png)
+Overfull \hbox (12.40114pt too wide) in paragraph at lines 670--670
+ [] 
+ []
 
-<use images/fabio/ativ_3.png>
-Package pdftex.def Info: images/fabio/ativ_3.png used on input line 515.
-(pdftex.def)             Requested size: 281.0022pt x 218.51813pt.
- [37
 
- <./images/fabio/ativ_3.png>]
-<images/fabio/dense2.png, id=1010, 804.00375pt x 630.355pt>
-File: images/fabio/dense2.png Graphic file (type png)
+Overfull \vbox (8.73093pt too high) detected at line 670
+ []
 
-<use images/fabio/dense2.png>
-Package pdftex.def Info: images/fabio/dense2.png used on input line 521.
-(pdftex.def)             Requested size: 278.71881pt x 218.51813pt.
- [38
+[31
 
- <./images/fabio/dense2.png>]
-<images/fabio/ativ_4.png, id=1037, 819.06pt x 629.35126pt>
-File: images/fabio/ativ_4.png Graphic file (type png)
+ <./images/resultados/network_1/input_1_layer_convolution2d_1.png> <./images/re
+sultados/network_1/input_1_layer_activation_1.png>]
+File: images/resultados/network_1/input_1_layer_activation_1.png Graphic file (
+type png)
 
-<use images/fabio/ativ_4.png>
-Package pdftex.def Info: images/fabio/ativ_4.png used on input line 527.
-(pdftex.def)             Requested size: 284.38818pt x 218.51813pt.
- [39
+<use images/resultados/network_1/input_1_layer_activation_1.png>
+Package pdftex.def Info: images/resultados/network_1/input_1_layer_activation_1
+.png used on input line 731.
+(pdftex.def)             Requested size: 113.80736pt x 113.81102pt.
 
- <./images/fabio/ativ_4.png>]
-File: images/resultados/network_1/model.png Graphic file (type png)
+Overfull \hbox (12.40114pt too wide) in paragraph at lines 731--731
+ [] 
+ []
 
-<use images/resultados/network_1/model.png>
-Package pdftex.def Info: images/resultados/network_1/model.png used on input li
-ne 538.
-(pdftex.def)             Requested size: 53.08098pt x 191.2018pt.
- [40
+
+<images/resultados/network_1/filter_convolution2d_2.png, id=855, 578.16pt x 578
+.16pt>
+File: images/resultados/network_1/filter_convolution2d_2.png Graphic file (type
+ png)
+ <use images/resultados/network_1/filter_convolution2d_2.png>
+Package pdftex.def Info: images/resultados/network_1/filter_convolution2d_2.png
+ used on input line 731.
+(pdftex.def)             Requested size: 113.80379pt x 113.81102pt.
+
+Overfull \hbox (12.39757pt too wide) in paragraph at lines 731--731
+ [] 
+ []
+
+
+Overfull \vbox (8.73093pt too high) detected at line 731
+ []
+
+[32
+
+ <./images/resultados/network_1/filter_convolution2d_2.png>]
+<images/resultados/network_1/input_1_layer_convolution2d_2.png, id=882, 578.16p
+t x 578.16pt>
+File: images/resultados/network_1/input_1_layer_convolution2d_2.png Graphic fil
+e (type png)
+
+<use images/resultados/network_1/input_1_layer_convolution2d_2.png>
+Package pdftex.def Info: images/resultados/network_1/input_1_layer_convolution2
+d_2.png used on input line 792.
+(pdftex.def)             Requested size: 113.80379pt x 113.81102pt.
+
+Overfull \hbox (12.39757pt too wide) in paragraph at lines 792--792
+ [] 
+ []
+
+
+<images/resultados/network_1/input_1_layer_activation_2.png, id=883, 558.6471pt
+ x 558.6471pt>
+File: images/resultados/network_1/input_1_layer_activation_2.png Graphic file (
+type png)
+
+<use images/resultados/network_1/input_1_layer_activation_2.png>
+Package pdftex.def Info: images/resultados/network_1/input_1_layer_activation_2
+.png used on input line 792.
+(pdftex.def)             Requested size: 113.80736pt x 113.81102pt.
+
+Overfull \hbox (12.40114pt too wide) in paragraph at lines 792--792
+ [] 
+ []
+
+
+Overfull \vbox (8.73093pt too high) detected at line 792
+ []
+
+[33
+
+ <./images/resultados/network_1/input_1_layer_convolution2d_2.png> <./images/re
+sultados/network_1/input_1_layer_activation_2.png>]
+File: images/resultados/network_1/input_1_layer_activation_2.png Graphic file (
+type png)
+
+<use images/resultados/network_1/input_1_layer_activation_2.png>
+Package pdftex.def Info: images/resultados/network_1/input_1_layer_activation_2
+.png used on input line 853.
+(pdftex.def)             Requested size: 113.80736pt x 113.81102pt.
+
+Overfull \hbox (12.40114pt too wide) in paragraph at lines 853--853
+ [] 
+ []
+
+
+<images/resultados/network_1/filter_convolution2d_3.png, id=911, 578.16pt x 578
+.16pt>
+File: images/resultados/network_1/filter_convolution2d_3.png Graphic file (type
+ png)
+ <use images/resultados/network_1/filter_convolution2d_3.png>
+Package pdftex.def Info: images/resultados/network_1/filter_convolution2d_3.png
+ used on input line 853.
+(pdftex.def)             Requested size: 113.80379pt x 113.81102pt.
+
+Overfull \hbox (12.39757pt too wide) in paragraph at lines 853--853
+ [] 
+ []
+
+
+Overfull \vbox (8.73093pt too high) detected at line 853
+ []
+
+[34
+
+ <./images/resultados/network_1/filter_convolution2d_3.png>]
+<images/resultados/network_1/input_1_layer_convolution2d_3.png, id=938, 578.16p
+t x 578.16pt>
+File: images/resultados/network_1/input_1_layer_convolution2d_3.png Graphic fil
+e (type png)
+
+<use images/resultados/network_1/input_1_layer_convolution2d_3.png>
+Package pdftex.def Info: images/resultados/network_1/input_1_layer_convolution2
+d_3.png used on input line 914.
+(pdftex.def)             Requested size: 113.80379pt x 113.81102pt.
+
+Overfull \hbox (12.39757pt too wide) in paragraph at lines 914--914
+ [] 
+ []
+
+
+<images/resultados/network_1/input_1_layer_activation_3.png, id=939, 558.6471pt
+ x 558.6471pt>
+File: images/resultados/network_1/input_1_layer_activation_3.png Graphic file (
+type png)
+
+<use images/resultados/network_1/input_1_layer_activation_3.png>
+Package pdftex.def Info: images/resultados/network_1/input_1_layer_activation_3
+.png used on input line 914.
+(pdftex.def)             Requested size: 113.80736pt x 113.81102pt.
+
+Overfull \hbox (12.40114pt too wide) in paragraph at lines 914--914
+ [] 
+ []
+
+
+Overfull \vbox (8.73093pt too high) detected at line 914
+ []
+
+[35
+
+ <./images/resultados/network_1/input_1_layer_convolution2d_3.png> <./images/re
+sultados/network_1/input_1_layer_activation_3.png>]
+File: images/resultados/network_1/input_1_layer_activation_3.png Graphic file (
+type png)
+
+<use images/resultados/network_1/input_1_layer_activation_3.png>
+Package pdftex.def Info: images/resultados/network_1/input_1_layer_activation_3
+.png used on input line 976.
+(pdftex.def)             Requested size: 113.80736pt x 113.81102pt.
+
+Overfull \hbox (12.40114pt too wide) in paragraph at lines 976--976
+ [] 
+ []
+
+
+<images/resultados/network_1/input_1_layer_maxpooling2d_1.png, id=966, 578.16pt
+ x 578.16pt>
+File: images/resultados/network_1/input_1_layer_maxpooling2d_1.png Graphic file
+ (type png)
+
+<use images/resultados/network_1/input_1_layer_maxpooling2d_1.png>
+Package pdftex.def Info: images/resultados/network_1/input_1_layer_maxpooling2d
+_1.png used on input line 976.
+(pdftex.def)             Requested size: 113.80379pt x 113.81102pt.
+
+Overfull \hbox (12.39757pt too wide) in paragraph at lines 976--976
+ [] 
+ []
+
+
+Overfull \vbox (8.73093pt too high) detected at line 976
+ []
+
+[36
+
+ <./images/resultados/network_1/input_1_layer_maxpooling2d_1.png>]
+File: images/resultados/network_1/input_1_layer_maxpooling2d_1.png Graphic file
+ (type png)
+
+<use images/resultados/network_1/input_1_layer_maxpooling2d_1.png>
+Package pdftex.def Info: images/resultados/network_1/input_1_layer_maxpooling2d
+_1.png used on input line 1037.
+(pdftex.def)             Requested size: 113.80379pt x 113.81102pt.
+
+Overfull \hbox (12.39757pt too wide) in paragraph at lines 1037--1037
+ [] 
+ []
+
+
+<images/resultados/network_1/filter_convolution2d_4.png, id=993, 578.16pt x 578
+.16pt>
+File: images/resultados/network_1/filter_convolution2d_4.png Graphic file (type
+ png)
+ <use images/resultados/network_1/filter_convolution2d_4.png>
+Package pdftex.def Info: images/resultados/network_1/filter_convolution2d_4.png
+ used on input line 1037.
+(pdftex.def)             Requested size: 113.80379pt x 113.81102pt.
+
+Overfull \hbox (12.39757pt too wide) in paragraph at lines 1037--1037
+ [] 
+ []
+
+
+Overfull \vbox (8.73093pt too high) detected at line 1037
+ []
+
+[37
+
+ <./images/resultados/network_1/filter_convolution2d_4.png>]
+<images/resultados/network_1/input_1_layer_convolution2d_4.png, id=1021, 578.16
+pt x 578.16pt>
+File: images/resultados/network_1/input_1_layer_convolution2d_4.png Graphic fil
+e (type png)
+
+<use images/resultados/network_1/input_1_layer_convolution2d_4.png>
+Package pdftex.def Info: images/resultados/network_1/input_1_layer_convolution2
+d_4.png used on input line 1098.
+(pdftex.def)             Requested size: 113.80379pt x 113.81102pt.
+
+Overfull \hbox (12.39757pt too wide) in paragraph at lines 1098--1098
+ [] 
+ []
+
+
+<images/resultados/network_1/input_1_layer_activation_4.png, id=1022, 558.6471p
+t x 558.6471pt>
+File: images/resultados/network_1/input_1_layer_activation_4.png Graphic file (
+type png)
+
+<use images/resultados/network_1/input_1_layer_activation_4.png>
+Package pdftex.def Info: images/resultados/network_1/input_1_layer_activation_4
+.png used on input line 1098.
+(pdftex.def)             Requested size: 113.80736pt x 113.81102pt.
+
+Overfull \hbox (12.40114pt too wide) in paragraph at lines 1098--1098
+ [] 
+ []
+
+
+Overfull \vbox (8.73093pt too high) detected at line 1098
+ []
+
+[38
+
+ <./images/resultados/network_1/input_1_layer_convolution2d_4.png> <./images/re
+sultados/network_1/input_1_layer_activation_4.png>]
+File: images/resultados/network_1/input_1_layer_activation_4.png Graphic file (
+type png)
+
+<use images/resultados/network_1/input_1_layer_activation_4.png>
+Package pdftex.def Info: images/resultados/network_1/input_1_layer_activation_4
+.png used on input line 1157.
+(pdftex.def)             Requested size: 113.80736pt x 113.81102pt.
+
+<images/resultados/network_1/input_1_layer_flatten_1.png, id=1050, 558.6471pt x
+ 71.5473pt>
+File: images/resultados/network_1/input_1_layer_flatten_1.png Graphic file (typ
+e png)
+ <use images/resultados/network_1/input_1_layer_flatten_1.png>
+Package pdftex.def Info: images/resultados/network_1/input_1_layer_flatten_1.pn
+g used on input line 1157.
+(pdftex.def)             Requested size: 170.71652pt x 21.8639pt.
+
+Overfull \vbox (8.73093pt too high) detected at line 1157
+ []
+
+[39
+
+ <./images/resultados/network_1/input_1_layer_flatten_1.png>]
+File: images/resultados/network_1/input_1_layer_flatten_1.png Graphic file (typ
+e png)
+
+<use images/resultados/network_1/input_1_layer_flatten_1.png>
+Package pdftex.def Info: images/resultados/network_1/input_1_layer_flatten_1.pn
+g used on input line 1216.
+(pdftex.def)             Requested size: 170.71652pt x 21.8639pt.
+
+<images/resultados/network_1/input_1_layer_dense_1.png, id=1077, 558.6471pt x 6
+8.6565pt>
+File: images/resultados/network_1/input_1_layer_dense_1.png Graphic file (type 
+png)
+ <use images/resultados/network_1/input_1_layer_dense_1.png>
+Package pdftex.def Info: images/resultados/network_1/input_1_layer_dense_1.png 
+used on input line 1216.
+(pdftex.def)             Requested size: 170.71652pt x 20.98051pt.
+
+Overfull \vbox (8.73093pt too high) detected at line 1216
+ []
+
+[40
+
+ <./images/resultados/network_1/input_1_layer_dense_1.png>]
+Overfull \vbox (8.73093pt too high) detected at line 1270
+ []
+
+[41
 
 ]
-File: images/resultados/network_2/model.png Graphic file (type png)
+<images/resultados/network_1/input_1_layer_activation_7.png, id=1128, 558.6471p
+t x 68.6565pt>
+File: images/resultados/network_1/input_1_layer_activation_7.png Graphic file (
+type png)
 
-<use images/resultados/network_2/model.png>
-Package pdftex.def Info: images/resultados/network_2/model.png used on input li
-ne 548.
-(pdftex.def)             Requested size: 40.83997pt x 191.2018pt.
- [41
+<use images/resultados/network_1/input_1_layer_activation_7.png>
+Package pdftex.def Info: images/resultados/network_1/input_1_layer_activation_7
+.png used on input line 1325.
+(pdftex.def)             Requested size: 170.71652pt x 20.98051pt.
 
-] [42
+Overfull \vbox (8.73093pt too high) detected at line 1325
+ []
+
+[42
+
+ <./images/resultados/network_1/input_1_layer_activation_7.png>]
+File: images/resultados/network_1/input_1_layer_activation_7.png Graphic file (
+type png)
+
+<use images/resultados/network_1/input_1_layer_activation_7.png>
+Package pdftex.def Info: images/resultados/network_1/input_1_layer_activation_7
+.png used on input line 1384.
+(pdftex.def)             Requested size: 170.71652pt x 20.98051pt.
+
+<images/resultados/network_1/input_1_layer_dense_2.png, id=1155, 558.6471pt x 5
+7.816pt>
+File: images/resultados/network_1/input_1_layer_dense_2.png Graphic file (type 
+png)
+ <use images/resultados/network_1/input_1_layer_dense_2.png>
+Package pdftex.def Info: images/resultados/network_1/input_1_layer_dense_2.png 
+used on input line 1384.
+(pdftex.def)             Requested size: 170.71652pt x 17.6678pt.
+
+Overfull \vbox (8.73093pt too high) detected at line 1384
+ []
+
+[43
+
+ <./images/resultados/network_1/input_1_layer_dense_2.png>]
+Overfull \vbox (8.73093pt too high) detected at line 1438
+ []
+
+[44
+
+]
+<images/resultados/network_1/input_1_layer_activation_8.png, id=1207, 558.6471p
+t x 57.816pt>
+File: images/resultados/network_1/input_1_layer_activation_8.png Graphic file (
+type png)
+ <use images/resultados/network_1/input_1_layer_activation_8.png>
+Package pdftex.def Info: images/resultados/network_1/input_1_layer_activation_8
+.png used on input line 1493.
+(pdftex.def)             Requested size: 170.71652pt x 17.6678pt.
+
+Overfull \vbox (8.73093pt too high) detected at line 1493
+ []
+
+[45
+
+ <./images/resultados/network_1/input_1_layer_activation_8.png>] [46
 
 ]
 \tf@nav=\write6
@@ -1656,11 +1968,13 @@ ne 548.
 \tf@snm=\write8
 \openout8 = `main.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 563.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 563.
- (./main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 563.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 563.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1509.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1509.
+
+(./main.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1509.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1509.
+
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
 
@@ -1671,16 +1985,16 @@ LaTeX Font Warning: Size substitutions with differences
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 563.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1509.
  ) 
 Here is how much of TeX's memory you used:
- 22568 strings out of 494902
- 428797 string characters out of 6179202
- 632545 words of memory out of 5000000
- 25260 multiletter control sequences out of 15000+600000
- 21359 words of font info for 54 fonts, out of 8000000 for 9000
+ 23926 strings out of 494902
+ 465149 string characters out of 6179202
+ 666785 words of memory out of 5000000
+ 26579 multiletter control sequences out of 15000+600000
+ 22911 words of font info for 60 fonts, out of 8000000 for 9000
  16 hyphenation exceptions out of 8191
- 48i,14n,65p,803b,1296s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 49i,14n,68p,803b,1296s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/fox/.texlive2016/texmf-var/fonts/pk/ljfour/jknappen/ec/ecit0800.525pk
 > </home/fox/.texlive2016/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt0800.525pk>
  </home/fox/.texlive2016/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsi0900.600pk> 
@@ -1704,12 +2018,13 @@ nts/type1/public/amsfonts/cm/cmss10.pfb></usr/share/texlive/texmf-dist/fonts/ty
 pe1/public/amsfonts/cm/cmss8.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
 lic/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
 sfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols
-/msam7.pfb>
-Output written on main.pdf (42 pages, 2743136 bytes).
+cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy
+9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msam7.
+pfb>
+Output written on main.pdf (46 pages, 1973096 bytes).
 PDF statistics:
- 1726 PDF objects out of 1728 (max. 8388607)
- 1141 compressed objects within 12 object streams
- 89 named destinations out of 1000 (max. 500000)
- 168 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1858 PDF objects out of 2073 (max. 8388607)
+ 1244 compressed objects within 13 object streams
+ 98 named destinations out of 1000 (max. 500000)
+ 203 words of extra memory for PDF output out of 10000 (max. 10000000)
 
