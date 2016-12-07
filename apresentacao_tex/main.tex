@@ -266,17 +266,10 @@ co-adaptation of feature detectors},
 Com o passar dos anos, a comunidade científica foi testando experimentalmente novas metodologias orientadas à     resultados sem tanto embasamento teórico como a MLP de Cybenko. Nesse contexto, novas funções de ativação e       novas arquiteturas de conexões entre neurônios foram surgindo na tentativa de inserir conhecimento específico     de domínio na generalidade das redes neurais. Introduz-se então o conceito de "building blocks", que são pequenos blocos neurais pré-definidos.
 
 Alguns exemplos:
-
 	 \begin{figure}
 	\centering
 	\includegraphics[scale=0.3]{blocks.png}
 	\end{figure}
-	
-	
-\end{frame}
-
-\begin{frame}
-	\frametitle{Apresentação do Bruno Canale}
 \end{frame}
 
 
@@ -353,43 +346,6 @@ Alguns exemplos:
 	
 \end{frame}
 
-\begin{frame}
-	\frametitle{Python - Keras Framework para Machine Learning}
-	
-	* Python - Linguagem de programação gratuita \newline
-	* Contém uma quantidade muito grande de Frameworks voltados para
-	\textit{Machine Learning}
-	
-	
-	\begin{figure}
-		\centering
-		\includegraphics[scale=0.3]{road_map}
-	\end{figure}
-	
-	Keras foi inicialmente desenvolvido como parte de um projeto de
-	pesquisa chamado de ONEIROS (Open-ended Neuro-Electronic
-	Intelligent Robot Operating System)
-	
-\end{frame}
-
-\begin{frame}
-	\frametitle{Keras - Exemplo de implementação MLP}
-	
-	
-	modelo = Sequential() \\
-	modelo.add(Dense(num-neuronios, init='uniform'))\\
-	modelo.add(Activation('tanh')) \newline
-	
-	modelo.add(Dense(1, init='uniform')) \\
-	modelo.add(Activation('linear')) \newline
-	
-	modelo.compile(learning-rate=0.1, optimizer='sgd]') \newline
-	
-	modelo.fit(features-treino, target-treino) \newline
-	
-	modelo.predict(features-teste)
-	
-\end{frame} 
 
 \begin{frame}
 	\frametitle{Base de dados utilizada - MNIST}
@@ -413,6 +369,8 @@ Alguns exemplos:
 	\lstinputlisting[language=Python, firstline=0, lastline=10,
 	basicstyle=\ttfamily\scriptsize]{base_import.py}
 \end{frame}
+
+  
 
 \begin{frame}
 	\frametitle{Processamento necessário no atributo target}
