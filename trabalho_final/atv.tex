@@ -54,7 +54,8 @@
 \usepackage{lipsum}
 %\usepackage{tikz}
 \usepackage{pgfplots}
-\usetikzlibrary{shapes,shapes.geometric,arrows,fit,calc,positioning,automata,patterns}
+\usetikzlibrary{shapes,shapes.geometric,arrows,fit,calc,positioning,automata,patterns,matrix,arrows.meta, shapes.geometric, arrows,chains}
+
 \usepackage{verbatim}
 \usepackage{blindtext}
 \usepackage{enumitem}
@@ -68,6 +69,7 @@
 
 \usepackage{caption}
 \usepackage{subcaption}
+\usepackage{multicol}
 % ---
 
 % ---
@@ -98,10 +100,73 @@
 	\fi}%
 % ---
 
+%%%% TIKZ HEADERS - Fabio
+
+\tikzset{
+	startstop/.style={
+		rectangle, 
+		rounded corners,
+		minimum width=4cm, 
+		minimum height=1cm,
+		align=center, 
+		draw=black, 
+		fill=gray!70
+	},
+	startstop2/.style={
+		rectangle, 
+		rounded corners,
+		minimum width=4cm, 
+		minimum height=1cm,
+		align=center, 
+		draw=black, 
+		fill=green!30
+	},
+	process/.style={
+		rectangle, 
+		minimum width=4cm, 
+		minimum height=1cm, 
+		align=center, 
+		draw=black, 
+		fill=gray!30
+	},
+	process2/.style={
+		rectangle, 
+		minimum width=4cm, 
+		minimum height=1cm, 
+		align=center, 
+		draw=black, 
+		fill=red!30
+	},
+	process3/.style={
+		rectangle, 
+		minimum width=4cm, 
+		minimum height=1cm, 
+		align=center, 
+		draw=black, 
+		fill=green!30
+	},
+	decision/.style={
+		rectangle, 
+		minimum width=4cm, 
+		minimum height=1cm, align=center, 
+		draw=black, 
+		fill=green!30
+	},
+	arrow/.style={thick,->,>=stealth},
+	dec/.style={
+		ellipse, 
+		align=center, 
+		draw=black, 
+		fill=black!30
+	},
+}
+
+%%% end TIZK HEADERS - Fabio
+
 % ---
 % Informações de dados para CAPA e FOLHA DE ROSTO
 % ---
-\titulo{Atividade 2}
+\titulo{Atividade Final}
 \autor{Bruno Canale \\ Bruno Giordano \\ Fábio T. Sancinetti \\ Wanderson Ferreira}
 \local{São Paulo - Brasil}
 \data{07 de dezembro de 2016}
@@ -259,6 +324,109 @@
 \par \lipsum[30] \cite{deeplearning_net_mlp}
 
 \par Exemplo de citação em linha segundo \citeonline{rojas1996} aqui.
+
+\chapter{Visualização do reconhecimento em uma Rede Neural}
+\section{Base de dados: MNIST}
+
+\par A base de dados MNIST (\textit{Mixed National Institute of Standards and Technology}) por \citeonline{LeCunn99}, é uma base de dados que contem 60000 exemplos de digitos manuscritos para treino e outros 10000 exemplos para treino disponível em \url{http://yann.lecun.com/exdb/mnist/}.
+
+\par As imagens dos dígitos possuem 28x28 pixels, entretanto os dígitos em si possuem 20x20, são normalizados e centralizados.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{images/fabio/inputs}
+	\caption[Exemplos dos 50 primeiros digítos disponíveis na base de dados do MNIST.]{}
+	\caption{}
+	\label{fig:inputs}
+\end{figure}
+
+\par Segundo \citeonline{LeCunn99}, algumas técnicas de reconhecimento de dígitos foram aplicadas a esses bancos como classificadores lineares, KNN (K-nearest neighbors), entre outras, obtendo taxa de erro entre 12\% e 0.54\% respectivamente. Entretanto, como o objetivo deste trabalho é auxiliar o entendimento dos funcionamento das redes convolucionais através da visualização dos resultados, os valores de taxa de erro mais interessantes são os relacionados a redes convolucionais similares as apresentadas nesse trabalho. \citeonline{LeCunn99} apresenta redes convolucionais de LeNet-1, LeNet-4, LeNet-5 com taxas de erro de 1.7\%, 1.1\% e 0.7\% respectivamente. \citeonline{LeCunn99} ainda apresenta os resultados para outras redes convolucionais com medida de erros como \textit{cross-entropy} com taxas de erro de 0.6\%,
+
+\par O resultado obtido pela rede explorada neste capítulo deste trabalho obteve taxa de erro de 0.94\% na base de teste do MNIST e sua estrutura será detalhada nas próximas sessões.
+
+\section{Rede Convolucional para reconhecimento de dígitos manuscritos do MNIST}
+\par A rede a ser apresentada neste trabalho é composta da camada de entrada e 16 camadas para o processamento. Com o objetivo de simplificar a visualização, as camadas de convolução e ativação que são consecutivas foram agrupadas em um único bloco.
+\par A identificação mostrada a seguir é feita após o treinamento da rede com a arquitetura exibida na imagem \ref{tikz:mnist_cnn16}.
+
+\begin{figure}[h]
+	\centering
+	\resizebox{!}{.4\textheight}{% if required
+	\begin{tikzpicture}[
+	start chain=going below,
+	every join/.style={arrow},
+	node distance=0.3cm
+	]
+	\node (start) [startstop,on chain,join] {Imagem de entrada};
+	
+	\node (out1) [process,on chain,join] {Convolução \\ Ativação};
+	
+	\node (out3) [process,on chain,join] {Convolução \\ Ativação };
+	
+	\node (out5) [process,on chain,join] {Convolução \\ Ativação};
+	
+	\node (out7) [process,on chain,join] {Pooling};
+	
+	\node (out8) [process,on chain,join] {Convolução \\ Ativação};
+	
+	\node (out10) [process,on chain,join] {Flatten};
+	\node (out11) [process,on chain,join] {Dense};
+	
+	\node (out12) [process,on chain,join] {Dropout};
+	\node (out13) [process,on chain,join] {Ativação};	
+	
+	\node (out14) [process,on chain,join] {Dense};
+	\node (out15) [process,on chain,join] {Dropout};
+	
+	\node (out16) [startstop,on chain,join] {Ativação};		
+	
+	\end{tikzpicture}%
+	} %resizebox
+	\label{tikz:mnist_cnn16}
+	\caption{Arquitetura da rede CNN utilizada neste trabalho.}
+\end{figure}
+
+\par O objetivo das camadas convolucionais com ativação no início dessa rede é de encontrar características dos números e reduzir parcialmente o tamanho da imagem inicial antes do primeiro \textit{pooling}. Para melhor compreensão dos efeitos da convolução nas imagens foram utilizados filtros de 2x2 \textit{pixels}, entretanto os autores deste trabalho sugerem a exploração de filtros de maior resolução (como por exemplo 3x3) para exploração de diferentes características de forma mais eficiente.
+\par Após as primeiras camadas de convolução foi adicionada uma camada de \textit{pooling} para auxiliar na eliminação de ruídos e reduzir o número de elementos a serem explorados pela rede.
+\par A seguir, uma nova camada de convolução foi adicionada para detectar novas características novamente. Por conta da estrutura do \textit{framework} do Keras, utilizado neste trabalho é necessário antes da rede \textit{fully-connected} ou (\textit{dense}) transformar a entrada em um vetor unidimensional, representada mais a frente por uma fita.
+\par A camada \textit{dense} trabalha como uma camada de redes neurais conectando todos os elementos da entrada com todos os elementos da saída, visando estabelecer a relação da importância entre os elementos ativados e os resultados obtidos.
+\par O próximo elemento é uma camada de \textit{Dropout} com objetivo de minimizar a dependência de algumas características específicas dos dígitos. Em seguida é utilizada uma camada de ativação para evidenciar os elementos mais importantes encontrados após a camada \textit{dense+droupout}.
+\par Os últimos dois passos são novamente uma camada \textit{dense}, agora reduzindo as entradas de 100 para 10 elementos  (correspondentes aos dígitos de 0 a 9) e uma nova camada de ativação agora com função \textit{softmax} para ativação de um único elemento (representando a escolha da rede do elemento mais provável identificado pela rede).
+
+\par A identificação do dígito é iniciada com a introdução da imagem contendo o item a ser identificado. Neste exemplo será utilizado o número 0 apresentado na imagem \ref{fig:numero_0}.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.3\linewidth]{images/fabio/numero_0}
+	\caption{Número 0 escrito a mão disponível na base de dados do MNIST.}
+	\label{fig:numero_0}
+\end{figure}
+
+
+\begin{figure}[h]
+\centering
+
+\begin{subfigure}{.8\textwidth}
+\centering
+\includegraphics[width=.6\linewidth]{images/fabio/resultados/network_1/filter_convolution2d_1}%
+\caption{Filtros 2x2 aplicados a primeira camada de convolução}			
+\end{subfigure}%
+
+\begin{subfigure}{.8\textwidth}
+\centering
+\includegraphics[width=.6\linewidth]{images/fabio/resultados/network_1/input_1_layer_convolution2d_1}
+\caption{Convolução 1}
+\end{subfigure}%
+
+\begin{subfigure}{.8\textwidth}
+\centering
+\includegraphics[width=.6\linewidth]{images/fabio/resultados/network_1/input_1_layer_activation_1}%
+\caption{Ativação}			
+\end{subfigure}%
+\label{fig:camada_1}
+\caption{Primeiro resultado da identificação no primeiro par de camadas de convolução e ativação.}
+\end{figure}
+
+
 
 
 
