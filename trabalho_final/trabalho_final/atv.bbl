@@ -1,0 +1,19 @@
+\providecommand{\abntreprintinfo}[1]{%
+ \citeonline{#1}}
+\setlength{\labelsep}{0pt}\begin{thebibliography}{}
+\providecommand{\abntrefinfo}[3]{}
+\providecommand{\abntbstabout}[1]{}
+\abntbstabout{v-1.9.6 }
+
+\bibitem[LISA Lab 2016]{deeplearning_net_mlp}
+\abntrefinfo{LISA Lab}{LISA LAB}{2016}
+{LISA LAB. \emph{DeepLearning 0.1 documentation}. 2016.
+Dispon{\'\i}vel em: \url{http://deeplearning.net/tutorial/mlp.html}.}
+
+\bibitem[Rojas 1996]{rojas1996}
+\abntrefinfo{Rojas}{ROJAS}{1996}
+{ROJAS, R. \emph{Neural Networks - A Systematic Introduction}. 1996.
+Dispon{\'\i}vel em:
+  \url{http://page.mi.fu-berlin.de/rojas/neural/index.html.html}.}
+
+\end{thebibliography}
