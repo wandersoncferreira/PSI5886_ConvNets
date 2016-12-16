@@ -385,7 +385,116 @@
 	\caption{Arquitetura da rede CNN utilizada neste trabalho.}
 \end{figure}
 
-\par O objetivo das camadas convolucionais com ativação no início dessa rede é de encontrar características dos números e reduzir parcialmente o tamanho da imagem inicial antes do primeiro \textit{pooling}. Para melhor compreensão dos efeitos da convolução nas imagens foram utilizados filtros de 2x2 \textit{pixels}, entretanto os autores deste trabalho sugerem a exploração de filtros de maior resolução (como por exemplo 3x3) para exploração de diferentes características de forma mais eficiente.
+\par A implementação da rede descrita pela imagem \ref{tikz:mnist_cnn16} é exibida no código abaixo:
+\begin{lstlisting}
+from keras.layers import Activation
+from keras.layers.convolutional import Convolution2D, MaxPooling2D
+from keras.layers import Flatten, Dense
+from keras.layers.core import Dropout
+
+dropout_rate=0.3
+
+modelo = Sequential()
+
+def keras_add(m,op):
+	m.add(op)
+	l = m.layers[-1]
+	print l.name, l.get_output_shape_at(-1)
+
+keras_add(modelo,Convolution2D(32, 2, 2,
+	border_mode='valid', input_shape=(28, 28, 1)))
+keras_add(modelo,Activation('relu'))
+
+keras_add(modelo,Convolution2D(8, 12, 12))
+keras_add(modelo,Activation('relu'))
+
+keras_add(modelo,Convolution2D(16, 8, 8))
+keras_add(modelo,Activation('relu'))
+
+keras_add(modelo,MaxPooling2D(pool_size=(2, 2)))
+
+keras_add(modelo,Convolution2D(32, 2, 2))
+keras_add(modelo,Activation('relu'))
+
+keras_add(modelo,Flatten())
+keras_add(modelo,Dense(100))
+keras_add(modelo,Dropout(dropout_rate))
+keras_add(modelo,Activation('relu'))
+
+keras_add(modelo,Dense(numero_classes))
+keras_add(modelo,Dropout(dropout_rate))
+keras_add(modelo,Activation('softmax'))
+\end{lstlisting}
+
+\par O objetivo das camadas convolucionais com ativação no início dessa rede é de encontrar características dos números e reduzir parcialmente o tamanho da imagem inicial antes do primeiro \textit{pooling}. Para melhor compreensão dos efeitos da convolução nas imagens foram utilizados em cada camada convolucional filtros dos tamanhos: 32 filtros de 2x2, 8 filtros de 12x12, 16 filtros de 8x8 e 32 filtros de 2x2.
+
+\par A visualização dos filtros obtidos após o treinamento foi obtida da seguinte forma:
+\begin{lstlisting}
+img = np.zeros((28,28))
+for a in xrange(28):
+  for b in xrange(28):
+    img[a][b] = X_treino[0][a,b]
+    for i in xrange(len(modelo.layers)):
+      m0 = modelo.layers[i]
+      name = m0.name
+      if "convolution" not in name:
+        continue    
+      ws = m0.get_weights()
+
+      flt = np.zeros((np.shape(ws[0])[0],np.shape(ws[0])[1]))
+      fig=plt.figure(figsize=(8,8))
+      for oz in xrange(np.shape(ws[0])[2]):
+        for z in xrange(np.shape(ws[0])[3]):
+          ax = fig.add_subplot(6, 6, z+1)
+          sa = np.shape(ws[0])[0]
+          sb = np.shape(ws[0])[1]
+          for a in xrange(sa):
+            for b in xrange(sb):
+              flt[a][b] = ws[0][a,b,oz,z]
+              plt.xticks(np.array([]))
+              plt.yticks(np.array([]))
+              plt.tight_layout()        
+              ax.imshow(flt,interpolation='nearest', cmap=plt.cm.gray) 
+\end{lstlisting}
+
+
+\par Os filtros descritos acima são visualizados na imagem \ref{convs_filtros}.
+
+\begin{figure}[h]
+	\centering
+	
+	\begin{subfigure}{.8\textwidth}
+		\centering
+		\includegraphics[width=.6\linewidth]{images/fabio/resultados/network_3/filter_convolution2d_1}%
+		\caption{Filtros 2x2 - primeira convolução}		
+		\label{fig:conv1_filtro}	
+	\end{subfigure}%
+	
+	\begin{subfigure}{.8\textwidth}
+		\centering
+		\includegraphics[width=.6\linewidth]{images/fabio/resultados/network_3/filter_convolution2d_2}
+		\caption{Filtros 12x12 - segunda convolução}		
+		\label{fig:conv2_filtro}	
+	\end{subfigure}%
+	
+	\begin{subfigure}{.8\textwidth}
+		\centering
+		\includegraphics[width=.6\linewidth]{images/fabio/resultados/network_3/filter_convolution2d_3}%
+		\caption{Filtros 8x8 - terceira convolução}		
+		\label{fig:conv3_filtro}	
+	\end{subfigure}%
+d
+	\begin{subfigure}{.8\textwidth}
+	\centering
+	\includegraphics[width=.6\linewidth]{images/fabio/resultados/network_3/filter_convolution2d_4}%
+	\caption{Filtros 2x2 - terceira convolução}		
+	\label{fig:conv4_filtro}	
+\end{subfigure}%
+	\label{fig:convs_filtros}
+	\caption{Filtros convolucionais obtidos do treinamento.}
+\end{figure}
+
+
 \par Após as primeiras camadas de convolução foi adicionada uma camada de \textit{pooling} para auxiliar na eliminação de ruídos e reduzir o número de elementos a serem explorados pela rede.
 \par A seguir, uma nova camada de convolução foi adicionada para detectar novas características novamente. Por conta da estrutura do \textit{framework} do Keras, utilizado neste trabalho é necessário antes da rede \textit{fully-connected} ou (\textit{dense}) transformar a entrada em um vetor unidimensional, representada mais a frente por uma fita.
 \par A camada \textit{dense} trabalha como uma camada de redes neurais conectando todos os elementos da entrada com todos os elementos da saída, visando estabelecer a relação da importância entre os elementos ativados e os resultados obtidos.
@@ -401,35 +510,166 @@
 	\label{fig:numero_0}
 \end{figure}
 
-
+\begin{center}
 \begin{figure}[h]
 \centering
 
 \begin{subfigure}{.8\textwidth}
 \centering
-\includegraphics[width=.6\linewidth]{images/fabio/resultados/network_1/filter_convolution2d_1}%
-\caption{Filtros 2x2 aplicados a primeira camada de convolução}			
+\includegraphics[width=.6\linewidth]{images/fabio/resultados/network_3/filter_convolution2d_1}%
+\caption{Filtros 2x2 aplicados a primeira camada de convolução}		
+\label{fig:filtros2x2}	
 \end{subfigure}%
 
 \begin{subfigure}{.8\textwidth}
 \centering
-\includegraphics[width=.6\linewidth]{images/fabio/resultados/network_1/input_1_layer_convolution2d_1}
+\includegraphics[width=.6\linewidth]{images/fabio/resultados/network_3/input_1_layer_convolution2d_1}
 \caption{Convolução 1}
 \end{subfigure}%
 
 \begin{subfigure}{.8\textwidth}
 \centering
-\includegraphics[width=.6\linewidth]{images/fabio/resultados/network_1/input_1_layer_activation_1}%
+\includegraphics[width=.6\linewidth]{images/fabio/resultados/network_3/input_1_layer_activation_1}%
 \caption{Ativação}			
 \end{subfigure}%
 \label{fig:camada_1}
 \caption{Primeiro resultado da identificação no primeiro par de camadas de convolução e ativação.}
 \end{figure}
+\end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{center}
+\begin{figure}
+\begin{subfigure}{.8\textwidth}
+	\centering
+	\includegraphics[width=.6\linewidth]{images/fabio/resultados/network_3/filter_convolution2d_2}%
+	\caption{Filtros 12x12 aplicados a segunda camada de convolução}		
+	\label{fig:filtros12x12}	
+\end{subfigure}%
+
+\begin{subfigure}{.8\textwidth}
+	\centering
+	\includegraphics[width=.6\linewidth]{images/fabio/resultados/network_3/input_1_layer_convolution2d_2}
+	\caption{Convolução 2}
+\end{subfigure}%
+
+\begin{subfigure}{.8\textwidth}
+	\centering
+	\includegraphics[width=.6\linewidth]{images/fabio/resultados/network_3/input_1_layer_activation_2}%
+	\caption{Ativação}			
+\end{subfigure}%
+\label{fig:camada_2}
+\caption{Primeiro resultado da identificação no segundo par de camadas de convolução e ativação.}
+\end{figure}
+\end{center}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{center}
+\begin{figure}
+	\begin{subfigure}{.8\textwidth}
+		\centering
+		\includegraphics[width=.6\linewidth]{images/fabio/resultados/network_3/filter_convolution2d_3}%
+		\caption{Filtros 8x8 aplicados a terceira camada de convolução}		
+		\label{fig:filtros8x8}	
+	\end{subfigure}%
+	
+	\begin{subfigure}{.8\textwidth}
+		\centering
+		\includegraphics[width=.6\linewidth]{images/fabio/resultados/network_3/input_1_layer_convolution2d_3}
+		\caption{Convolução 3}
+	\end{subfigure}%
+	
+	\begin{subfigure}{.8\textwidth}
+		\centering
+		\includegraphics[width=.6\linewidth]{images/fabio/resultados/network_3/input_1_layer_activation_3}%
+		\caption{Ativação}			
+	\end{subfigure}%
+	\label{fig:camada_3}
+	\caption{Primeiro resultado da identificação no terceiro par de camadas de convolução e ativação.}
+\end{figure}
+\end{center}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{center}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\textwidth]{images/fabio/resultados/network_3/input_1_layer_maxpooling2d_1}
+	\caption{Resultado da camada de Pooling}
+	\label{fig:input1layermaxpooling2d1}
+\end{figure}
+\end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{center}
+\begin{figure}
+	\begin{subfigure}{.8\textwidth}
+		\centering
+		\includegraphics[width=.6\linewidth]{images/fabio/resultados/network_3/filter_convolution2d_4}%
+		\caption{Filtros 2x2 aplicados a quarta camada de convolução}		
+		\label{fig:filtros2x2_4}	
+	\end{subfigure}%
+	
+	\begin{subfigure}{.8\textwidth}
+		\centering
+		\includegraphics[width=.6\linewidth]{images/fabio/resultados/network_3/input_1_layer_convolution2d_4}
+		\caption{Convolução 4}
+	\end{subfigure}%
+	
+	\begin{subfigure}{.8\textwidth}
+		\centering
+		\includegraphics[width=.6\linewidth]{images/fabio/resultados/network_3/input_1_layer_activation_4}%
+		\caption{Ativação}			
+	\end{subfigure}%
+	\label{fig:camada_2}
+	\caption{Primeiro resultado da identificação no quarto par de camadas de convolução e ativação.}
+\end{figure}
+\end{center}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{center}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\textwidth]{images/fabio/resultados/network_3/input_1_layer_flatten_1}
+	\caption{Resultado da camada de Flatten}
+	\label{fig:input1flatten}
+\end{figure}
+\end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{center}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\textwidth]{images/fabio/resultados/network_3/input_1_layer_dense_1}
+	\caption{Resultado da camada de Flatten}
+	\label{fig:input1dense1}
+\end{figure}
+\end{center}
 
 
-
-
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{center}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\textwidth]{images/fabio/resultados/network_1/input_1_layer_activation_7}
+	\caption{Resultado da camada de ativação antes da saída}
+	\label{fig:input1atv5}
+\end{figure}
+\end{center}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{center}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\textwidth]{images/fabio/resultados/network_1/input_1_layer_dense_2}
+	\caption{Resultado da camada de ativação antes da saída}
+	\label{fig:input1dense2}
+\end{figure}
+\end{center}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{center}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\textwidth]{images/fabio/resultados/network_1/input_1_layer_activation_8}
+	\caption{Resultado da camada de ativação para definição da saída}
+	\label{fig:input1atv7}
+\end{figure}
+\end{center}
 % ---
 % Conclusão
 % ---

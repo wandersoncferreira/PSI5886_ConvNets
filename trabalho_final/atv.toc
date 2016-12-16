@@ -13,6 +13,6 @@
 \contentsline {section}{\numberline {3.1}Base de dados: MNIST}{6}{section.3.1}
 \contentsline {section}{\numberline {3.2}Rede Convolucional para reconhecimento de d\IeC {\'\i }gitos manuscritos do MNIST}{7}{section.3.2}
 \setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
-\contentsline {chapter}{\chapternumberline {4}\MakeTextUppercase {Conclus\IeC {\~a}o}}{10}{chapter.4}
+\contentsline {chapter}{\chapternumberline {4}\MakeTextUppercase {Conclus\IeC {\~a}o}}{18}{chapter.4}
 \setlength {\cftchapterindent }{\cftlastnumwidth } \setlength {\cftchapternumwidth }{2em}
-\contentsline {chapter}{\uppercase {Refer\^encias}}{11}{section*.9}
+\contentsline {chapter}{\uppercase {Refer\^encias}}{19}{section*.19}

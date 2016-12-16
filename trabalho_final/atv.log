@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded format=pdflatex 2016.12.9)  14 DEC 2016 21:16
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded format=pdflatex 2016.12.9)  15 DEC 2016 21:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1758,7 +1758,11 @@ Package: afterpage 2014/10/28 v1.08 After-Page Package (DPC)
 \AP@output=\toks53
 \AP@partial=\box93
 \AP@footins=\box94
-) (./atv.aux)
+) (./atv.aux
+
+LaTeX Warning: Label `fig:camada_2' multiply defined.
+
+)
 \openout1 = `atv.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 242.
@@ -1776,8 +1780,7 @@ LaTeX Font Info:    ... okay on input line 242.
 LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 242.
 LaTeX Font Info:    ... okay on input line 242.
 LaTeX Font Info:    Try loading font information for T1+lmr on input line 242.
-
-(/usr/share/texmf/tex/latex/lm/t1lmr.fd
+ (/usr/share/texmf/tex/latex/lm/t1lmr.fd
 File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 \AtBeginShipoutBox=\box95
@@ -1948,56 +1951,281 @@ See the caption package documentation for explanation.
 LaTeX Warning: Reference `tikz:mnist_cnn16' on page 7 undefined on input line 3
 49.
 
-[7] <images/fabio/numero_0.png, id=83, 132.495pt x 132.495pt>
-File: images/fabio/numero_0.png Graphic file (type png)
 
-<use images/fabio/numero_0.png>
-Package pdftex.def Info: images/fabio/numero_0.png used on input line 399.
-(pdftex.def)             Requested size: 136.50139pt x 136.51178pt.
+Package caption Warning: \label without proper reference on input line 384.
+See the caption package documentation for explanation.
 
-<images/fabio/resultados/network_1/filter_convolution2d_1.png, id=84, 578.16pt 
-x 578.16pt>
-File: images/fabio/resultados/network_1/filter_convolution2d_1.png Graphic file
+
+LaTeX Warning: Reference `tikz:mnist_cnn16' on page 7 undefined on input line 3
+88.
+
+
+Overfull \hbox (10.29718pt too wide) in paragraph at lines 391--392
+[][][][][][][][][][][][][][][][][] 
+ []
+
+[7] [8]
+Overfull \hbox (38.49701pt too wide) in paragraph at lines 457--458
+[][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+LaTeX Warning: Reference `convs_filtros' on page 9 undefined on input line 461.
+
+
+
+<images/fabio/resultados/network_3/filter_convolution2d_1.png, id=134, 558.6471
+pt x 558.6471pt>
+File: images/fabio/resultados/network_3/filter_convolution2d_1.png Graphic file
  (type png)
- <use images/fabio/resultados/network_1/filter_convolution2d_1.png>
-Package pdftex.def Info: images/fabio/resultados/network_1/filter_convolution2d
-_1.png used on input line 410.
-(pdftex.def)             Requested size: 218.40305pt x 218.39742pt.
 
-<images/fabio/resultados/network_1/input_1_layer_convolution2d_1.png, id=85, 57
-8.16pt x 578.16pt>
-File: images/fabio/resultados/network_1/input_1_layer_convolution2d_1.png Graph
-ic file (type png)
+<use images/fabio/resultados/network_3/filter_convolution2d_1.png>
+Package pdftex.def Info: images/fabio/resultados/network_3/filter_convolution2d
+_1.png used on input line 468.
+(pdftex.def)             Requested size: 218.40305pt x 218.4pt.
 
-<use images/fabio/resultados/network_1/input_1_layer_convolution2d_1.png>
-Package pdftex.def Info: images/fabio/resultados/network_1/input_1_layer_convol
-ution2d_1.png used on input line 416.
-(pdftex.def)             Requested size: 218.40305pt x 218.39742pt.
+<images/fabio/resultados/network_3/filter_convolution2d_2.png, id=135, 558.6471
+pt x 180.675pt>
+File: images/fabio/resultados/network_3/filter_convolution2d_2.png Graphic file
+ (type png)
 
-<images/fabio/resultados/network_1/input_1_layer_activation_1.png, id=86, 558.6
-471pt x 558.6471pt>
-File: images/fabio/resultados/network_1/input_1_layer_activation_1.png Graphic 
-file (type png)
+<use images/fabio/resultados/network_3/filter_convolution2d_2.png>
+Package pdftex.def Info: images/fabio/resultados/network_3/filter_convolution2d
+_2.png used on input line 475.
+(pdftex.def)             Requested size: 218.40305pt x 70.63388pt.
 
-<use images/fabio/resultados/network_1/input_1_layer_activation_1.png>
-Package pdftex.def Info: images/fabio/resultados/network_1/input_1_layer_activa
-tion_1.png used on input line 422.
+<images/fabio/resultados/network_3/filter_convolution2d_3.png, id=136, 558.6471
+pt x 275.3487pt>
+File: images/fabio/resultados/network_3/filter_convolution2d_3.png Graphic file
+ (type png)
+
+<use images/fabio/resultados/network_3/filter_convolution2d_3.png>
+Package pdftex.def Info: images/fabio/resultados/network_3/filter_convolution2d
+_3.png used on input line 482.
+(pdftex.def)             Requested size: 218.40305pt x 107.64604pt.
+
+<images/fabio/resultados/network_3/filter_convolution2d_4.png, id=137, 558.6471
+pt x 558.6471pt>
+File: images/fabio/resultados/network_3/filter_convolution2d_4.png Graphic file
+ (type png)
+
+<use images/fabio/resultados/network_3/filter_convolution2d_4.png>
+Package pdftex.def Info: images/fabio/resultados/network_3/filter_convolution2d
+_4.png used on input line 489.
 (pdftex.def)             Requested size: 218.40305pt x 218.4pt.
 
 
-LaTeX Warning: Float too large for page by 46.99478pt on input line 427.
+LaTeX Warning: Float too large for page by 12.97986pt on input line 495.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[8 <./images/fabio/numero_0.png>] [9 <./images/fabio/resultados/network_1/filte
-r_convolution2d_1.png> <./images/fabio/resultados/network_1/input_1_layer_convo
-lution2d_1.png> <./images/fabio/resultados/network_1/input_1_layer_activation_1
-.png>] (./atv.bbl (./atv.brf)
+[9] <images/fabio/numero_0.png, id=162, 132.495pt x 132.495pt>
+File: images/fabio/numero_0.png Graphic file (type png)
+
+<use images/fabio/numero_0.png>
+Package pdftex.def Info: images/fabio/numero_0.png used on input line 508.
+(pdftex.def)             Requested size: 136.50139pt x 136.51178pt.
+File: images/fabio/resultados/network_3/filter_convolution2d_1.png Graphic file
+ (type png)
+
+<use images/fabio/resultados/network_3/filter_convolution2d_1.png>
+Package pdftex.def Info: images/fabio/resultados/network_3/filter_convolution2d
+_1.png used on input line 519.
+(pdftex.def)             Requested size: 218.40305pt x 218.4pt.
+
+<images/fabio/resultados/network_3/input_1_layer_convolution2d_1.png, id=163, 5
+58.6471pt x 558.6471pt>
+File: images/fabio/resultados/network_3/input_1_layer_convolution2d_1.png Graph
+ic file (type png)
+
+<use images/fabio/resultados/network_3/input_1_layer_convolution2d_1.png>
+Package pdftex.def Info: images/fabio/resultados/network_3/input_1_layer_convol
+ution2d_1.png used on input line 526.
+(pdftex.def)             Requested size: 218.40305pt x 218.4pt.
+
+<images/fabio/resultados/network_3/input_1_layer_activation_1.png, id=164, 558.
+6471pt x 558.6471pt>
+File: images/fabio/resultados/network_3/input_1_layer_activation_1.png Graphic 
+file (type png)
+
+<use images/fabio/resultados/network_3/input_1_layer_activation_1.png>
+Package pdftex.def Info: images/fabio/resultados/network_3/input_1_layer_activa
+tion_1.png used on input line 532.
+(pdftex.def)             Requested size: 218.40305pt x 218.4pt.
+
+
+LaTeX Warning: Float too large for page by 46.99994pt on input line 537.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+File: images/fabio/resultados/network_3/filter_convolution2d_2.png Graphic file
+ (type png)
+<use images/fabio/resultados/network_3/filter_convolution2d_2.png>
+Package pdftex.def Info: images/fabio/resultados/network_3/filter_convolution2d
+_2.png used on input line 545.
+(pdftex.def)             Requested size: 218.40305pt x 70.63388pt.
+
+<images/fabio/resultados/network_3/input_1_layer_convolution2d_2.png, id=165, 5
+58.6471pt x 180.675pt>
+File: images/fabio/resultados/network_3/input_1_layer_convolution2d_2.png Graph
+ic file (type png)
+
+<use images/fabio/resultados/network_3/input_1_layer_convolution2d_2.png>
+Package pdftex.def Info: images/fabio/resultados/network_3/input_1_layer_convol
+ution2d_2.png used on input line 552.
+(pdftex.def)             Requested size: 218.40305pt x 70.63388pt.
+
+<images/fabio/resultados/network_3/input_1_layer_activation_2.png, id=166, 558.
+6471pt x 180.675pt>
+File: images/fabio/resultados/network_3/input_1_layer_activation_2.png Graphic 
+file (type png)
+
+<use images/fabio/resultados/network_3/input_1_layer_activation_2.png>
+Package pdftex.def Info: images/fabio/resultados/network_3/input_1_layer_activa
+tion_2.png used on input line 558.
+(pdftex.def)             Requested size: 218.40305pt x 70.63388pt.
+File: images/fabio/resultados/network_3/filter_convolution2d_3.png Graphic file
+ (type png)
+
+<use images/fabio/resultados/network_3/filter_convolution2d_3.png>
+Package pdftex.def Info: images/fabio/resultados/network_3/filter_convolution2d
+_3.png used on input line 570.
+(pdftex.def)             Requested size: 218.40305pt x 107.64604pt.
+
+<images/fabio/resultados/network_3/input_1_layer_convolution2d_3.png, id=167, 5
+58.6471pt x 275.3487pt>
+File: images/fabio/resultados/network_3/input_1_layer_convolution2d_3.png Graph
+ic file (type png)
+
+<use images/fabio/resultados/network_3/input_1_layer_convolution2d_3.png>
+Package pdftex.def Info: images/fabio/resultados/network_3/input_1_layer_convol
+ution2d_3.png used on input line 577.
+(pdftex.def)             Requested size: 218.40305pt x 107.64604pt.
+
+<images/fabio/resultados/network_3/input_1_layer_activation_3.png, id=168, 558.
+6471pt x 275.3487pt>
+File: images/fabio/resultados/network_3/input_1_layer_activation_3.png Graphic 
+file (type png)
+
+<use images/fabio/resultados/network_3/input_1_layer_activation_3.png>
+Package pdftex.def Info: images/fabio/resultados/network_3/input_1_layer_activa
+tion_3.png used on input line 583.
+(pdftex.def)             Requested size: 218.40305pt x 107.64604pt.
+
+<images/fabio/resultados/network_3/input_1_layer_maxpooling2d_1.png, id=169, 55
+8.6471pt x 275.3487pt>
+File: images/fabio/resultados/network_3/input_1_layer_maxpooling2d_1.png Graphi
+c file (type png)
+
+<use images/fabio/resultados/network_3/input_1_layer_maxpooling2d_1.png>
+Package pdftex.def Info: images/fabio/resultados/network_3/input_1_layer_maxpoo
+ling2d_1.png used on input line 594.
+(pdftex.def)             Requested size: 227.5pt x 112.12901pt.
+File: images/fabio/resultados/network_3/filter_convolution2d_4.png Graphic file
+ (type png)
+
+<use images/fabio/resultados/network_3/filter_convolution2d_4.png>
+Package pdftex.def Info: images/fabio/resultados/network_3/filter_convolution2d
+_4.png used on input line 605.
+(pdftex.def)             Requested size: 218.40305pt x 218.4pt.
+
+<images/fabio/resultados/network_3/input_1_layer_convolution2d_4.png, id=170, 5
+58.6471pt x 558.6471pt>
+File: images/fabio/resultados/network_3/input_1_layer_convolution2d_4.png Graph
+ic file (type png)
+
+<use images/fabio/resultados/network_3/input_1_layer_convolution2d_4.png>
+Package pdftex.def Info: images/fabio/resultados/network_3/input_1_layer_convol
+ution2d_4.png used on input line 612.
+(pdftex.def)             Requested size: 218.40305pt x 218.4pt.
+
+<images/fabio/resultados/network_3/input_1_layer_activation_4.png, id=171, 558.
+6471pt x 558.6471pt>
+File: images/fabio/resultados/network_3/input_1_layer_activation_4.png Graphic 
+file (type png)
+
+<use images/fabio/resultados/network_3/input_1_layer_activation_4.png>
+Package pdftex.def Info: images/fabio/resultados/network_3/input_1_layer_activa
+tion_4.png used on input line 618.
+(pdftex.def)             Requested size: 218.40305pt x 218.4pt.
+
+
+LaTeX Warning: Float too large for page by 46.99994pt on input line 623.
+
+
+<images/fabio/resultados/network_3/input_1_layer_flatten_1.png, id=172, 558.647
+1pt x 71.5473pt>
+File: images/fabio/resultados/network_3/input_1_layer_flatten_1.png Graphic fil
+e (type png)
+
+<use images/fabio/resultados/network_3/input_1_layer_flatten_1.png>
+Package pdftex.def Info: images/fabio/resultados/network_3/input_1_layer_flatte
+n_1.png used on input line 629.
+(pdftex.def)             Requested size: 227.5pt x 29.13588pt.
+
+<images/fabio/resultados/network_3/input_1_layer_dense_1.png, id=173, 558.6471p
+t x 68.6565pt>
+File: images/fabio/resultados/network_3/input_1_layer_dense_1.png Graphic file 
+(type png)
+
+<use images/fabio/resultados/network_3/input_1_layer_dense_1.png>
+Package pdftex.def Info: images/fabio/resultados/network_3/input_1_layer_dense_
+1.png used on input line 639.
+(pdftex.def)             Requested size: 227.5pt x 27.95866pt.
+
+<images/fabio/resultados/network_1/input_1_layer_activation_7.png, id=174, 558.
+6471pt x 68.6565pt>
+File: images/fabio/resultados/network_1/input_1_layer_activation_7.png Graphic 
+file (type png)
+
+<use images/fabio/resultados/network_1/input_1_layer_activation_7.png>
+Package pdftex.def Info: images/fabio/resultados/network_1/input_1_layer_activa
+tion_7.png used on input line 650.
+(pdftex.def)             Requested size: 227.5pt x 27.95866pt.
+
+<images/fabio/resultados/network_1/input_1_layer_dense_2.png, id=175, 558.6471p
+t x 57.816pt>
+File: images/fabio/resultados/network_1/input_1_layer_dense_2.png Graphic file 
+(type png)
+
+<use images/fabio/resultados/network_1/input_1_layer_dense_2.png>
+Package pdftex.def Info: images/fabio/resultados/network_1/input_1_layer_dense_
+2.png used on input line 659.
+(pdftex.def)             Requested size: 227.5pt x 23.54414pt.
+
+<images/fabio/resultados/network_1/input_1_layer_activation_8.png, id=176, 558.
+6471pt x 57.816pt>
+File: images/fabio/resultados/network_1/input_1_layer_activation_8.png Graphic 
+file (type png)
+
+<use images/fabio/resultados/network_1/input_1_layer_activation_8.png>
+Package pdftex.def Info: images/fabio/resultados/network_1/input_1_layer_activa
+tion_8.png used on input line 668.
+(pdftex.def)             Requested size: 227.5pt x 23.54414pt.
+ [10]
+[11 <./images/fabio/resultados/network_3/filter_convolution2d_1.png> <./images/
+fabio/resultados/network_3/filter_convolution2d_2.png> <./images/fabio/resultad
+os/network_3/filter_convolution2d_3.png> <./images/fabio/resultados/network_3/f
+ilter_convolution2d_4.png>] [12 <./images/fabio/numero_0.png>] [13 <./images/fa
+bio/resultados/network_3/input_1_layer_convolution2d_1.png> <./images/fabio/res
+ultados/network_3/input_1_layer_activation_1.png>] [14 <./images/fabio/resultad
+os/network_3/input_1_layer_convolution2d_2.png> <./images/fabio/resultados/netw
+ork_3/input_1_layer_activation_2.png>] [15 <./images/fabio/resultados/network_3
+/input_1_layer_convolution2d_3.png> <./images/fabio/resultados/network_3/input_
+1_layer_activation_3.png> <./images/fabio/resultados/network_3/input_1_layer_ma
+xpooling2d_1.png>] [16 <./images/fabio/resultados/network_3/input_1_layer_convo
+lution2d_4.png> <./images/fabio/resultados/network_3/input_1_layer_activation_4
+.png>] [17 <./images/fabio/resultados/network_3/input_1_layer_flatten_1.png> <.
+/images/fabio/resultados/network_3/input_1_layer_dense_1.png> <./images/fabio/r
+esultados/network_1/input_1_layer_activation_7.png> <./images/fabio/resultados/
+network_1/input_1_layer_dense_2.png> <./images/fabio/resultados/network_1/input
+_1_layer_activation_8.png>] (./atv.bbl (./atv.brf)
 \tf@brf=\write7
 \openout7 = `atv.brf'.
 
- [10
+ [18
 
 ]
 
@@ -2005,17 +2233,17 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `\uppercase' on input line 3.
 
 bibitemlist
-) [11
+) [19
 
 ]
 \tf@toc=\write8
 \openout8 = `atv.toc'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 578.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 578.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 818.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 818.
  (./atv.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 578.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 578.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 818.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 818.
 Package rerunfilecheck Info: File `atv.brf' has not changed.
 (rerunfilecheck)             Checksum: 03C6A9E88049DEF8924A7999083F05AB;292.
 
@@ -2023,28 +2251,30 @@ Package rerunfilecheck Info: File `atv.brf' has not changed.
 LaTeX Warning: There were undefined references.
 
 
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 578.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 818.
  ) 
 Here is how much of TeX's memory you used:
- 40461 strings out of 494902
- 897633 string characters out of 6179203
- 1263231 words of memory out of 5000000
- 42994 multiletter control sequences out of 15000+600000
- 59670 words of font info for 74 fonts, out of 8000000 for 9000
+ 40908 strings out of 494902
+ 905826 string characters out of 6179203
+ 1279849 words of memory out of 5000000
+ 43339 multiletter control sequences out of 15000+600000
+ 59852 words of font info for 76 fonts, out of 8000000 for 9000
  16 hyphenation exceptions out of 8191
- 68i,13n,96p,868b,894s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf/fonts/enc/dvips/lm/lm-ec.enc}</usr/share/texmf/fonts/type1/
-public/lm/lmbx12.pfb></usr/share/texmf/fonts/type1/public/lm/lmr10.pfb></usr/sh
-are/texmf/fonts/type1/public/lm/lmr12.pfb></usr/share/texmf/fonts/type1/public/
-lm/lmri10.pfb></usr/share/texmf/fonts/type1/public/lm/lmri12.pfb></usr/share/te
-xmf/fonts/type1/public/lm/lmss12.pfb></usr/share/texmf/fonts/type1/public/lm/lm
-ss17.pfb></usr/share/texmf/fonts/type1/public/lm/lmssbx10.pfb>
-Output written on atv.pdf (11 pages, 294533 bytes).
+ 68i,13n,96p,868b,1815s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/share/texmf/fonts/en
+c/dvips/lm/lm-ec.enc}</usr/share/texmf/fonts/type1/public/lm/lmbx12.pfb></usr/s
+hare/texmf/fonts/type1/public/lm/lmr10.pfb></usr/share/texmf/fonts/type1/public
+/lm/lmr12.pfb></usr/share/texmf/fonts/type1/public/lm/lmri10.pfb></usr/share/te
+xmf/fonts/type1/public/lm/lmri12.pfb></usr/share/texmf/fonts/type1/public/lm/lm
+ss12.pfb></usr/share/texmf/fonts/type1/public/lm/lmss17.pfb></usr/share/texmf/f
+onts/type1/public/lm/lmssbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy1
+0.pfb>
+Output written on atv.pdf (19 pages, 342418 bytes).
 PDF statistics:
- 184 PDF objects out of 1000 (max. 8388607)
- 153 compressed objects within 2 object streams
- 33 named destinations out of 1000 (max. 500000)
- 22142 words of extra memory for PDF output out of 24883 (max. 10000000)
+ 330 PDF objects out of 1000 (max. 8388607)
+ 276 compressed objects within 3 object streams
+ 115 named destinations out of 1000 (max. 500000)
+ 22217 words of extra memory for PDF output out of 24883 (max. 10000000)
 
