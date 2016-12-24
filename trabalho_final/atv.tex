@@ -33,6 +33,7 @@
 \usepackage{color}				% Controle das cores
 \usepackage{graphicx}			% Inclusão de gráficos
 \usepackage{microtype} 			% para melhorias de justificação
+\usepackage{float}
 % ---
 
 % ---
@@ -328,7 +329,7 @@
 \chapter{Visualização do reconhecimento em uma Rede Neural}
 \section{Base de dados: MNIST}
 
-\par A base de dados MNIST (\textit{Mixed National Institute of Standards and Technology}) por \citeonline{LeCunn99}, é uma base de dados que contem 60000 exemplos de digitos manuscritos para treino e outros 10000 exemplos para treino disponível em \url{http://yann.lecun.com/exdb/mnist/}.
+\par A base de dados MNIST (\textit{Mixed National Institute of Standards and Technology}) por \citeonline{mnistlecunn}, é uma base de dados que contem 60000 exemplos de digitos manuscritos para treino e outros 10000 exemplos para treino disponível em \url{http://yann.lecun.com/exdb/mnist/}.
 
 \par As imagens dos dígitos possuem 28x28 pixels, entretanto os dígitos em si possuem 20x20, são normalizados e centralizados.
 
@@ -340,13 +341,13 @@
 	\label{fig:inputs}
 \end{figure}
 
-\par Segundo \citeonline{LeCunn99}, algumas técnicas de reconhecimento de dígitos foram aplicadas a esses bancos como classificadores lineares, KNN (K-nearest neighbors), entre outras, obtendo taxa de erro entre 12\% e 0.54\% respectivamente. Entretanto, como o objetivo deste trabalho é auxiliar o entendimento dos funcionamento das redes convolucionais através da visualização dos resultados, os valores de taxa de erro mais interessantes são os relacionados a redes convolucionais similares as apresentadas nesse trabalho. \citeonline{LeCunn99} apresenta redes convolucionais de LeNet-1, LeNet-4, LeNet-5 com taxas de erro de 1.7\%, 1.1\% e 0.7\% respectivamente. \citeonline{LeCunn99} ainda apresenta os resultados para outras redes convolucionais com medida de erros como \textit{cross-entropy} com taxas de erro de 0.6\%,
+\par Segundo \citeonline{mnistlecunn}, algumas técnicas de reconhecimento de dígitos foram aplicadas a esses bancos como classificadores lineares, KNN (K-nearest neighbors), entre outras, obtendo taxa de erro entre 12\% e 0.54\% respectivamente. Entretanto, como o objetivo deste trabalho é auxiliar o entendimento dos funcionamento das redes convolucionais através da visualização dos resultados, os valores de taxa de erro mais interessantes são os relacionados a redes convolucionais similares as apresentadas nesse trabalho. \citeonline{mnistlecunn} apresenta redes convolucionais de LeNet-1, LeNet-4, LeNet-5 com taxas de erro de 1.7\%, 1.1\% e 0.7\% respectivamente. \citeonline{mnistlecunn} ainda apresenta os resultados para outras redes convolucionais com medida de erros como \textit{cross-entropy} com taxas de erro de 0.6\%,
 
 \par O resultado obtido pela rede explorada neste capítulo deste trabalho obteve taxa de erro de 0.94\% na base de teste do MNIST e sua estrutura será detalhada nas próximas sessões.
 
 \section{Rede Convolucional para reconhecimento de dígitos manuscritos do MNIST}
 \par A rede a ser apresentada neste trabalho é composta da camada de entrada e 16 camadas para o processamento. Com o objetivo de simplificar a visualização, as camadas de convolução e ativação que são consecutivas foram agrupadas em um único bloco.
-\par A identificação mostrada a seguir é feita após o treinamento da rede com a arquitetura exibida na imagem \ref{tikz:mnist_cnn16}.
+\par A identificação mostrada a seguir é feita após o treinamento da rede com a arquitetura exibida na \autoref{tikz:mnist_cnn16}.
 
 \begin{figure}[h]
 	\centering
@@ -381,8 +382,8 @@
 	
 	\end{tikzpicture}%
 	} %resizebox
-	\label{tikz:mnist_cnn16}
 	\caption{Arquitetura da rede CNN utilizada neste trabalho.}
+		\label{tikz:mnist_cnn16}
 \end{figure}
 
 \par A implementação da rede descrita pela imagem \ref{tikz:mnist_cnn16} é exibida no código abaixo:
@@ -399,7 +400,6 @@ modelo = Sequential()
 def keras_add(m,op):
 	m.add(op)
 	l = m.layers[-1]
-	print l.name, l.get_output_shape_at(-1)
 
 keras_add(modelo,Convolution2D(32, 2, 2,
 	border_mode='valid', input_shape=(28, 28, 1)))
@@ -429,6 +429,7 @@ keras_add(modelo,Activation('softmax'))
 \par O objetivo das camadas convolucionais com ativação no início dessa rede é de encontrar características dos números e reduzir parcialmente o tamanho da imagem inicial antes do primeiro \textit{pooling}. Para melhor compreensão dos efeitos da convolução nas imagens foram utilizados em cada camada convolucional filtros dos tamanhos: 32 filtros de 2x2, 8 filtros de 12x12, 16 filtros de 8x8 e 32 filtros de 2x2.
 
 \par A visualização dos filtros obtidos após o treinamento foi obtida da seguinte forma:
+
 \begin{lstlisting}
 img = np.zeros((28,28))
 for a in xrange(28):
@@ -458,9 +459,9 @@ for a in xrange(28):
 \end{lstlisting}
 
 
-\par Os filtros descritos acima são visualizados na imagem \ref{convs_filtros}.
+\par Os filtros descritos acima são visualizados na imagem \autoref{fig:convs_filtros}.
 
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	
 	\begin{subfigure}{.8\textwidth}
@@ -490,8 +491,8 @@ d
 	\caption{Filtros 2x2 - terceira convolução}		
 	\label{fig:conv4_filtro}	
 \end{subfigure}%
-	\label{fig:convs_filtros}
 	\caption{Filtros convolucionais obtidos do treinamento.}
+		\label{fig:convs_filtros}
 \end{figure}
 
 
@@ -503,17 +504,21 @@ d
 
 \par A identificação do dígito é iniciada com a introdução da imagem contendo o item a ser identificado. Neste exemplo será utilizado o número 0 apresentado na imagem \ref{fig:numero_0}.
 
-\begin{figure}
+\begin{center}
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=0.3\linewidth]{images/fabio/numero_0}
 	\caption{Número 0 escrito a mão disponível na base de dados do MNIST.}
 	\label{fig:numero_0}
 \end{figure}
+\end{center}
+
+
+\par A aplicação do primeiro conjunto de camada convolucional e ativação é mostrada em \autoref{fig:camada_1}. Apesar da aplicação dos filtros não resultar necessariamente em uma imagem humanamente compreensível é possível notar na ativação da \ref{fig:camada_1} que as bordas ficam ressaltadas em relação ao fundo e algumas das camadas buscam encontrar formatos específicos como linhas horizontais e verticais enquanto outras buscam formatos de curvas. 
 
 \begin{center}
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
-
 \begin{subfigure}{.8\textwidth}
 \centering
 \includegraphics[width=.6\linewidth]{images/fabio/resultados/network_3/filter_convolution2d_1}%
@@ -532,14 +537,17 @@ d
 \includegraphics[width=.6\linewidth]{images/fabio/resultados/network_3/input_1_layer_activation_1}%
 \caption{Ativação}			
 \end{subfigure}%
-\label{fig:camada_1}
 \caption{Primeiro resultado da identificação no primeiro par de camadas de convolução e ativação.}
+\label{fig:camada_1}
 \end{figure}
 \end{center}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\par Na segunda camada um filtro de tamanho 12x12 é utilizado. Novamente, apesar de não necessariamente ser uma imagem compreensível para humanos é possível notar no próprio filtro que alguns formtados de curvas e traços ficam evidenciado, indicando que esses filtros irão se ativar mais para esse tipo de padrão. O resultado na \autoref{fig:camada_2} tem a resolução menor por conta da redução no tamanho da saída. A saída dessa segunda camada é composta por varios componentes do número zero como bordas internas e externas além da evidenciação do centro do zero.
+
 \begin{center}
-\begin{figure}
+\begin{figure}[H]
 \begin{subfigure}{.8\textwidth}
 	\centering
 	\includegraphics[width=.6\linewidth]{images/fabio/resultados/network_3/filter_convolution2d_2}%
@@ -558,13 +566,15 @@ d
 	\includegraphics[width=.6\linewidth]{images/fabio/resultados/network_3/input_1_layer_activation_2}%
 	\caption{Ativação}			
 \end{subfigure}%
-\label{fig:camada_2}
 \caption{Primeiro resultado da identificação no segundo par de camadas de convolução e ativação.}
+\label{fig:camada_2}
 \end{figure}
 \end{center}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\par A terceira camada utiliza um filtro 8x8, dessa vez praticamente nenhum elemento dos filtros é humanamente compreensível. A convolução nesta camada mostra que aguns filtros buscam por um padrão onde as bordas são preenchidas e o entro é vazio, e alguns outros filtros que também são mais ativados evidenciam o formato circular que o número zero tem.
 \begin{center}
-\begin{figure}
+\begin{figure}[H]
 	\begin{subfigure}{.8\textwidth}
 		\centering
 		\includegraphics[width=.6\linewidth]{images/fabio/resultados/network_3/filter_convolution2d_3}%
@@ -583,13 +593,15 @@ d
 		\includegraphics[width=.6\linewidth]{images/fabio/resultados/network_3/input_1_layer_activation_3}%
 		\caption{Ativação}			
 	\end{subfigure}%
-	\label{fig:camada_3}
 	\caption{Primeiro resultado da identificação no terceiro par de camadas de convolução e ativação.}
+		\label{fig:camada_3}
 \end{figure}
 \end{center}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\par A camada de \textit{pooling} tem como objetivo reduzir a dimensionalidade como é visto na \autoref{fig:input1layermaxpooling2d1}. O resultado da imagem com alguns dos filtro não possuem nenhum valor (filtro 5/16)=, enquanto outros capturam mais os pares de bordas (filtros 1/16 e 2/16) e outros apenas algumas bordas (filtros 14/16 e 15/16).
+
 \begin{center}
-\begin{figure}
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\textwidth]{images/fabio/resultados/network_3/input_1_layer_maxpooling2d_1}
 	\caption{Resultado da camada de Pooling}
@@ -598,8 +610,10 @@ d
 \end{center}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\par Na quarta camada de convolução o resultado é uma imagem de 3x3 pixels. Não é possível afirmar exatamente o que cada resultado representa (por conta da forma como o aprendizado de máquina funciona), mas é possível verificar que o ponto mais ativo em cada filtro  representa uma relação dentre cada um dos 9 pixels da imagem e os elementos adjacentes.
+
 \begin{center}
-\begin{figure}
+\begin{figure}[H]
 	\begin{subfigure}{.8\textwidth}
 		\centering
 		\includegraphics[width=.6\linewidth]{images/fabio/resultados/network_3/filter_convolution2d_4}%
@@ -618,13 +632,14 @@ d
 		\includegraphics[width=.6\linewidth]{images/fabio/resultados/network_3/input_1_layer_activation_4}%
 		\caption{Ativação}			
 	\end{subfigure}%
-	\label{fig:camada_2}
 	\caption{Primeiro resultado da identificação no quarto par de camadas de convolução e ativação.}
+		\label{fig:camada_2}
 \end{figure}
 \end{center}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\par A função Flatten do Keras, \autoref{fig:input1flatten}, transformar um item multidimensional em um vetor unidimensional. Neste caso 3x3x32 (imagem 3x3 e 32 filtros) transformasse em um vetor 1x1x288. Este artifício é utilizado para pode realizar a interface com a camada de treinamento \textit{fully connected} (totalmente conectada) assim como no aprendizado clássico de redes neurais.
 \begin{center}
-\begin{figure}
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\textwidth]{images/fabio/resultados/network_3/input_1_layer_flatten_1}
 	\caption{Resultado da camada de Flatten}
@@ -633,19 +648,21 @@ d
 \end{center}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\par A camada Dense do Keras, \autoref{fig:input1dense1}, representa o treinamento clássico de redes neurais onde cada elemento da entrada é ligado a todos os elementos da camada escondida que por sua vez é ligado por todos os elementos de saída. Como as camadas anteriores reduziram a dimensionalidade da imagem o treinamento nesta fase é relativamente rápido por contar com 288 elementos de entrada e 100 elementos de saída apenas.
 \begin{center}
-\begin{figure}
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\textwidth]{images/fabio/resultados/network_3/input_1_layer_dense_1}
-	\caption{Resultado da camada de Flatten}
+	\caption{Resultado da camada Dense}
 	\label{fig:input1dense1}
 \end{figure}
 \end{center}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\par Uma camada de ativação é adicionada em \autoref{fig:input1atv5} com objetivo de passar para a próxima camada apenas os elementos mais importantes e eliminar possíveis ruídos no treinamento.
 \begin{center}
-\begin{figure}
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\textwidth]{images/fabio/resultados/network_1/input_1_layer_activation_7}
 	\caption{Resultado da camada de ativação antes da saída}
@@ -653,8 +670,9 @@ d
 \end{figure}
 \end{center}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\par Uma nova camada Dense é adiciona agora para realizar a classificação entre 10 itens (número de 0 a 9).
 \begin{center}
-\begin{figure}
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\textwidth]{images/fabio/resultados/network_1/input_1_layer_dense_2}
 	\caption{Resultado da camada de ativação antes da saída}
@@ -662,8 +680,9 @@ d
 \end{figure}
 \end{center}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\par A ultima camada de ativação elimina os outros resultados menos prováveis e mantém apenas o elemento que foi mais ativado. Neste caso apenas o único elemento do vetor com indice zero representando o número 0.
 \begin{center}
-\begin{figure}
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\textwidth]{images/fabio/resultados/network_1/input_1_layer_activation_8}
 	\caption{Resultado da camada de ativação para definição da saída}
@@ -676,7 +695,8 @@ d
 \chapter{Conclusão}
 % ---
 
-\par \lipsum[30-30]
+\par O resultado da arquitetura apresentada na seção anterior foi de 98.89\% para os elementos de treino da base do MNIST e de 99.06\% para os elementos de teste da mesma base. Tais resultados demonstram que a aplicação da técnica de redes convolucionais para este problema foi efetiva se comparando a outros bons resultados demonstrados em outras redes convolucionais em \citeonline{mnistlecunn}.
+
 
 
 % ----------------------------------------------------------
