@@ -1,0 +1,230 @@
+\documentclass[12pt,fleqn]{article}
+%\usepackage {psfig,epsfig} % para incluir figuras em PostScript
+\usepackage{amsfonts,amsthm,amsopn,amssymb,latexsym}
+\usepackage{graphicx,float}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+\usepackage{geometry}
+\usepackage[latin1]{inputenc}
+\usepackage[intlimits]{amsmath}
+\usepackage{indentfirst}
+\usepackage{booktabs}
+\usepackage[toc,page]{appendix}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    filecolor=magenta,      
+    urlcolor=blue,
+		citecolor=black,
+}
+
+
+%alguns macros
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\newcommand{\Rn}{{\ensuremath{\mathbb{R}}}^{n}}
+\newcommand{\Rm}{{\ensuremath{\mathbb{R}}}^{m}}
+\newcommand{\Rmn}{{\ensuremath{\mathbb{R}}}^{{m}\times{n}}}
+\newcommand{\contcaption}[1]{\vspace*{-0.6\baselineskip}\begin{center}#1\end{center}\vspace*{-0.6\baselineskip}}
+%\newcommand{\sobrenome}{nome}
+%=======================================================================
+% Dimensões da página
+\usepackage{a4}                       % tamanho da página
+\setlength{\textwidth}{16.0cm}        % largura do texto
+\setlength{\textheight}{9.0in}        % tamanho do texto (sem head, etc)
+\renewcommand{\baselinestretch}{1.15} % espaçamento entre linhas
+\addtolength{\topmargin}{-1cm}        % espaço entre o head e a margem
+\setlength{\oddsidemargin}{-0.1cm}    % espaço entre o texto e a margem
+       
+% Ser indulgente no preenchimento das linhas
+\sloppy
+ 
+
+\begin{document}
+
+
+\pagestyle {empty}
+
+% Páginas iniciais
+%\include {capa_tarefa6}           % capa ilustrativa
+
+
+
+\pagestyle {empty}
+%\abstract{ Este trabalho tem como intuito esmiuçar a minha participação no projeto final da disciplina PSI5886 - Princípios de Neurocomputação o qual está sendo desenvolvido colaborativamente com mais três alunos, Fábio Teixeira, Bruno Giordano e Wanderson Ferreira. O projeto final consiste na compreensão de uma das arquiteturas de redes neurais utilizadas em \textit{Deep Learning}, no caso, redes convolucionais.
+
+%\newpage
+
+%\tableofcontents
+
+
+% Numeração em romanos para páginas iniciais (sumários, listas, etc)
+%\pagenumbering {roman}
+\pagestyle {plain}
+
+
+
+\setcounter{page}{0} \pagenumbering{arabic}
+
+
+
+
+
+
+  
+\setlength{\parindent}{0in}  %espaco entre paragrafo e margem 
+% Espaçamento entre parágrafos
+\parskip 5pt  
+
+\newpage
+
+\section{Redes Convolucionais}
+Redes convolucionais figuram entre as arquiteturas conhecidas na literatura como pertencentes à uma subárea particular de Redes Neurais , conhecida como \textit{Deep Learning}. \textit{Deep Learning} consiste em um grupo  de topologias de redes neurais, o qual tem como grande característica a presença de muitas camadas, apresentando grande aplicação para reconhecimento de padrões. Outra forte característica deste grupo, se encontra no grande espaço amostral exigido para o treinamento das redes, reforçando os obstáculos já conhecidos em outras topologias relacionados à complexidade computacional \cite{ref1}. Para tornar viável o aprofundamento de camadas, considerando um espaço de treino significativo, fez-se necessário o estudo de implementações alternativas de redes neurais, revolucionando as arquiteturas convencionais. Neste contexto, nascem as redes convolucionais, as quais tem o compromisso de lidar com grande complexidade computacional, não só pelas presença de várias camadas, mas por serem utilizadas majoritariamente para o reconhecimento de imagens \cite{ref3}.
+
+Imagens digitais nada mais são que conjuntos de dados, os quais representam combinações de cores dos \textit{pixels} que as compõem. Uma imagem digital, abstraindo para sua representação numérica discretizada em cores, consiste em uma grande matriz de diversas dimensões, sendo usualmente representada por um volume de dados. Pode-se facilmente compreender a magnitude do esforço computacional exigido para operações de manipulação de imagens, sendo algumas delas: aplicações de filtros; identificação de bordas; transformadas e outras. De nada supreende o fato de que fabricantes de \textit{hardware} vem desenvolvendo alternativas dedicadas ao processamento de imagens, como as GPU \textit{(Graphical Processing Unit)}, as quais possuem uma arquitetura que permite grande poder de paralelização computacional.
+
+Neste cenário, torna-se claro o desafio das redes convolucionais em treinar seus neurônios para reconhecimento de imagens, considerando o volume intenso de dados que elas manipulam. Porém, talvez equiparável ao tamanho do desafio, seja também o investimento para vencê-lo, já que o poder de reconhecimento visual por um sistema inteligente, possui aplicação nas mais diversas indústrias. De automação industrial à segurança, com pouco esforço mental é fácil imaginar uma possível implementação de reconhecimento de imagens interessante para absolutamente qualquer indústria. Não obstante, o pesado investimento \cite{ref4} em forma de pesquisas e competições acelerou a viabilidade das redes convolucionais quando utilizadas para o propósito em questão. Como grande representativo deste movimento, pode-se citar a competição \href{http://www.image-net.org/challenges/LSVRC/}{\textit{ImageNet}}, que reúne grandes pólos de tecnologia (iniciativa privada e centros de pesquisa) em prol do desenvolvimento desta área. Entre os notórios participantes desta competição, destacam-se equipes da Microsoft Google, Intel e outras.
+
+Externado o seu posicionamento na sociedade e sua aplicação, faz-se necessário um estudo de sua topologia para entender como redes convolucionais funcionam perante estes desafios.
+
+\section{Topologia das Redes Convolucionais}
+Para melhor entender sua topologia, é de interesse do leitor conhecer de forma macro como uma rede convolucional permite a segmentação de imagens. De forma resumida, a rede convolucional está de forma insistente à procura de representações características de imagens que permitam à ela categorizar a imagem em questão. Esta procura é feita a partir da aplicação de filtros, os quais acusam quando uma representação característica em especial é encontrada na imagem. Como exemplo, pode-se ver na figura abaixo os filtros utilizados para a identificação de uma face e de um carro, aplicados pelas camadas de uma rede convolucional.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.8\textwidth]{imagens/filtros}
+    \caption{Filtros de uma rede convolucional}
+    \label{filtros}
+\end{figure} 
+
+A princípio, tendo apenas a figura \ref{filtros} como referência de filtros utilizados pelas camadas comvolucionais, torna-se difícil entender a praticidade e a real justificativa desta rede, já que olhos, narizes e bocas são obviamente representações características de uma face. Porém, esta primeira impressão é rapidamente questionada ao analisar a figura \ref{filtros2}, a qual apresenta filtros que possuem o mesmo propósito.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.5\textwidth]{imagens/filtros2}
+    \caption{Filtros de uma rede convolucional. Fonte: \href{www.cs.toronto.edu}{www.cs.toronto.edu}.}
+    \label{filtros2}
+\end{figure} 
+
+Nota-se que estes filtros carregam quase nenhuma semelhança aparente com alguma imagem especial, e visualmente não proporcionam qualquer informação. Este filtros, os quais são frutos do treino da rede, mostram o verdadeiro poder das redes convolucionais, pois um ser humano provavelmente não diria que este filtros tem capacidade alguma de segmentar entre dois ou mais grupos de imagens distintas. O poder de abstração dos filtros em uma rede convolucional vai além da capacidade de segmentação visual do ser humano, sendo então muito mais eficiente que qualquer algoritmo determinístico que possamos desenvolver racionalmente.
+
+A aplicação dos filtros é realizada nas camadas de convolução, sendo esta a principal camada em uma rede convolucional. As demais serão descritas logo a seguir:
+
+\subsection{Camada Convolucional}
+Como explicado anteriormente, a camada convolucional aplica filtros na imagem à procura de sua representação equivalente. Esta aplicação pode ser traduziada matematicamente como a convolução do filtro ao longo da imagem. A figura \ref{camadaconvolucional} passa a sensação que o filtro desliza pela imagem \cite{ref3}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.4\textwidth]{imagens/camadaconvolucional}
+    \caption{Representação da camada convolucional aplicando filtros em uma imagem. Fonte: \cite{ref3}.}
+    \label{camadaconvolucional}
+\end{figure} 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.8\textwidth]{imagens/camadaconvolucional2}
+    \caption{Desenho que retrata a camada convolucional e a disposição de seus neurônios. Fonte: \cite{ref3}.}
+    \label{camadaconvolucional2}
+\end{figure} 
+
+Na figura \ref{camadaconvolucional}, o volume rosa representa a imagem alimentada na rede; o volume azul corresponde aos neurônios que estão aplicando o filtro; e a projeção do volume azul corresponde ao filtro sendo aplicado na imagem. Os filtros tem sua representação numérica nos pesos dos neurônios, os quais são calculados durante o treino da rede. Como o mesmo filtro é aplicado ao longo da imagem, e os filtros são os pesos dos neurônios, necessariamente os neurônios que compartilham o mesmo eixo da largura e altura na figura \ref{camadaconvolucional2}, compartilham também os mesmos pesos. Portanto, o número de filtros diferentes aplicados à imagem está relacionado com a quantidade de neurônios no eixo da profundidade (vide \ref{camadaconvolucional2}). A saída dos neurônios quantificam quão próximo uma porção específica da imagem se assemelhou com o fitro aplicado, sendo esta quantificação convencionada como valor de ativação.
+
+O tamanho do filtro, em quantos \textit{pixels} é deslocado o filtro, e outras características importantes da rede convolucional são determinadas pelos seus hiperparâmetros, os quais estão descritos a seguir:
+\begin{enumerate}
+\item F = Tamanho do filtro (FxF).
+\item S = \textit{Stride}. Este hiperparâmetro corresponde ao deslocamento do filtro ao longo da imagem, medido em \textit{pixels}.
+\item K = Quantidade de filtros. Corresponde à quantidade de neurônios na camada convolucional.
+\item W = Resolução da Imagem (WxW).
+\item P = \textit{Zero Padding}. Corresponde ao número de zeros adicionados na periferia da imagem. Este hiperparâmetro tem como principal função adequar o tamanho da imagem com o F e S escolhidos.
+\end{enumerate}
+
+A partir destes hiperparâmetros, considerando a aplicação do filtro já detalhada anteriormente, os dados de saída possuem resolução (ou área, caso uma notação geométrica esteja em vigor) que pode ser descrita pela fórmula:
+
+\begin{equation}
+	\textrm{Resolução} = \frac{W - F + 2P}{S} + 1 
+	\label{resolução}
+\end{equation}
+
+Pode-se notar que fixando os hiperparâmetros W, F e S, faz-se necessário uma escolha de P para que a divisão resulte em um número inteiro. A figura \ref{exemplo_conv} mostra um exemplo em que W = 5, F = 3, P = 1 e S = 2:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.8\textwidth]{imagens/gif_conv}
+    \caption{Exemplo de convolução e hiperparâmetros de uma rede convolucional. Fonte: \cite{ref3}.}
+    \label{exemplo_conv}
+\end{figure} 
+
+
+Não é apenas de camadas convolucionais que uma rede convolucional é feita, outras camadas também realizam operações interessantes que auxiliam na classificação de imagens:
+
+\subsection{Camada ReLUs}
+Esta camada tem uma função muito simples dentro da rede: Rejeitar os baixos valores de ativação, desprezando então as convoluções entre filtro e porção da imagem que não trouxeram informação, e enfatizar os casos contrários. Em muitos casos, as camadas ReLUs aplicam nas saídas do neurônios da camada convolucional, a simples relação matemática:
+\begin{equation}
+	f(x) = max(0,x)
+	\label{eq_relus}
+\end{equation}
+Assim, os valores negativos de ativação são desprezados, ou seja, são zerados, passando apenas os que acusaram alguma semelhança entre o filtro e a porção da imagem analisada. Em alguns casos, implementa-se uma função matemática alternativa, conhecidada como \textit{leaky}. Ela permite exatamente o que sua tradução em português sugere, um vazamento de valores inferiores à \(0\). Esta implementação é usada já que a fórmula convencional acaba ocasionalmente neutralizando uma grande sequência de neurônios, já que os valores zerados vão alimentar outras camadas, inativando outros neurônios no caminho. A fórmula alternativa se encontra a seguir:
+
+\[
+    f(x)= 
+\begin{cases}
+    x,& \text{if } x > 0  \\      
+		0.01x,& \text{c.c.}
+\end{cases}
+\]
+
+Uma camada ReLU pode ser vista em ação na figura \ref{relus}:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.8\textwidth]{imagens/relus}
+    \caption{Representação gráfica do funcionamento de uma camada ReLUs em uma rede convolucional. Fonte: \href{https://www.youtube.com/watch?v=FmpDIaiMIeA&t=943s}{https://www.youtube.com/watch?v=FmpDIaiMIeA&t=943s}.}
+    \label{relus}
+\end{figure} 
+
+\subsection{Pooling}
+Esta camada tem como função diminuir o tamanho da imagem ao longo do seu aprofundamento na rede. O seu funcionamento pode ser melhor entendido com a figura \ref{pooling}:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.8\textwidth]{imagens/pooling}
+    \caption{Representação gráfica do funcionamento de uma camada de \textit{Pooling} em uma rede convolucional. Fonte: \cite{ref3}}
+    \label{pooling}
+\end{figure} 
+
+Como pode-se ver na figura \ref{pooling}, os valores de ativação menos significativos foram filtrados, e os mais significativos foram rearranjados em uma matriz de resolução inferior. Seu comportamento tem um compromisso parecido com a ReLUs, sendo a associação das duas uma boa estratégia para identificar as ativações que provavelmente carregam informações valiosas na categorização da imagem.
+
+\subsection{MLP - \textit{Multilayer Perceptron}}
+Com a alternância sistemática das camadas anteriores, ou seja, gradualmente diminuindo o volume dos dados de entrada, aplicando filtros e coletando seus valores de ativação significativos, ao final das diversas camadas, resta-se apenas um vetor. Este vetor corresponde à uma votação ponderada dos grupos os quais se deseja classificar as imagens. Portanto, se uma classificação está sendo realizada para separar veículos de trasnporte, o vetor de votação pode estar sugerindo que a imagem alimentada na rede é provavelmente um carro. Para acontecer esta decisão, a camada final de uma rede convolucional consiste geralmente em uma rede MLP (\textit{MultiLayer Perceptron}) convencional, em que cada neurônio se conecta com todos os demais na camada seguinte. A figura \ref{topologiaMLP} relembra o que seria uma topologia MLP:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.4\textwidth]{imagens/MLP1}
+    \caption{Topologia de uma rede MLP. Fonte: \cite{ref3}.}
+    \label{topologiaMLP}
+\end{figure} 
+
+Com todas as camadas descritas, pode-se entender finalmente como funcionaria uma implementação típica de uma rede convolucional para a classificação de imagens. A figura \ref{final} mostra uma rede convolucional típica em ação:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.8\textwidth]{imagens/final}
+    \caption{Aplicação típica de uma rede convolucional para a classificação de imagens. Fonte: \cite{ref3}.}
+    \label{final}
+\end{figure} 
+
+
+
+
+\begin{thebibliography}{99}
+\bibitem{ref1} H. Simon, \textit{Redes Neurais: princípios e práticas}, 2.ed, Porto Alegre: Bookman 2001.
+\bibitem{ref2} J. Hertz et al, \textit{Introduction to the Theory of Neural Computation}, A Lecture Notes Volume in the Santa Fe Institute Studies in the Sciences of Complexity, Addison-Wesley Publishing Company, California, 1993.
+\bibitem{ref3} J. Johnson et al \textit{CS231n: Convolutional Neural Networks for Visual Recognition}, Lecture Notes \url{http://cs231n.stanford.edu/}.
+\bibitem{ref4} Investments in Image Recognition \textit{Index}, \url{https://index.co/market/image-recognition/investments}.
+
+\end{thebibliography}
+
+
+%inserindo anexos
+
+\end{document} %finaliza o documento

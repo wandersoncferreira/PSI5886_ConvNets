@@ -47,6 +47,8 @@
 % Pacotes adicionais, usados apenas no âmbito do Modelo Canônico do abnteX2
 % ---
 \usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
 \usepackage{graphicx}
 \graphicspath{ {images/} }
 \usepackage[colorinlistoftodos]{todonotes}
@@ -317,14 +319,353 @@
 % Introdução (exemplo de capítulo sem numeração, mas presente no Sumário)
 % ----------------------------------------------------------
 \chapter[Introdução]{Introdução}
+aew
 
-\par \lipsum[50]
+\chapter{Multi-Layer Perceptrons}
 
-\chapter{LIPSUM}
-\section{Wolverinis Adamantium}
-\par \lipsum[30] \cite{deeplearning_net_mlp}
 
-\par Exemplo de citação em linha segundo \citeonline{rojas1996} aqui.
+\section{Perceptron de Rosenblatt}
+O perceptron de Rosenblatt implementa um classificador bin\'ario utilizando um neur\^onio. Tal neur\^onio \'e modelado como uma fun\c{c}\~ao $sgn$ aplicada a uma combina\c{c}\~ao linear das entradas:
+
+\begin{center}
+	\includegraphics[scale=1]{rosenblattperceptron.png}
+	\captionof{figure}{ Perceptron de Rosenblatt \cite{livronnet} }
+\end{center} 
+
+Considerando a fun\c{c}\~ao $sgn$ devolvendo resultados entre $+1$ e $-1$:
+
+$$sgn(x) = \begin{cases}
++1 \enspace \text{se } x > 0 \\
+-1 \enspace \text{se } x < 0 \\
+\end{cases}$$
+
+
+Temos o seguinte modelo para $y$:
+
+$$ y = sgn\bigg(  \big(\sum_{i=0}^m w_ix_i\big) + b \bigg)$$
+
+Reorganizando a equa\c{c}\~ao matricialmente:
+$$ X = \begin{bmatrix}
+x_1 \\
+x_2 \\
+... \\
+x_m
+\end{bmatrix},
+W = \begin{bmatrix}
+w_1 \\
+w_2 \\
+... \\
+w_m
+\end{bmatrix} \Rightarrow
+y = sgn\bigg( \big(W^T\cdot X\big) + b \bigg)$$
+
+Assim, podemos associar o output $y$ com duas classes $\mathcal{C}_1$ e $\mathcal{C}_2$, para os respectivos valores $+1$ e $-1$. Como a opera\c{c}\~ao envolvendo os inputs \'e puramente linear, h\'a uma correspond\^encia geom\'etrica interessante facilmente visualiz\'avel para duas dimens\~oes. Considerando um conjunto de dados com duas dimens\~oes, cada input $(x_1,x_2)$ pode ser plotado no $\mathbb{R}^2$. Assim, interpretando os par\^ametros $(W,b)$ do sistema como vetores:
+
+\begin{center}
+	\includegraphics[scale=1]{perceptron2d.png}
+	\captionof{figure}{ Interpreta\c{c}\~ao geom\'etrica para duas dimens\~oes \cite{livronnet} }
+\end{center} 
+
+Os pesos $(W,b)$ separam o espa\c{c}o de inputs em duas regi\~oes correspondentes a cada classe $\mathcal{C}_1$ e $\mathcal{C}_2$. Dado um conjunto $D$ de $N$ dados:
+$$D = \begin{bmatrix}
+d_1 \\
+d_2 \\
+... \\
+d_N
+\end{bmatrix} =
+\begin{bmatrix}
+(X_{ref},Y_{ref})_1 \\
+(X_{ref},Y_{ref})_2 \\
+... \\
+(X_{ref},Y_{ref})_N
+\end{bmatrix}$$
+Para $d_i = (X_{ref},Y_{ref})_i$ com inputs $X \in \mathbb{R}^m$ e outputs $Y \in \{\{+1\},\{-1\}\}$, queremos então determinar $W$ separando o $\mathbb{R}^m$ em duas regiões $\mathcal{R}_1$ e $\mathcal{R}_2$, cada uma responsável por cada classe definida em $Y$. Ou seja:
+$$\forall d_i = (X_{ref},Y_{ref})_i \text{,}  \enspace \enspace \begin{cases}
+Y_{ref} = +1 \Leftarrow \Rightarrow X_{ref} \in R_1 \\
+Y_{ref} = -1 \Leftarrow \Rightarrow X_{ref} \in R_2 \\
+\end{cases} $$
+
+
+Para estender a formula\c{c}\~ao para um n\'umero arbitr\'ario de classes, podemos utilizar mais neur\^onios. Assim, podemos definir um n\'umero qualquer de regi\~oes utilizando composi\c{c}\~oes de l\'ogica booleana. A combinação de diversos perceptrons e a generalização da função de transferência do neurônio resultou no desenvolvimento da teoria de Multi-Layer Perceptrons.
+
+\section{Multi-Layer Perceptrons}
+O Perceptron da arquitetura MLP \'e uma extens\~ao do perceptron de Rosenblatt. Assim, visa solucionar limita\c{c}\~oes pr\'aticas encontradas no modelo de Rosenblatt, como, por exemplo, a limita\c{c}\~ao \`a conjunto de dados linearmente separ\'aveis. Isso se deve principalmente a \`a fun\c{c}\~ao de ativa\c{c}\~ao do modelo, $sgn(.)$; e ao aumento no n\'umero de neur\^onios. O Perceptron de Multiplas Camadas (Multi-Layer Perceptron) utiliza diversos perceptrons de Rosenblatt com fun\c{c}\~oes de ativa\c{c}\~ao $\varphi(.)$ mais gen\'ericas, organizados em diversas camadas. Tais fun\c{c}\~oes $\varphi(.)$ devem ser cont\'inuas e diferenci\'aveis, como por exemplo:
+
+$$\varphi(x) = \begin{cases}
+tgh(x) = \frac{ e^x - e^{-x} } {e^x + e^{-x}} \\
+sig(x) = \frac{ 1 } {1 + e^{-x}} \\
+
+\end{cases} $$
+
+Tais caracter\'isticas s\~ao as principais respons\'aveis pelos excelentes resultados recentes em aplica\c{c}\~oes de MLP, como tamb\'em s\~ao os principais motivos pela dificuldade no entendimento do comportamento desse tipo de rede neural. A presen\c{c}a de tantas n\~ao linearidades distribuidas combinadas com a alta conectividade entre neur\^onios faz com que a an\'alise te\'orica seja extremamente complexa. Al\'em disso, o uso de camadas escondidas torna o processo de aprendizado extremamente dificil de se visualizar.
+
+Considere o diagrama a seguir de uma MLP com inputs $\vec{x} \in \mathbb{R}^m$ e outputs $\vec{y} \in \mathbb{R}^3$. Sejam duas camadas escondidas: $W_1$ com $n_1$ outputs $h_1 \in \mathbb{R}^{n_1}$ e $W_2$ com $n_2$ outputs $h_2 \in \mathbb{R}^{n_2}$.
+
+\begin{center}
+	\includegraphics[scale=0.8]{MLP.png}
+	\captionof{figure}{ Diagrama de arquitetura de uma MLP \cite{livronnet} }
+\end{center} 
+
+Seja $w_{nij}$ o peso conectando o i-\'esimo neur\^onio da n-\'esima camada ao j-\'esimo output da camada anterior. Analisemos o output $h_{1i}$ do i-\'esimo neur\^onio da primeira camada escondida.  Similarmente ao perceptron de Rosenblatt, considerando uma fun\c{c}\~ao de ativa\c{c}\~ao $\varphi(.)$, temos:
+
+$$h_{1i} =  \varphi \bigg( \sum_{j=0}^m w_{1ij} x_j  \bigg) = \varphi \big(\vec{w_{1i}}^T \cdot \vec{x} ) $$
+
+Onde $\vec{x} = \begin{bmatrix}
+x_1 & x_2 & ... & x_m
+\end{bmatrix}^T$ denotam os inputs e $\vec{w_{1i}} = \begin{bmatrix}
+w_{1i1} & w_{1i2} & ... & w_{1im} \end{bmatrix}^T$ denotam os pesos ligando os inputs ao i-\'esimo neur\^onio da primeira camada. Seja $\vec{h_1} = \begin{bmatrix}
+h_{11} &
+h_{12} &
+... &
+h_{1 n_1}
+\end{bmatrix}^T$ o vetor contendo todos os outputs dos neur\^onios da primeira camada. Analogamente, analisemos simplificadamente o output $h_{2i}$ do i-\'esimo neur\^onio da segunda camada escondida:
+
+$$h_{2i} = \varphi \big( \vec{w_{2i}}^T \cdot \vec{h_1}  ) = 
+\varphi \bigg(
+\begin{bmatrix}
+w_{2i1} & w_{2i2} & ... & w_{2in_1}
+\end{bmatrix} \cdot 
+\begin{bmatrix}
+\varphi \big(\vec{w_{11}}^T \cdot \vec{x} ) \\
+\varphi \big(\vec{w_{12}}^T \cdot \vec{x} ) \\
+
+...  \\
+\varphi \big(\vec{w_{1n_1}}^T \cdot \vec{x} )
+\end{bmatrix} 
+\bigg) \Rightarrow
+$$
+$$ h_{2i} = \varphi \bigg(
+\sum_{j = 0}^{n_1} \big(w_{2ij}\big) \varphi \big(\vec{w_{1j}}^T \cdot \vec{x} )  
+\bigg) $$
+
+Finalmente, analisando o output $y_i$ de maneira similar:
+
+$$y_i = \varphi \big( \vec{w_{yi}}^T \cdot \vec{h_2}) = 
+\varphi \Bigg( \begin{bmatrix}
+w_{yi1} & w_{yi2} & ... & w_{yin_2}
+\end{bmatrix} \cdot 
+\begin{bmatrix}
+\varphi \bigg(
+\sum_{j = 0}^{n_1} \big(w_{21j}\big)  \varphi \big(\vec{w_{1j}}^T \cdot \vec{x} )\bigg) \\
+\varphi \bigg(
+\sum_{j = 0}^{n_1}\big( w_{22j}\big)  \varphi \big(\vec{w_{1j}}^T \cdot \vec{x} )\bigg) \\
+... \\
+\varphi \bigg(
+\sum_{j = 0}^{n_1}\big( w_{2n_2j}\big)  \varphi \big(\vec{w_{1j}}^T \cdot \vec{x} ) \bigg) \\
+\end{bmatrix} \Bigg) =
+$$
+$$y_i = \varphi \Bigg( \sum_{k=0}^{n_2}\bigg( 
+w_{yik}  \varphi \Big(
+\sum_{j = 0}^{n_1}\big( w_{2kj}\big)  \varphi \big( \vec{x}  \vec{w_{1j}} ) \Big) 
+\bigg) \Bigg)$$
+
+Como podemos perceber, a complexidade da express\~ao relacionando os inputs e outputs aumenta consideravelmente com o aumento de camadas. A determina\c{c}\~ao dos pesos $W$ era um problema em aberto at\'e a d\'ecada de 80, quando foi proposto um algoritmo computacionalmente eficiente para encontra-los: o algoritmo de backpropagation. A implementa\c{c}\~ao realmente eficiente desse algoritmo s\'o foi poss\'ivel recentemente com a evolu\c{c}\~ao de GPUs, cuja capacidade computacional paralela \'e altissima. 
+
+\subsection{Algoritmo de Backpropagation}
+
+O algoritmo de backpropagation \'e um metodo iterativo baseado em derivadas parciais. Explicaremos nessa se\c{c}\~ao o procedimento de maneira simplificada. O algoritmo formula o problema de determina\c{c}\~ao dos pesos como um problema de otimiza\c{c}\~ao, definindo uma vari\'avel de erro $e_{(W_k)}$. Seja $e_{(W_k)}$ uma fun\c{c}\~ao escalar cont\'inua e deriv\'avel dos pesos $W_k$, calculada para todos os exemplos do conjunto de treinamento $C_T$:
+$$e_{(W_k)} = \sum_{c \in C_T} \frac{1}{2} (y_{c} - y_{i(W_k)})^2$$
+
+Ent\~ao, o algoritmo procura pelos pesos que minimizam esse erro de forma iterativa:
+$$W_{k+1} = W_k + \Delta W$$
+
+As hip\'oteses para converg\^encia do algoritmo de backpropagation s\~ao extremamente complexas e n\~ao ser\~ao tratadas nesse momento. Por simplicidade, assuma converg\^encia para algum $W_0$ e considere a k-\'esima itera\c{c}\~ao do algoritmo com fun\c{c}\~ao de erro $e_{(W_k)}$. H\'a duas etapas sequenciais no algoritmo:
+
+Os inputs $\vec{x}$ s\~ao propagados at\'e o output $\vec{y}$ considerando os pesos atuais $W_k$. Todos os outputs $h_1$, $h_2$ e $y$ s\~ao calculados a partir das entradas $\vec{x}$, de acordo com as express\~oes deduzidas anteriormente. Al\'em dos outputs, \'e calculado o erro $e_{(W_k)}$.  Como $e_{(W_k)}$ \'e uma fun\c{c}\~ao cont\'inua e deriv\'avel em rela\c{c}\~ao \`a $W_k$, \'e poss\'ivel fazer uma an\'alise de sensibilidade num\'erica. Especificamente, estamos interessados na varia\c{c}\~ao local $\Delta W$ capaz de provocar um decr\'escimo local no erro $e_{(W_k)}$.
+
+\subsubsection{Backward Pass}
+
+Considere a decomposi\c{c}\~ao em s\'erie de Taylor de uma fun\c{c}\~ao $f_{(x)}$ cont\'inua e deriv\'avel:
+
+$$f_{(x)} \simeq f_{(x_0)} + \frac{ \partial f_{(x_0)} } {\partial x} (x - x_0) + ... +
+\frac{ \partial^n f_{(x_0)} } {\partial x^n} \frac{ (x - x_0)^n } { n! } + ...$$
+
+O backpropagation em sua forma classica prop\~oe a lineariza\c{c}\~ao da fun\c{c}\~ao de erro $e_{(W_k)}$, analisando a primeira componente linear da decomposi\c{c}\~ao de Taylor para o erro $e_{(W_{k+1})}$:
+
+$$e_{(W_{k+1})} \simeq e_{(W_{k})}  \frac{ \partial e_{(W_{k})} } { \partial W_k } (W_{k+1} - W_k)^T
+= e_{(W_{k})} + \frac{ \partial e_{(W_{k})} } { \partial W_k }(\Delta W)^T \Rightarrow$$
+
+$$e_{(W_{k+1})} \simeq e_{(W_{k})} + \begin{bmatrix}
+\frac{ \partial e_{(W_{k})} } { \partial w_{111} } & ...
+& \frac{ \partial e_{(W_{k})} } { \partial w_{ijk} } & ... & \frac{ \partial e_{(W_{k})} } { \partial w_{mn_1n_2} }
+
+\end{bmatrix} \begin{bmatrix}
+\Delta w_{111} \\
+... \\
+\Delta w_{ijk} \\
+... \\
+\Delta w_{mn_1n_2} \\
+
+\end{bmatrix} $$
+
+Assim, podemos perceber que para diminuir o erro $\Delta W = \begin{bmatrix}
+\Delta w_{ijk}
+\end{bmatrix}$ deve ser tal que:
+
+$$ \frac{ \partial e_{(W_{k})} } { \partial W_k }(\Delta W) = \sum_{i,j,k} \frac{ \partial e_{(W_{k})} } { \partial w_{ijk} } \Delta w_{ijk} < 0  \Rightarrow $$
+
+Seja $\Delta W$ na dire\c{c}\~ao contr\'aria a $ \frac{ \partial e_{(W_{k})} } { \partial W_k }$:
+
+$$\Delta W = -  \frac{ \partial e_{(W_{k})} } { \partial W_k } \Rightarrow 
+\frac{ \partial e_{(W_{k})} } { \partial W_k }(\Delta W) = 
+\sum_{i,j,k} \frac{ \partial e_{(W_{k})} } { \partial w_{ijk} } \Big( - \frac{ \partial e_{(W_{k})} } { \partial w_{ijk} } \Big ) \Rightarrow $$
+
+$$ e_{(\Delta W)} \simeq e_{(W_k)}
+- \sum_{i,j,k} \frac{ \partial e_{(W_{k})} } { \partial w_{ijk} } \frac{ \partial e_{(W_{k})} } { \partial w_{ijk} }
+=
+e_{(W_k)}
+- \sum_{i,j,k} \Big( \frac{ \partial e_{(W_{k})} } { \partial w_{ijk} } \Big)^2 \Rightarrow
+$$
+
+$$e_{(\Delta W)} = e_{(W_k)}
+- \bigg|\bigg|  \frac{ \partial e_{(W_{k})} } { \partial W_k } \bigg|\bigg|^2 < e_{(W_k)}$$
+
+Ou seja, definindo $\Delta W$ no sentido contr\'ario de $ \frac{ \partial e_{(W_{k})} } { \partial W_k }$, garantimos um decr\'escimo de primeira ordem negativo no erro. Em particular, definindo: 
+$$\Delta W = - \eta  \frac{ \partial e_{(W_{k})} } { \partial W_k }  $$
+
+Podemos definir o tamanho do decr\'escimo no erro ap\'os cada itera\c{c}\~ao. Esse par\^ametro $\eta$ \'e comumente chamado de learning rate (taxa de aprendizado) na comunidade cient\'ifica. Pode-se calcular $ \frac{ \partial e_{(W_{k})} } { \partial W_k }$ utilizando teoria de derivadas parciais em fun\c{c}\~ao da topologia utilizada na rede ("regra da cadeia").
+
+Note que nessa formula\c{c}\~ao ignoramos os efeitos superiores \`a primeira ordem (resultantes de derivadas de ordens superiores). Quanto menor o learning rate $\eta$, menores as varia\c{c}\~oes $\Delta W$. Consequentemente, menores s\~ao os efeitos superiores \`a primeira ordem e portanto melhor \'e a aproxima\c{c}\~ao utilizada. Vale ressaltar que, embora n\~ao apresentado nessa se\c{c}\~ao, j\'a existem diversas varia\c{c}\~oes do algoritmo de backpropagation que consideram efeitos superiores \`a primeira ordem. 
+\chapter{Deep Learning}
+
+\chapter{Redes Neurais Convolucionais}
+
+\section{Redes Convolucionais}
+Redes convolucionais figuram entre as arquiteturas conhecidas na literatura como pertencentes à uma subárea particular de Redes Neurais , conhecida como \textit{Deep Learning}. \textit{Deep Learning} consiste em um grupo  de topologias de redes neurais, o qual tem como grande característica a presença de muitas camadas, apresentando grande aplicação para reconhecimento de padrões. Outra forte característica deste grupo, se encontra no grande espaço amostral exigido para o treinamento das redes, reforçando os obstáculos já conhecidos em outras topologias relacionados à complexidade computacional \cite{ref1}. Para tornar viável o aprofundamento de camadas, considerando um espaço de treino significativo, fez-se necessário o estudo de implementações alternativas de redes neurais, revolucionando as arquiteturas convencionais. Neste contexto, nascem as redes convolucionais, as quais tem o compromisso de lidar com grande complexidade computacional, não só pelas presença de várias camadas, mas por serem utilizadas majoritariamente para o reconhecimento de imagens \cite{ref3}.
+
+Imagens digitais nada mais são que conjuntos de dados, os quais representam combinações de cores dos \textit{pixels} que as compõem. Uma imagem digital, abstraindo para sua representação numérica discretizada em cores, consiste em uma grande matriz de diversas dimensões, sendo usualmente representada por um volume de dados. Pode-se facilmente compreender a magnitude do esforço computacional exigido para operações de manipulação de imagens, sendo algumas delas: aplicações de filtros; identificação de bordas; transformadas e outras. De nada supreende o fato de que fabricantes de \textit{hardware} vem desenvolvendo alternativas dedicadas ao processamento de imagens, como as GPU \textit{(Graphical Processing Unit)}, as quais possuem uma arquitetura que permite grande poder de paralelização computacional.
+
+Neste cenário, torna-se claro o desafio das redes convolucionais em treinar seus neurônios para reconhecimento de imagens, considerando o volume intenso de dados que elas manipulam. Porém, talvez equiparável ao tamanho do desafio, seja também o investimento para vencê-lo, já que o poder de reconhecimento visual por um sistema inteligente, possui aplicação nas mais diversas indústrias. De automação industrial à segurança, com pouco esforço mental é fácil imaginar uma possível implementação de reconhecimento de imagens interessante para absolutamente qualquer indústria. Não obstante, o pesado investimento \cite{ref4} em forma de pesquisas e competições acelerou a viabilidade das redes convolucionais quando utilizadas para o propósito em questão. Como grande representativo deste movimento, pode-se citar a competição \href{http://www.image-net.org/challenges/LSVRC/}{\textit{ImageNet}}, que reúne grandes pólos de tecnologia (iniciativa privada e centros de pesquisa) em prol do desenvolvimento desta área. Entre os notórios participantes desta competição, destacam-se equipes da Microsoft Google, Intel e outras.
+
+Externado o seu posicionamento na sociedade e sua aplicação, faz-se necessário um estudo de sua topologia para entender como redes convolucionais funcionam perante estes desafios.
+
+\section{Topologia das Redes Convolucionais}
+Para melhor entender sua topologia, é de interesse do leitor conhecer de forma macro como uma rede convolucional permite a segmentação de imagens. De forma resumida, a rede convolucional está de forma insistente à procura de representações características de imagens que permitam à ela categorizar a imagem em questão. Esta procura é feita a partir da aplicação de filtros, os quais acusam quando uma representação característica em especial é encontrada na imagem. Como exemplo, pode-se ver na figura abaixo os filtros utilizados para a identificação de uma face e de um carro, aplicados pelas camadas de uma rede convolucional.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.8\textwidth]{imagens/filtros}
+	\caption{Filtros de uma rede convolucional}
+	\label{filtros}
+\end{figure} 
+
+A princípio, tendo apenas a figura \ref{filtros} como referência de filtros utilizados pelas camadas comvolucionais, torna-se difícil entender a praticidade e a real justificativa desta rede, já que olhos, narizes e bocas são obviamente representações características de uma face. Porém, esta primeira impressão é rapidamente questionada ao analisar a figura \ref{filtros2}, a qual apresenta filtros que possuem o mesmo propósito.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.5\textwidth]{imagens/filtros2}
+	\caption{Filtros de uma rede convolucional. Fonte: \href{www.cs.toronto.edu}{www.cs.toronto.edu}.}
+	\label{filtros2}
+\end{figure} 
+
+Nota-se que estes filtros carregam quase nenhuma semelhança aparente com alguma imagem especial, e visualmente não proporcionam qualquer informação. Este filtros, os quais são frutos do treino da rede, mostram o verdadeiro poder das redes convolucionais, pois um ser humano provavelmente não diria que este filtros tem capacidade alguma de segmentar entre dois ou mais grupos de imagens distintas. O poder de abstração dos filtros em uma rede convolucional vai além da capacidade de segmentação visual do ser humano, sendo então muito mais eficiente que qualquer algoritmo determinístico que possamos desenvolver racionalmente.
+
+A aplicação dos filtros é realizada nas camadas de convolução, sendo esta a principal camada em uma rede convolucional. As demais serão descritas logo a seguir:
+
+\subsection{Camada Convolucional}
+Como explicado anteriormente, a camada convolucional aplica filtros na imagem à procura de sua representação equivalente. Esta aplicação pode ser traduziada matematicamente como a convolução do filtro ao longo da imagem. A figura \ref{camadaconvolucional} passa a sensação que o filtro desliza pela imagem \cite{ref3}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.4\textwidth]{imagens/camadaconvolucional}
+	\caption{Representação da camada convolucional aplicando filtros em uma imagem. Fonte: \cite{ref3}.}
+	\label{camadaconvolucional}
+\end{figure} 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.8\textwidth]{imagens/camadaconvolucional2}
+	\caption{Desenho que retrata a camada convolucional e a disposição de seus neurônios. Fonte: \cite{ref3}.}
+	\label{camadaconvolucional2}
+\end{figure} 
+
+Na figura \ref{camadaconvolucional}, o volume rosa representa a imagem alimentada na rede; o volume azul corresponde aos neurônios que estão aplicando o filtro; e a projeção do volume azul corresponde ao filtro sendo aplicado na imagem. Os filtros tem sua representação numérica nos pesos dos neurônios, os quais são calculados durante o treino da rede. Como o mesmo filtro é aplicado ao longo da imagem, e os filtros são os pesos dos neurônios, necessariamente os neurônios que compartilham o mesmo eixo da largura e altura na figura \ref{camadaconvolucional2}, compartilham também os mesmos pesos. Portanto, o número de filtros diferentes aplicados à imagem está relacionado com a quantidade de neurônios no eixo da profundidade (vide \ref{camadaconvolucional2}). A saída dos neurônios quantificam quão próximo uma porção específica da imagem se assemelhou com o fitro aplicado, sendo esta quantificação convencionada como valor de ativação.
+
+O tamanho do filtro, em quantos \textit{pixels} é deslocado o filtro, e outras características importantes da rede convolucional são determinadas pelos seus hiperparâmetros, os quais estão descritos a seguir:
+\begin{enumerate}
+	\item F = Tamanho do filtro (FxF).
+	\item S = \textit{Stride}. Este hiperparâmetro corresponde ao deslocamento do filtro ao longo da imagem, medido em \textit{pixels}.
+	\item K = Quantidade de filtros. Corresponde à quantidade de neurônios na camada convolucional.
+	\item W = Resolução da Imagem (WxW).
+	\item P = \textit{Zero Padding}. Corresponde ao número de zeros adicionados na periferia da imagem. Este hiperparâmetro tem como principal função adequar o tamanho da imagem com o F e S escolhidos.
+\end{enumerate}
+
+A partir destes hiperparâmetros, considerando a aplicação do filtro já detalhada anteriormente, os dados de saída possuem resolução (ou área, caso uma notação geométrica esteja em vigor) que pode ser descrita pela fórmula:
+
+\begin{equation}
+	\textrm{Resolução} = \frac{W - F + 2P}{S} + 1 
+	\label{resolução}
+\end{equation}
+
+Pode-se notar que fixando os hiperparâmetros W, F e S, faz-se necessário uma escolha de P para que a divisão resulte em um número inteiro. A figura \ref{exemplo_conv} mostra um exemplo em que W = 5, F = 3, P = 1 e S = 2:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.8\textwidth]{imagens/gif_conv}
+	\caption{Exemplo de convolução e hiperparâmetros de uma rede convolucional. Fonte: \cite{ref3}.}
+	\label{exemplo_conv}
+\end{figure} 
+
+
+Não é apenas de camadas convolucionais que uma rede convolucional é feita, outras camadas também realizam operações interessantes que auxiliam na classificação de imagens:
+
+\subsection{Camada ReLUs}
+Esta camada tem uma função muito simples dentro da rede: Rejeitar os baixos valores de ativação, desprezando então as convoluções entre filtro e porção da imagem que não trouxeram informação, e enfatizar os casos contrários. Em muitos casos, as camadas ReLUs aplicam nas saídas do neurônios da camada convolucional, a simples relação matemática:
+\begin{equation}
+	f(x) = max(0,x)
+	\label{eq_relus}
+\end{equation}
+Assim, os valores negativos de ativação são desprezados, ou seja, são zerados, passando apenas os que acusaram alguma semelhança entre o filtro e a porção da imagem analisada. Em alguns casos, implementa-se uma função matemática alternativa, conhecidada como \textit{leaky}. Ela permite exatamente o que sua tradução em português sugere, um vazamento de valores inferiores à \(0\). Esta implementação é usada já que a fórmula convencional acaba ocasionalmente neutralizando uma grande sequência de neurônios, já que os valores zerados vão alimentar outras camadas, inativando outros neurônios no caminho. A fórmula alternativa se encontra a seguir:
+
+\[
+f(x)= 
+\begin{cases}
+x,& \text{if } x > 0  \\      
+0.01x,& \text{c.c.}
+\end{cases}
+\]
+
+Uma camada ReLU pode ser vista em ação na figura \ref{relus}:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.8\textwidth]{imagens/relus}
+	\caption{Representação gráfica do funcionamento de uma camada ReLUs em uma rede convolucional. Fonte: \href{https://www.youtube.com/watch?v=FmpDIaiMIeA&t=943s}{https://www.youtube.com/watch?v=FmpDIaiMIeA&t=943s}.}
+	\label{relus}
+\end{figure} 
+
+\subsection{Pooling}
+Esta camada tem como função diminuir o tamanho da imagem ao longo do seu aprofundamento na rede. O seu funcionamento pode ser melhor entendido com a figura \ref{pooling}:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.8\textwidth]{imagens/pooling}
+	\caption{Representação gráfica do funcionamento de uma camada de \textit{Pooling} em uma rede convolucional. Fonte: \cite{ref3}}
+	\label{pooling}
+\end{figure} 
+
+Como pode-se ver na figura \ref{pooling}, os valores de ativação menos significativos foram filtrados, e os mais significativos foram rearranjados em uma matriz de resolução inferior. Seu comportamento tem um compromisso parecido com a ReLUs, sendo a associação das duas uma boa estratégia para identificar as ativações que provavelmente carregam informações valiosas na categorização da imagem.
+
+\subsection{MLP - \textit{Multilayer Perceptron}}
+Com a alternância sistemática das camadas anteriores, ou seja, gradualmente diminuindo o volume dos dados de entrada, aplicando filtros e coletando seus valores de ativação significativos, ao final das diversas camadas, resta-se apenas um vetor. Este vetor corresponde à uma votação ponderada dos grupos os quais se deseja classificar as imagens. Portanto, se uma classificação está sendo realizada para separar veículos de trasnporte, o vetor de votação pode estar sugerindo que a imagem alimentada na rede é provavelmente um carro. Para acontecer esta decisão, a camada final de uma rede convolucional consiste geralmente em uma rede MLP (\textit{MultiLayer Perceptron}) convencional, em que cada neurônio se conecta com todos os demais na camada seguinte. A figura \ref{topologiaMLP} relembra o que seria uma topologia MLP:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.4\textwidth]{imagens/MLP1}
+	\caption{Topologia de uma rede MLP. Fonte: \cite{ref3}.}
+	\label{topologiaMLP}
+\end{figure} 
+
+Com todas as camadas descritas, pode-se entender finalmente como funcionaria uma implementação típica de uma rede convolucional para a classificação de imagens. A figura \ref{final} mostra uma rede convolucional típica em ação:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.8\textwidth]{imagens/final}
+	\caption{Aplicação típica de uma rede convolucional para a classificação de imagens. Fonte: \cite{ref3}.}
+	\label{final}
+\end{figure} 
+
+
 
 \chapter{Visualização do reconhecimento em uma Rede Neural}
 \section{Base de dados: MNIST}
