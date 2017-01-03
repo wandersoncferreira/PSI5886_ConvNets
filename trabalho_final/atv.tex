@@ -537,11 +537,10 @@ Considere a seguinte rede neural:
 
 \begin{center}
 	\includegraphics[scale=0.8]{nnetsimples.png}
-	\captionof{figure}{ Rede neural simples \cite{livronnet} }
+	\captionof{figure}{ Rede neural simples. Retirado de \cite{livronnet2} }
 \end{center} 
 
 Seja $a_i$ o output do i-\'esimo neur\^onio do modelo. Ou seja:
-
 
 $$a = \begin{cases}
 a_1 = \sigma\big( w_1 x + b_1\big) = \sigma( z_1 ) \\
@@ -594,6 +593,7 @@ Para exemplificar essa situação, considere uma rede com 4 camadas escondidas c
 
 \begin{center}
 	\includegraphics[scale=0.8]{vanishinggradient.png}
+	\captionof{figure}{ Norma do vetor de pesos durante o treinamento. Retirada de \cite{livronnet2}}
 \end{center}
 
 No experimento podemos perceber que a camada mais próxima dos outputs (hidden layer 4) tem seus pesos variados com mais intensidade durante todo o treinamento, desde o começo do algoritmo de backpropagation. O método de inicialização clássico para uma rede neural MLP consiste na utilização de pesos iniciais aleatórios, vindos de uma mesma distribuição. Por exemplo, uma distribuição gaussiana com média nula e desvio padrão unitário. Nesse caso, os pesos não serão tais a compensar os termos $\sigma^{'}(z)$. Consequentemente, temos uma inicialização com $\frac{\partial C}{\partial w_1} < \frac{\partial C}{\partial w_2} < \frac{\partial C}{\partial w_3} < ... $ que se mantêm durante todo o treinamento.
@@ -1157,6 +1157,23 @@ d
 % Referências bibliográficas
 % ----------------------------------------------------------
 \bibliography{bibliografia}
+
+
+
+\begin{thebibliography}{1}
+	
+\bibitem{livronnet}
+Simon Haykin - \emph{Neural Networks and Learning Machines}, Pearson Education Inc. 3rd edition, 2009
+\bibitem{ref1} H. Simon, \textit{Redes Neurais: princípios e práticas}, 2.ed, Porto Alegre: Bookman 2001.
+\bibitem{ref2} J. Hertz et al, \textit{Introduction to the Theory of Neural Computation}, A Lecture Notes Volume in the Santa Fe Institute Studies in the Sciences of Complexity, Addison-Wesley Publishing Company, California, 1993.
+\bibitem{ref3} J. Johnson et al \textit{CS231n: Convolutional Neural Networks for Visual Recognition}, Lecture Notes \url{http://cs231n.stanford.edu/}.
+\bibitem{ref4} Investments in Image Recognition \textit{Index}, \url{https://index.co/market/image-recognition/investments}.
+\bibitem{dropout} G.E. Hinton et al, \textit{Improving neural networks by preventing co-adaptation of feature detectors}, 2012.
+\bibitem{regularization} A. Krogh, \textit{A Simple Weight Decay Can Improve Generalization}
+
+\end{thebibliography}
+
+
 
 % ----------------------------------------------------------
 % Glossário
