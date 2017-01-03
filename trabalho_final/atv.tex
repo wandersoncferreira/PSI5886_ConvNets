@@ -321,11 +321,11 @@
 \chapter[Introdução]{Introdução}
 aew
 
-\chapter{Multi-Layer Perceptrons}
+\chapter{Multi-Layer Perceptrons e Deep Learning}
 
 
 \section{Perceptron de Rosenblatt}
-O perceptron de Rosenblatt é uma unidade de processamento baseada em neurônios biológicos. Mimetizando o funcionamento do cérebro de seres vivos, implementa um classificador. Esse perceptron foi a base do desenvolvimento de toda teoria de redes neurais. Analisemos nessa seção esse perceptron, sob um ponto de vista matemático, para melhor familiarização do leitor com o conteúdo das próximas seçõesm. Considere uma variável de saída $y \in \mathbb{R}$ para entradas $\vec{x} \in \mathbb{R}^m$:
+O perceptron de Rosenblatt é uma unidade de processamento baseada em neurônios biológicos. Mimetizando o funcionamento do cérebro de seres vivos, implementa um classificador. Esse perceptron foi a base do desenvolvimento de toda teoria de redes neurais. Analisemos nessa seção esse perceptron, sob um ponto de vista matemático, para melhor familiarização do leitor com o conteúdo das próximas seções. Considere uma variável de saída $y \in \mathbb{R}$ para entradas $\vec{x} \in \mathbb{R}^m$:
 
 \begin{center}
 	\includegraphics[scale=1]{rosenblattperceptron.png}
@@ -396,7 +396,7 @@ sig(x) = \frac{ 1 } {1 + e^{-x}} \\
 
 \end{cases} $$
 
-Tais caracter\'isticas s\~ao as principais respons\'aveis pelos excelentes resultados recentes em aplica\c{c}\~oes de MLP, como tamb\'em s\~ao os principais motivos pela dificuldade no entendimento do comportamento desse tipo de rede neural. A presen\c{c}a de tantas n\~ao linearidades distribuidas combinadas com a alta conectividade entre neur\^onios faz com que a an\'alise te\'orica seja extremamente complexa. Al\'em disso, o uso de camadas escondidas torna o processo de aprendizado extremamente dificil de se visualizar.
+A presen\c{c}a de diversas n\~ao linearidades distribuidas combinadas com a alta conectividade entre neur\^onios faz com que a an\'alise te\'orica desse tipo de rede seja extremamente complexa. Principalmente, o aumento no número de camadas escondidas torna a visualização do processo de aprendizado difícil.
 
 Considere o diagrama a seguir de uma MLP com inputs $\vec{x} \in \mathbb{R}^m$ e outputs $\vec{y} \in \mathbb{R}^3$. Sejam duas camadas escondidas: $W_1$ com $n_1$ outputs $h_1 \in \mathbb{R}^{n_1}$ e $W_2$ com $n_2$ outputs $h_2 \in \mathbb{R}^{n_2}$.
 
@@ -407,7 +407,7 @@ Considere o diagrama a seguir de uma MLP com inputs $\vec{x} \in \mathbb{R}^m$ e
 
 Seja $w_{nij}$ o peso conectando o i-\'esimo neur\^onio da n-\'esima camada ao j-\'esimo output da camada anterior. Analisemos o output $h_{1i}$ do i-\'esimo neur\^onio da primeira camada escondida.  Similarmente ao perceptron de Rosenblatt, considerando uma fun\c{c}\~ao de ativa\c{c}\~ao $\varphi(.)$, temos:
 
-$$h_{1i} =  \varphi \bigg( \sum_{j=0}^m w_{1ij} x_j  \bigg) = \varphi \big(\vec{w_{1i}}^T \cdot \vec{x} ) $$
+$$h_{1i} =  \varphi \bigg( \sum_{j=0}^m w_{1ij} x_j  \bigg) = \varphi \big(\vec{w_{1i}}^T \cdot \vec{x} \big) $$
 
 Onde $\vec{x} = \begin{bmatrix}
 x_1 & x_2 & ... & x_m
@@ -525,7 +525,7 @@ Podemos definir o tamanho do decr\'escimo no erro ap\'os cada itera\c{c}\~ao. Es
 
 Pode-se calcular $ \frac{ \partial e_{(W_{k})} } { \partial W_k }$ através de derivadas parciais em fun\c{c}\~ao da topologia utilizada na rede (regra da cadeia). A seguir deduziremos as expressões das derivadas parciais para topologias profundas com funções de ativações sigmoidais.
 
-\section{MLP e sigmoides}
+\section{MLPs e Sigmoides}
 
 Considere a seguinte rede neural:
 
@@ -594,19 +594,36 @@ No experimento podemos perceber que a camada mais próxima dos outputs (hidden l
 
 Como consequência dessa diferença nas velocidades de aprendizado entre cada camada, não há a exploração ampla de todas as possibilidades no espaço de pesos possíveis. Em particular, os pesos pertencentes à camadas mais próximas dos inputs não são explorados com tanta ênfase quanto as últimas camadas. Esse problema se pronuncia consideravelmente para redes neurais com muitas camadas escondidas - usualmente chamadas de redes neurais profundas (\textit{deep neural networks}).
 
-Com o passar dos anos, pesquisadores apresentaram técnicas para contornar esse e outros problemas no treinamento de redes profundas desse tipo. Nesse contexto, o Deep Learning pode ser estudado como um conjunto de técnicas para melhorar o treinamento dessas redes profundas. Not No próximo capitulo indicaremos algumas técnicas já consolidadas nesse meio científico.
-
-\chapter{Técnicas de Deep Learning}
-
-\section{Inicialização dos pesos}
+Com o passar dos anos, pesquisadores apresentaram técnicas para contornar esse e outros problemas no treinamento de redes profundas desse tipo. Nesse contexto, o Deep Learning pode ser estudado como um conjunto de técnicas para melhorar o treinamento dessas redes profundas. No próximo capitulo indicaremos duas das principais técnicas já consolidadas nesse meio.
 
 \section{Regularização}
+Introduz um termo extra $C_r$ na função de perda original, penalizando convergências inadequadas no treinamento.
+$$ C = C_{or} + C_r$$
+
+A principal regularização utilizada é a L2, também conhecida como Weight Decay. Todos os pesos da rede neural são concatenados em um vetor e, então, o termo acrescido na função de perda é a norma euclidiana ao quadrado escalada por um fator $\lambda$:
+
+$$ C_r = \frac{1}{2} \lambda || w ||^2 $$
+
+O treinamento irá minimizar as duas partes da função de perda $C$: $C_{or}$, referente à diminuir o erro de classificação; e $C_r$, referente a diminuir o tamanho da norma de $w$. Assim, essa regularização penaliza os pesos para que não adquiram valores muitos altos durante o treinamento. Dessa maneira, os neurônios não operam em regiões de saturação. Dependendo do valor de $\lambda$, pode-se aumentar ou diminuir esse efeito. Juntamente com o Learning Rate $\eta$, esse parâmetro $\lambda$ é \textit{tunado} de acordo com as especifidades do conjunto de dados para um treinamento otimizado.
+
+Considere a seguinte figura, onde os pontos representam dados pertencentes à duas classes (verde e vermelho) e a região hachurada com as respectivas cores indica as regiões de classificação da rede após o treinamento:
+
+\begin{center}
+	\includegraphics[scale=0.8]{regL2.png}
+\end{center}
+
+ Para $\lambda$ pequeno, equivalente a situação sem regularização, podemos perceber que o treinamento converge para uma classificação perfeita. Entretanto, tal fronteira de separação das classes é abrupta, característico de situações de overfitting. Ao aumentar $\lambda$, os pesos da rede ficam menores e consequentemente os neurônios ficam em regiões mais lineares.
 
 \section{Dropout}
 
+Introduzido por Hinton et al \cite{dropout}, pode ser interpretado simplificadamente como uma técnica para evitar o problema de overfitting. Em cada iteração de treino, há uma probabilidade p para cada neurônio estar ativo (pesos w mantidos) e (1-p) de estar inativo (pesos w zerados). 
 
+\begin{center}
+	\includegraphics[scale=0.8]{dropout.png}
+\end{center}
 
-\section{Funções de ativação / building blocks}
+Essa técnica ajuda a reduzir a co-adaptação de neurônios, forçando-os a aprenderem pesos baseados em diferentes subsets aleatórios de outros neurônios. Hinton argumenta que essa técnica é análoga ao treinamento de diversas redes em paralelo, já que em cada iteração do treino a rede neural é diferente já que os neurônios ativos serão provavelmente diferentes. Ainda, melhora a capacidade de generalização para situações de oclusão de características.
+
 
 \chapter{Redes Neurais Convolucionais}
 
