@@ -325,7 +325,7 @@ aew
 
 
 \section{Perceptron de Rosenblatt}
-O perceptron de Rosenblatt foi uma das primeiras unidades de processamento baseada em neurônios biológicos, implementando classificadores mimetizando o funcionamento do cérebro de seres vivos. Esse perceptron foi a base do desenvolvimento de toda teoria de redes neurais. Analisemos nessa seção esse perceptron, sob um ponto de vista matemático. Considere uma variável de saída $y \in \mathbb{R}$ para entradas $\vec{x} \in \mathbb{R}^m$:
+O perceptron de Rosenblatt é uma unidade de processamento baseada em neurônios biológicos. Mimetizando o funcionamento do cérebro de seres vivos, implementa um classificador. Esse perceptron foi a base do desenvolvimento de toda teoria de redes neurais. Analisemos nessa seção esse perceptron, sob um ponto de vista matemático, para melhor familiarização do leitor com o conteúdo das próximas seçõesm. Considere uma variável de saída $y \in \mathbb{R}$ para entradas $\vec{x} \in \mathbb{R}^m$:
 
 \begin{center}
 	\includegraphics[scale=1]{rosenblattperceptron.png}
@@ -358,14 +358,14 @@ w_m
 \end{bmatrix} \Rightarrow
 y = sgn\bigg( \big(\vec{w}^T\cdot \vec{x}\big) + b \bigg)$$
 
-Assim, o output $y$ pode ser associado à duas classes $\mathcal{C}_1$ e $\mathcal{C}_2$, para os respectivos valores $+1$ e $-1$. Como a opera\c{c}\~ao envolvendo os inputs \'e puramente linear, h\'a uma correspond\^encia geom\'etrica interessante facilmente visualiz\'avel para duas dimens\~oes. Considerando um conjunto de dados com duas dimens\~oes, cada input $(x_1,x_2)$ pode ser plotado no $\mathbb{R}^2$. Assim, interpretando os par\^ametros $(\vec{w},b)$ do sistema como vetores:
+Assim, o output $y$ pode ser associado à duas classes $\mathcal{C}_1$ e $\mathcal{C}_2$, cada uma associada a um valor de output $+1$ ou $-1$. Analisemos o argumento $z = \big(\vec{w}^T\cdot \vec{x}\big) + b$ para um conjunto de dados com duas dimens\~oes, plotando cada input $(x_1,x_2)$ no $\mathbb{R}^2$:
 
 \begin{center}
 	\includegraphics[scale=1]{perceptron2d.png}
 	\captionof{figure}{ Interpreta\c{c}\~ao geom\'etrica para duas dimens\~oes \cite{livronnet} }
 \end{center} 
 
-Os pesos $(\vec{w},b)$ separam o espa\c{c}o de inputs em duas regi\~oes correspondentes a cada classe $\mathcal{C}_1$ e $\mathcal{C}_2$. Dado um conjunto $D$ de $N$ dados:
+Podemos perceber que o $\mathbb{R}^2$ é dividido em duas regiões $\mathcal{C}_1$ e $\mathcal{C}_2$ de acordo com o sinal da expressão $z = w_1x_1 + w_2x_2 + b$. Assim, os pesos $(\vec{w},b)$ definem duas regiões   separam o espa\c{c}o de inputs em duas regi\~oes correspondentes a cada classe $\mathcal{C}_1$ e $\mathcal{C}_2$. Dado um conjunto $D$ de $N$ dados:
 $$D = \begin{bmatrix}
 d_1 \\
 d_2 \\
@@ -460,7 +460,7 @@ w_{yik}  \varphi \Big(
 
 Como podemos perceber, a complexidade da express\~ao relacionando os inputs e outputs aumenta consideravelmente com o aumento de camadas. Para a determina\c{c}\~ao dos pesos $W$, foi proposto na década de 80 o algoritmo de backpropagation em sua forma clássica.
 
-\subsection{Algoritmo de Backpropagation}
+\section{Algoritmo de Backpropagation}
 
 O algoritmo de backpropagation \'e um metodo iterativo baseado em derivadas parciais. Explicaremos nessa se\c{c}\~ao o procedimento de maneira simplificada. O algoritmo formula o problema de determina\c{c}\~ao dos pesos como um problema de otimiza\c{c}\~ao, definindo uma vari\'avel de erro $e_{(W_k)}$. Considere $e_{(W_k)}$ como o erro RMS. Sejam $C_T$ o conjunto de treinamento, cada exemplo $c \in C_T$ e seu correspondente output de referência $y_c$, e $y_{i(W_k)}$ a previsão da rede para os pesos $W_k$:
 $$e_{(W_k)} = \sum_{c \in C_T} \frac{1}{2} (y_{c} - y_{i(W_k)})^2$$
@@ -525,7 +525,7 @@ Podemos definir o tamanho do decr\'escimo no erro ap\'os cada itera\c{c}\~ao. Es
 
 Pode-se calcular $ \frac{ \partial e_{(W_{k})} } { \partial W_k }$ através de derivadas parciais em fun\c{c}\~ao da topologia utilizada na rede (regra da cadeia). A seguir deduziremos as expressões das derivadas parciais para topologias profundas com funções de ativações sigmoidais.
 
-\subsection{Multi-layer Perceptrons com funções de ativação sigmoidais}
+\section{MLP e sigmoides}
 
 Considere a seguinte rede neural:
 
@@ -592,9 +592,21 @@ Para exemplificar essa situação, considere uma rede com 4 camadas escondidas c
 
 No experimento podemos perceber que a camada mais próxima dos outputs (hidden layer 4) tem seus pesos variados com mais intensidade durante todo o treinamento, desde o começo do algoritmo de backpropagation. O método de inicialização clássico para uma rede neural MLP consiste na utilização de pesos iniciais aleatórios, vindos de uma mesma distribuição. Por exemplo, uma distribuição gaussiana com média nula e desvio padrão unitário. Nesse caso, os pesos não serão tais a compensar os termos $\sigma^{'}(z)$. Consequentemente, temos uma inicialização com $\frac{\partial C}{\partial w_1} < \frac{\partial C}{\partial w_2} < \frac{\partial C}{\partial w_3} < ... $ que se mantêm durante todo o treinamento.
 
-Diversos pesquisadores se depararam com esse e outros problemas no treinamento de redes neurais com diversas camadas escondidas (comumente chamadas de profundas - deep). Em 2005 e 2006, surgem os primeiros algoritmos para inicialização de pesos resultando em treinamento eficiente para arquiteturas profundas. Em 2010, Alex Krizhevsky et al ganha uma das mais importantes competições de classificação com uma rede neural profunda com funções de ativação adequadas. Nesse contexto, surge o Deep Learning como conjunto de técnicas para melhorar o treinamento de redes profundas. No próximo capitulo indicaremos algumas técnicas já consolidadas no meio científico.
+Como consequência dessa diferença nas velocidades de aprendizado entre cada camada, não há a exploração ampla de todas as possibilidades no espaço de pesos possíveis. Em particular, os pesos pertencentes à camadas mais próximas dos inputs não são explorados com tanta ênfase quanto as últimas camadas. Esse problema se pronuncia consideravelmente para redes neurais com muitas camadas escondidas - usualmente chamadas de redes neurais profundas (\textit{deep neural networks}).
 
-\chapter{Deep Learning}
+Com o passar dos anos, pesquisadores apresentaram técnicas para contornar esse e outros problemas no treinamento de redes profundas desse tipo. Nesse contexto, o Deep Learning pode ser estudado como um conjunto de técnicas para melhorar o treinamento dessas redes profundas. Not No próximo capitulo indicaremos algumas técnicas já consolidadas nesse meio científico.
+
+\chapter{Técnicas de Deep Learning}
+
+\section{Inicialização dos pesos}
+
+\section{Regularização}
+
+\section{Dropout}
+
+
+
+\section{Funções de ativação / building blocks}
 
 \chapter{Redes Neurais Convolucionais}
 
