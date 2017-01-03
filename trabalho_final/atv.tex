@@ -898,76 +898,14 @@ Os principios que guiam a biblioteca são:
 \end{figure}
 
 \par A implementação da rede descrita pela imagem \ref{tikz:mnist_cnn16} é exibida no código abaixo:
-\begin{lstlisting}
-from keras.layers import Activation
-from keras.layers.convolutional import Convolution2D, MaxPooling2D
-from keras.layers import Flatten, Dense
-from keras.layers.core import Dropout
 
-dropout_rate=0.3
-
-modelo = Sequential()
-
-def keras_add(m,op):
-	m.add(op)
-	l = m.layers[-1]
-
-keras_add(modelo,Convolution2D(32, 2, 2,
-	border_mode='valid', input_shape=(28, 28, 1)))
-keras_add(modelo,Activation('relu'))
-
-keras_add(modelo,Convolution2D(8, 12, 12))
-keras_add(modelo,Activation('relu'))
-
-keras_add(modelo,Convolution2D(16, 8, 8))
-keras_add(modelo,Activation('relu'))
-
-keras_add(modelo,MaxPooling2D(pool_size=(2, 2)))
-
-keras_add(modelo,Convolution2D(32, 2, 2))
-keras_add(modelo,Activation('relu'))
-
-keras_add(modelo,Flatten())
-keras_add(modelo,Dense(100))
-keras_add(modelo,Dropout(dropout_rate))
-keras_add(modelo,Activation('relu'))
-
-keras_add(modelo,Dense(numero_classes))
-keras_add(modelo,Dropout(dropout_rate))
-keras_add(modelo,Activation('softmax'))
-\end{lstlisting}
+\lstinputlisting[language=Python, firstline=0, lastline=25, basicstyle=\ttfamily\scriptsize]{cnn2.py}
 
 \par O objetivo das camadas convolucionais com ativação no início dessa rede é de encontrar características dos números e reduzir parcialmente o tamanho da imagem inicial antes do primeiro \textit{pooling}. Para melhor compreensão dos efeitos da convolução nas imagens foram utilizados em cada camada convolucional filtros dos tamanhos: 32 filtros de 2x2, 8 filtros de 12x12, 16 filtros de 8x8 e 32 filtros de 2x2.
 
 \par A visualização dos filtros obtidos após o treinamento foi obtida da seguinte forma:
 
-\begin{lstlisting}
-img = np.zeros((28,28))
-for a in xrange(28):
-  for b in xrange(28):
-    img[a][b] = X_treino[0][a,b]
-    for i in xrange(len(modelo.layers)):
-      m0 = modelo.layers[i]
-      name = m0.name
-      if "convolution" not in name:
-        continue    
-      ws = m0.get_weights()
-
-      flt = np.zeros((np.shape(ws[0])[0],np.shape(ws[0])[1]))
-      fig=plt.figure(figsize=(8,8))
-      for oz in xrange(np.shape(ws[0])[2]):
-        for z in xrange(np.shape(ws[0])[3]):
-          ax = fig.add_subplot(6, 6, z+1)
-          sa = np.shape(ws[0])[0]
-          sb = np.shape(ws[0])[1]
-          for a in xrange(sa):
-            for b in xrange(sb):
-              flt[a][b] = ws[0][a,b,oz,z]
-              plt.xticks(np.array([]))
-              plt.yticks(np.array([]))
-              plt.tight_layout()        
-              ax.imshow(flt,interpolation='nearest', cmap=plt.cm.gray) 
-\end{lstlisting}
+\lstinputlisting[language=Python, firstline=0, lastline=25, basicstyle=\ttfamily\scriptsize]{fig.py}
 
 
 \par Os filtros descritos acima são visualizados na imagem \autoref{fig:convs_filtros}.
