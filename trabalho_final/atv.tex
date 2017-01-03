@@ -319,7 +319,13 @@
 % Introdução (exemplo de capítulo sem numeração, mas presente no Sumário)
 % ----------------------------------------------------------
 \chapter[Introdução]{Introdução}
-aew
+
+\par A motivação para realizar esse trabalho partiu dos estudos de Redes Neurais Artificiais durante a disciplina. O relacionamento entre Redes Neurais clássicas como as \textit{Multilayer Perceptrons} e \textit{Redes de Hopfields} com redes mais sofisticadas utilizadas na área de \textbf{Deep Learning} não é muito simples de entender a primeira vista. Dessa forma, a proposta desse trabalho foi definida como uma análise aprofundada de algoritmos de Deep Learning.
+
+\par Porém para atingir esse objetivo foi necessário escolher apenas uma arquitetura da classe de algoritmos apresentados na literatura da área. As Redes Neurais Convolucionais apareceram naturalmente como uma ferramenta para visualizar como a informação se transforma ao caminhar para porções cada vez mais profundas do algoritmo de Rede Neural.
+
+\par A ideia do trabalho gira em torno do entendimento do processo de funcionamento de redes convolucionais, porém é suficiente para gerar uma boa intuição de como redes neurais genéricas funcionam e como a abstração da informação pode ser representada de uma camada para a outra. Dessa forma, o estudo permite que o conhecimento adquirido durante a confecção e leitura do trabalho sejam extrapolados para outras arquiteturas de redes neurais.
+	
 
 \chapter{Multi-Layer Perceptrons e Deep Learning}
 
@@ -762,7 +768,74 @@ Com todas as camadas descritas, pode-se entender finalmente como funcionaria uma
 	\label{final}
 \end{figure} 
 
+\chapter{Implementação de Redes Convolucionais}
 
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=.7\textwidth]{imagens/typical_cnn}
+  \caption{Tipica Rede Neural Convolucional.Fonte: \url{https://en.wikipedia.org/wiki/Convolutional_neural_network}}
+  \label{typical_cnn}
+\end{figure}
+
+\par Esse capítulo visa fornecer mais detalhes sobre o processo de implementação da  da de Redes Neurais Convolucionais utilizando uma linguagem de programação. O objetivo principal da implementação da rede foi proporcionar a oportunidade de trabalhar com todos os aspectos que compõem a arquitetura mencionada nos capitulos anteriores.
+
+\par Durante a implementação de um algoritmo somos apresentados as dificuldades que durante a revisão bibliografica de um tema, não fica muito clara. Muitas vezes os autores não tem espaço e nem oportunidade de detalhar todo o processo da sua ideia por completo. Em outras situações, preferimos um texto mais abrangente para conseguir conectar a ideia principal do trabalho com um contexto mais amplo e assim criar intuições sobre os resultados esperados.
+
+\par Portanto, escolhemos a linguagem de programação Python para consolidar e praticar os conhecimentos adquiridos nas seções anteriores.
+
+\section{Python}
+
+\par A linguagem de programação Python foi criada por Guido van Rossum em 1991 e vem ganhando muito espaço dentro da área de \textit{Machine Learning} e \textit{Data Science} no geral. O sucesso da linguagem se dá principalmente pelos dois objetivos principais que norteiam o desenvolvimento da linguagem: \textbf{produtividade} e \textbf{legibilidade}.
+
+\par Essas caracteristicas tornam o ambiente ideal para o desenvolvimento rápido e fácil de códigos visando tanto a validação e analise de algoritmos como também a exploração de dados e desenvolvimento de modelos que expliquem e/ou extraiam com certo grau de fidelidade as \textit{features} do conjunto de dados.
+
+\section{Frameworks disponiveis}
+
+\par A linguagem Python contém é mantida por uma comunidade aberta e possui contribuições de diversos setores distintos, cada um com um interesse particular. Abaixo temos a descrição dos principais \textit{frameworks} relacionados com \textit{Machine Learning}:
+
+\begin{itemize}
+  
+\item \textbf{Caffe}: É um um \textit{framework} de \textbf{Deep Learning} focado no uso de expressões, em performance e modularidade. É desenvolvido pelo Centro de Aprendizado e Visão de Berkeley (BVLC, em inglês) e por uma comunidade aberta de contribuidores. Os modelos e otimizadores são definidos por configurações simplificadas onde o usuário pode optar por utilizar CPU e GPU.
+  
+\item \textbf{Scikit-learn}: Esse \textit{framework} utiliza de bibliotecas do Python bem consolidadas focadas em aplicações de matemática e ciências. Essa biblioteca inclui ferramentas para muitas técnicas padrões da área de \textit{Machine learning} tais como \textit{clusterização, classificação, regressão}, etc.
+  
+\item \textbf{Tensorflow}: É um projeto de código aberto que provê uma biblioteca de computação numérica baseada em fluxo de informações através de grafos. O Tensorflow traz o conceito de grafos onde os dados são modelados como objetos (tensores) que podem ser processados tanto em CPUs ou GPUs.
+  
+\item \textbf{Theano}: Similar ao Tensorflow, o theano é uma biblioteca em Python que permite ao usuário definir, otimizar e calcular expressões matemáticas que são modeladas em arrays-multidimensionais com grande uso da biblioteca numpy do Python. O Theano foi escrito no Laboratório MILA (Montreal Institute for Learning Algorithms).
+  
+\item \textbf{Torch}: É uma biblioteca focada em algoritmos de \textit{machine learning} com foco maior voltado ao suporte em GPUs. Internamente a biblioteca também faz uso da linguagem de programação LuaJIT e C/CUDA. A biblioteca Torch tem uma base de usuários bem ampla desde processamento de sinais até segurança de sistemas.
+  
+\end{itemize}
+
+\par Porém, a biblioteca utilizada no desenvolvimento do trabalho foi o Keras que será melhor detalhado na próxima seção.
+
+\newpage
+\section{Implementação em Keras}
+
+\epigraph{\textbf{You have just found Keras}}{Keras Documentation}
+
+\par A biblioteca Keras é focada em promover uma interface de alto nivel para a construção de redes neurais artificiais. A biblioteca é capaz de utilizar tanto o \textbf{Theano} quanto o \textbf{Tensorflow} como motores para calculo dos modelos.
+
+Os principios que guiam a biblioteca são:
+
+\begin{itemize}
+  \item \textbf{Modularidade}: Um modelo é entendido como uma sequência de grafos completamente configuraveis.
+  \item \textbf{Minimalismo}: Cada modulo da biblioteca é conciso e simples.
+  \item \textbf{Fácilmente de extender}
+  \item \textbf{Completamente integrado com o Python}
+\end{itemize}
+
+
+\par Abaixo temos um exemplo de implementação de uma Rede Neural Perceptron de Multicamadas:
+\lstinputlisting[language=Python, firstline=0, lastline=25, basicstyle=\ttfamily\scriptsize]{mlp.py}
+
+\par A camada \textbf{Dense} representa uma camada completamente conectada no modelo. Os parâmetros informados no exemplo acima são as dimensões das features de entrada e saída esperada para o modelo. Vale observar que após a primeira camada, não é mais necessário informar quais são as dimensões de entrada para as camadas, pois o próprio Keras calcula internamente essa informação.
+
+\par As funções de ativação disponíveis são muito diversas, tendo até a opção de programar e inserir uma forma customizada de função.
+
+\par Um exemplo mais completo pode ser visto abaixo na implementação da Rede Convolucional que será utilizada no próximo capitulo para análise mais aprofundada dos output de cada porção dessa arquitetura.
+
+\lstinputlisting[language=Python, firstline=0, lastline=25, basicstyle=\ttfamily\scriptsize]{cnn1.py}
 
 \chapter{Visualização do reconhecimento em uma Rede Neural}
 \section{Base de dados: MNIST}
